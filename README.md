@@ -1,14 +1,13 @@
 # Nghé ơi, đọc nào! 🐃
-htt
-[![Kiểm tra & đăng app](https://github.com/dungmytutss/Ngh-i---c-n-o/actions/workflows/pages.yml/badge.svg)](ps://github.com/dungmytutss/Ngh-i---c-n-o/actions/workflows/pages.yml)
+[![Kiểm tra & đăng app](https://github.com/dungmytutss/Nghe-oi-doc-nao/actions/workflows/pages.yml/badge.svg)](https://github.com/dungmytutss/Nghe-oi-doc-nao/actions/workflows/pages.yml)
 
 *Mỗi ngày đọc một vần hay – Nghé vui, vườn đẹp, bé say học hành!*
 
 Ứng dụng web rèn đọc âm vần cho học sinh lớp 1, bám SGK *Tiếng Việt 1 — Kết nối tri thức với cuộc sống* (bài 1–50).
 Tác giả: cô **Từ Thị Mỹ Dung**, GV chủ nhiệm lớp 1A, Trường Tiểu học Bình Hòa (Gia Lai).
 
-👉 **Dùng thử:** https://dungmytutss.github.io/Ngh-i---c-n-o/
-(thêm đuôi `#toi-31` để app mở sẵn bài 31)
+👉 **Dùng thử:** https://dungmytutss.github.io/Nghe-oi-doc-nao/
+(thêm đuôi `#toi-31` để app mở sẵn bài 31, ví dụ https://dungmytutss.github.io/Nghe-oi-doc-nao/#toi-31)
 
 > ✅ Bản nháp — cô duyệt nội dung từng bài trước khi gửi phụ huynh.
 
