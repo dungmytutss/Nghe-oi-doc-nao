@@ -1,0 +1,52 @@
+# Kiểm tra app rồi đăng lên GitHub Pages mỗi khi đẩy bản mới lên nhánh main.
+# Bật một lần: Settings → Pages → Build and deployment → Source: GitHub Actions.
+name: Kiểm tra & đăng app
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  kiem-tra:
+    name: Cửa kiểm
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Kiểm tra tệp, cú pháp, dữ liệu cá nhân
+        run: node .github/scripts/kiem-tra.mjs
+
+  dang:
+    name: Đăng GitHub Pages
+    needs: kiem-tra
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Gom đúng các tệp của app
+        run: |
+          mkdir _site
+          cp index.html manifest.webmanifest sw.js icon-192.png icon-512.png .nojekyll _site/
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+      - id: deploy
+        uses: actions/deploy-pages@v4

@@ -1,0 +1,4 @@
+# Phiếu và ảnh do cửa kiểm trên máy tạo ra — không đưa lên kho
+*.PHIEU-KIEM.md
+*.anh-kiem/
+_site/
