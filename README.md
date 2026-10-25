@@ -9,8 +9,6 @@ Tác giả: cô **Từ Thị Mỹ Dung**, GV chủ nhiệm lớp 1A, Trường T
 👉 **Dùng thử:** https://dungmytutss.github.io/Nghe-oi-doc-nao/
 (thêm đuôi `#toi-31` để app mở sẵn bài 31, ví dụ https://dungmytutss.github.io/Nghe-oi-doc-nao/#toi-31)
 
-> ✅ Bản nháp — cô duyệt nội dung từng bài trước khi gửi phụ huynh.
-
 ## App làm gì
 
 Mỗi tối khoảng 10 phút, có ông bà, cha mẹ ngồi cạnh, bé đi qua ba chặng:

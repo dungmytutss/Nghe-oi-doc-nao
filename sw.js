@@ -1,5 +1,5 @@
-/* Bộ nhớ đệm «Nghé ơi, đọc nào!» — phiên bản 20261025-2116. Mở lần đầu có mạng; sau đó dùng được khi mất mạng. */
-const KHO = "nghe-oi-20261025-2116";
+/* Bộ nhớ đệm «Nghé ơi, đọc nào!» — phiên bản 20261025-2137. Mở lần đầu có mạng; sau đó dùng được khi mất mạng. */
+const KHO = "nghe-oi-20261025-2137";
 const TEP = ["./", "index.html", "manifest.webmanifest", "icon-192.png", "icon-512.png"];
 self.addEventListener("install", e => { e.waitUntil(caches.open(KHO).then(c => c.addAll(TEP)).then(() => self.skipWaiting())); });
 self.addEventListener("activate", e => { e.waitUntil(caches.keys().then(ds => Promise.all(ds.filter(k => k !== KHO).map(k => caches.delete(k)))).then(() => self.clients.claim())); });
