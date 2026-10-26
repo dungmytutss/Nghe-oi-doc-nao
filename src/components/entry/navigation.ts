@@ -6,4 +6,3 @@ export function readScreen(): Screen {
   if (location.hash.includes('type=recovery')) return 'teacher';
   return 'choose';
 }
-
