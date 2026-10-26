@@ -40,4 +40,32 @@ export interface GameBridge {
   snapshot(): LegacyStore;
   selectedCode(): string;
   restoreStudent(code: string, progress: StudentProgress, lesson: number): void;
+  selectStudent(code: string, lesson: number, displayCode?: string): void;
+  setLesson(code: string, lesson: number): void;
+}
+
+export const classLookupSchema = z.object({
+  name: z.string(), lesson: z.number().int().min(1).max(50),
+  students: z.array(z.object({ id: z.uuid(), local_code: z.string(), avatar: z.string() })),
+});
+export type ClassLookup = z.infer<typeof classLookupSchema>;
+export const deviceResponseSchema = z.object({
+  student_id: z.uuid(), local_code: z.string(), avatar: z.string(), class_name: z.string(),
+  lesson: z.number().int().min(1).max(50), status: z.enum(['pending', 'approved']),
+  check_code: z.string(), device_token: z.string().optional(),
+  revision: z.number().int().nonnegative().optional(), progress: progressSchema.optional(),
+});
+export interface StudentDevice {
+  localCode: string;
+  studentId: string;
+  remoteCode: string;
+  token: string;
+  avatar: string;
+  className: string;
+  lesson: number;
+  status: 'pending' | 'approved';
+  checkCode: string;
+  revision: number;
+  lastSnapshot: string;
+  lastSync?: string;
 }

@@ -57,6 +57,8 @@ Use `npm run build` and `npm run preview` to test the production PWA. Developmen
 
 Supabase credentials are optional for local practice. Copy `.env.example` to `.env.local` and follow [Supabase setup](docs/SUPABASE_SETUP.md). Never commit `.env.local`, database passwords, or secret/service-role keys.
 
-Account, class, and invitation screens await review of the [student and teacher flow proposal](docs/USER_FLOWS.md). The cloud schema and sync functions are scaffolding, not an active end-to-end account feature yet.
+Teachers can generate a class by choosing its starting lesson and student count. Parents enter the six-digit class code once, choose the assigned student animal/code, and wait for the teacher's first-device approval while continuing local practice. Approved devices remember the child and sync automatically; no parent login is required. See [student and teacher flows](docs/USER_FLOWS.md).
+
+For the existing Supabase project, apply the classroom upgrade described in [Supabase setup](docs/SUPABASE_SETUP.md), rather than rerunning the initial table-creation script. Live classroom access requires that upgrade and teacher Auth setup; guest/offline practice works independently.
 
 GitHub Actions validates branch pushes. Only `main` deploys to GitHub Pages, using `VITE_BASE_PATH=/Nghe-oi-doc-nao/`. A separate daily database keepalive is prepared; it activates only after its migration, repository secrets, and default-branch workflow are in place.

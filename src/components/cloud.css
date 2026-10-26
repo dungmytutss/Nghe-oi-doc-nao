@@ -2,3 +2,22 @@
 .cloud-settings h3{margin:0 0 8px}
 .cloud-settings p{line-height:1.5;margin:8px 0}
 .cloud-settings small{color:#51486e}
+.cloud-form,.cloud-label{display:grid;gap:12px;margin:14px 0}
+.cloud-form label,.cloud-label{font-weight:800;text-align:left}
+.cloud-form input,.cloud-label select{display:block;width:100%;margin-top:5px;min-height:48px;border:2px solid #9585be;border-radius:12px;padding:10px;font:inherit;color:#2b2350;background:white}
+.cloud-form input:focus-visible,.cloud-label select:focus-visible{outline:3px solid #1f6fd1;outline-offset:3px}
+.cloud-form button{justify-self:start;white-space:normal}
+.cloud-actions{display:flex;flex-wrap:wrap;gap:10px;margin:12px 0}
+.cloud-fields{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.cloud-message{padding:12px;border:2px solid #b1a1d3;border-radius:12px;background:#fff;overflow-wrap:anywhere}
+.classroom-manager details{padding:12px 0}.classroom-manager summary{font-weight:800;cursor:pointer;min-height:44px;padding:10px 0}
+.class-code{margin:18px 0;padding:16px;background:white;border:2px dashed #6d4fe0;border-radius:16px;text-align:center;display:grid;gap:12px}
+.class-code strong{font-size:clamp(18px,4vw,28px);overflow-wrap:anywhere;letter-spacing:1px;user-select:all}
+.device-list{list-style:none;margin:12px 0;padding:0;display:grid;gap:12px}.device-list li{display:flex;flex-wrap:wrap;align-items:center;gap:10px;background:#fff;border:1px solid #b8add5;padding:12px;border-radius:12px}
+.roster-scroll{max-width:100%;overflow:auto;margin:14px 0}.cloud-roster{border-collapse:collapse;width:100%;background:#fff;font-size:14px}.cloud-roster th,.cloud-roster td{padding:12px 8px;border:1px solid #b8add5;text-align:left;min-width:75px}.cloud-roster thead{background:#e6dff4}
+.student-classroom{margin:0 0 14px}.student-connection{display:grid;gap:7px;padding:14px;border:2px solid #86bfa1;background:#effff4;border-radius:16px;text-align:left}.student-connection small{color:#28513a;line-height:1.5}
+.remembered-children{display:flex;flex-wrap:wrap;gap:10px;margin:12px 0}.remembered-children [aria-pressed=true]{outline:3px solid #6d4fe0;outline-offset:2px}.remembered-children span{font-size:30px}
+.class-entry{margin-top:10px}.class-enrollment{margin-top:12px;padding:14px;border:2px solid #c4b4e8;border-radius:16px;background:#f9f6ff}
+.cloud-student-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}.cloud-student-grid .o-ma{font-size:16px;min-height:80px;width:100%;padding:10px 4px}.cloud-student-grid .o-ma span{font-size:30px}
+.device-sync{margin:16px 0;padding-bottom:14px;border-bottom:2px solid #dcd4f4}.cloud-settings h4{margin:14px 0 8px}.cloud-settings button:focus-visible,.student-classroom button:focus-visible{outline:3px solid #1f6fd1;outline-offset:3px}
+@media(max-width:420px){.cloud-fields{grid-template-columns:1fr}.cloud-student-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}

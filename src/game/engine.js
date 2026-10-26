@@ -492,7 +492,8 @@ function diToi(ten){
   else if (ten === "tivi") veTivi();
   if (!CHUP) try { window.scrollTo(0, 0); } catch (e){}
 }
-function veThanh(){ $("#tbConVat").textContent = S.hs ? S.hs.conVat : "🐰"; $("#tbMa").textContent = S.ma || ""; }
+function nhanMaHS(code){ return KHO.caiDat.nhanHS?.[code] || code; }
+function veThanh(){ $("#tbConVat").textContent = S.hs ? S.hs.conVat : "🐰"; $("#tbMa").textContent = nhanMaHS(S.ma) || ""; }
 function capNhatDongHo(){}
 function doiBai(buoc){ const m = baiKe(S.bai, buoc, S.baiToi); if (m === S.bai){ bao(buoc > 0 ? "Bài sau con chưa học tới — cô sẽ mở dần nhé!" : "Đây là bài đầu rồi."); return; } S.bai = m; S.tau = S.cham = S.doc = null; diToi(S.man); }
 
@@ -539,14 +540,16 @@ function veTrangDau(){
   $("#ngheDau").innerHTML = veNghe("vui");
   const sel = $("#chonMa");
   sel.value = S.ma || KHO.caiDat.hsCuoi || "HS01";
+  if (!CHUP && KHO.caiDat.baiTheoHS?.[sel.value]) S.baiToi = KHO.caiDat.baiTheoHS[sel.value];
   S.conVatChon = conVatCua(sel.value);
   const quen = CHUP || !!KHO.caiDat.hsCuoi;
   $("#dauQuen").hidden = !quen; $("#dauMoi").hidden = quen;
-  $("#dauMa").textContent = sel.value; $("#dauConVat").textContent = S.conVatChon;
+  $("#dauMa").textContent = nhanMaHS(sel.value); $("#dauConVat").textContent = S.conVatChon;
   const hsNay = KHO.hs[sel.value], coHoc = hsNay && (hsNay.docTheo || Object.keys(hsNay.muc || {}).length);
   const lauChua = !hsNay || !hsNay.lanGui || (Date.now() - new Date(hsNay.lanGui + "T00:00:00").getTime()) / 864e5 >= 7;
   $("#dauNhacGui").hidden = CHUP || !quen || !coHoc || !lauChua;
   veConVat(""); veBaiDau(); veGiong();
+  if (!CHUP) callbacks.onStudentChange?.(sel.value);
 }
 function moNguoiLon(){ veBaiDau(); veGiong(); moHop("#hopNguoiLon"); }
 function veConVat(chon){
@@ -940,7 +943,7 @@ function moTienTrinh(o){
   const muc = {}; (b.m || []).forEach(x => { muc[x[0]] = {b: x[1], d: x[2], s: x[3], h: x[4]}; });
   return {conVat: b.cv || conVatCua(o.m), muc, am: b.a || {}, loi: b.l || {}, loiCT: [], phut: b.p || {}, daDoc: b.dd || {}, docTheo: b.r || 0, lanGui: homNay()};
 }
-async function taoMaGuiCo(){ return "NGHE1-" + S.ma + "-" + await nen(JSON.stringify(thongKe(S.ma, S.hs))); }
+async function taoMaGuiCo(){ const ma = nhanMaHS(S.ma); return "NGHE1-" + ma + "-" + await nen(JSON.stringify(thongKe(ma, S.hs))); }
 function moGuiCo(){
   chonHSMacDinh(); $("#guiNghe").innerHTML = veNghe("khen"); $("#guiMa").value = "Đang tạo mã…"; moHop("#hopGuiCo");
   taoMaGuiCo().then(m => { $("#guiMa").value = m; if (S.hs && !CHUP){ S.hs.lanGui = homNay(); luu(); } }).catch(() => { $("#guiMa").value = "Máy chưa tạo được mã — bấm Sao lưu ra file rồi gửi file cho cô nhé."; });
@@ -1268,11 +1271,26 @@ return {
   restoreStudent: (code, progress, lesson) => {
     if (CHUP) throw new Error('Không khôi phục trong chế độ xem thử.');
     KHO.hs[code] = progress;
-    KHO.caiDat.baiToi = lesson;
-    S.baiToi = lesson;
+    KHO.caiDat.baiTheoHS = {...KHO.caiDat.baiTheoHS, [code]: lesson};
+    if ((S.ma || KHO.caiDat.hsCuoi) === code){ KHO.caiDat.baiToi = lesson; S.baiToi = lesson; }
     S.hs = S.ma ? layHS(S.ma) : null;
     luu();
     if (S.man === 'dau') veTrangDau();
+  },
+  selectStudent: (code, lesson, displayCode) => {
+    if (CHUP) return;
+    S.ma = code; S.hs = layHS(code); S.conVatChon = S.hs.conVat;
+    if (displayCode) KHO.caiDat.nhanHS = {...KHO.caiDat.nhanHS, [code]: displayCode};
+    S.baiToi = lesson; S.bai = lesson;
+    KHO.caiDat.hsCuoi = code; KHO.caiDat.baiToi = lesson;
+    KHO.caiDat.baiTheoHS = {...KHO.caiDat.baiTheoHS, [code]: lesson};
+    luu(); diToi('dau');
+  },
+  setLesson: (code, lesson) => {
+    if (CHUP || KHO.caiDat.baiTheoHS?.[code] === lesson) return;
+    KHO.caiDat.baiTheoHS = {...KHO.caiDat.baiTheoHS, [code]: lesson};
+    if ((S.ma || KHO.caiDat.hsCuoi) === code){ S.baiToi = lesson; KHO.caiDat.baiToi = lesson; if (S.man === 'dau') veBaiDau(); }
+    luu();
   },
 };
 

@@ -17,8 +17,12 @@ async function start() {
   } catch { /* The original teaching engine handles unavailable browser storage. */ }
   document.getElementById('game-root')!.innerHTML = screens;
   const game = initializeGame({
-    onSave: store => { void saveSnapshot(store).catch(reportStorageFailure); },
+    onSave: store => {
+      void saveSnapshot(store).catch(reportStorageFailure);
+      window.dispatchEvent(new Event('nghe-progress-change'));
+    },
     onLearningEvent: event => { void recordEvent(event).catch(reportStorageFailure); },
+    onStudentChange: () => window.dispatchEvent(new Event('nghe-student-change')),
   });
   createRoot(document.getElementById('root')!).render(<CloudSettings game={game} />);
   if (!document.body.classList.contains('chup')) {

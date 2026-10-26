@@ -1,7 +1,8 @@
 import 'fake-indexeddb/auto';
 import { afterEach, expect, test } from 'vitest';
-import { LearningDatabase, recordEvent, saveSnapshot } from '../src/cloud/local';
+import { allocateLocalCode, LearningDatabase, recordEvent, saveSnapshot } from '../src/cloud/local';
 import { progressSchema, type LegacyStore } from '../src/cloud/types';
+import { stableJson } from '../src/cloud/serialize';
 
 const databases: LearningDatabase[] = [];
 function database() {
@@ -33,4 +34,12 @@ test('keeps the original progress structure for device migration', async () => {
 
 test('rejects invalid cloud progress before replacing local data', () => {
   expect(progressSchema.safeParse({ ...progress, docTheo: -1 }).success).toBe(false);
+});
+
+test('joining a class preserves occupied legacy profiles and assigns another local slot', () => {
+  expect(allocateLocalCode('HS01', { caiDat: {}, hs: { HS01: progress } }, [])).toBe('HS02');
+});
+
+test('JSONB key order does not create a false progress conflict', () => {
+  expect(stableJson({ a: 1, b: { x: 2, y: 3 } })).toBe(stableJson({ b: { y: 3, x: 2 }, a: 1 }));
 });
