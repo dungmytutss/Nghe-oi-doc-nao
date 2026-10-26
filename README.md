@@ -27,7 +27,7 @@ Mỗi tối khoảng 10 phút, có ông bà, cha mẹ ngồi cạnh, bé đi qua
 
 ## An toàn cho học sinh
 
-- **Không** máy chủ, **không** đăng nhập, **không** thu âm, **không** dùng micro, **không** chấm giọng đọc của bé.
+- Không thu âm, không dùng micro, không chấm giọng đọc của bé. Bản chuyển đổi đang chuẩn bị đăng nhập người lớn và lưu tiến trình qua Supabase; hiện giao diện học vẫn dùng dữ liệu trên máy.
 - Bé chỉ chọn **mã HS (HS01…HS40) và một con vật** — không có tên thật.
 - Tiến độ lưu trong trình duyệt của chính máy đó. Dữ liệu chỉ rời máy khi người lớn bấm «Gửi cô» (tạo mã số liệu ngắn, không tên, để dán vào Zalo).
 - Không xếp hạng, không so sánh các bé với nhau.
@@ -40,3 +40,23 @@ Mở link → menu trình duyệt → **«Thêm vào màn hình chính»** → c
 
 - Giọng đọc: Microsoft Hoài My (vi-VN), thu sẵn.
 - Ngữ liệu trích ngắn từ SGK *Tiếng Việt 1* (Kết nối tri thức với cuộc sống), phục vụ dạy học.
+
+## Development (migration branch)
+
+The app now builds with React, TypeScript, and Vite. The original teaching engine is retained in `src/game/engine.js`; it has not yet been rewritten in TypeScript. New storage, account integration, and sync modules use strict TypeScript. The original Vietnamese screens, CSS, lesson content, local progress key, and all 815 recordings are preserved.
+
+```sh
+npm ci
+npm run dev
+npm run check
+npx playwright install chromium
+npm run test:e2e
+```
+
+Use `npm run build` and `npm run preview` to test the production PWA. Development mode does not install a service worker. Production builds precache lesson/audio assets for offline practice. Close and reopen the app after an update to use the newly downloaded version.
+
+Supabase credentials are optional for local practice. Copy `.env.example` to `.env.local` and follow [Supabase setup](docs/SUPABASE_SETUP.md). Never commit `.env.local`, database passwords, or secret/service-role keys.
+
+Account, class, and invitation screens await review of the [student and teacher flow proposal](docs/USER_FLOWS.md). The cloud schema and sync functions are scaffolding, not an active end-to-end account feature yet.
+
+GitHub Actions validates branch pushes. Only `main` deploys to GitHub Pages, using `VITE_BASE_PATH=/Nghe-oi-doc-nao/`. A separate daily database keepalive is prepared; it activates only after its migration, repository secrets, and default-branch workflow are in place.

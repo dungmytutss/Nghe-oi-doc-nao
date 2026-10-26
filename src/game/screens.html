@@ -1,0 +1,288 @@
+
+<!-- Bộ màu dùng chung cho mọi hình SVG (đặt trong khung luôn hiển thị) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <linearGradient id="gThan" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#a3acc8"/><stop offset="1" stop-color="#6f7a99"/></linearGradient>
+    <radialGradient id="gDau" cx=".42" cy=".36" r=".75"><stop offset="0" stop-color="#bcc3da"/><stop offset="1" stop-color="#7c87a6"/></radialGradient>
+    <linearGradient id="gTau" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ff7d8f"/><stop offset="1" stop-color="#e2324f"/></linearGradient>
+    <linearGradient id="gLa" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7fd65a"/><stop offset="1" stop-color="#3f9f3a"/></linearGradient>
+  </defs>
+</svg>
+
+<!-- Cảnh nền: trời – núi – nhà rông – đồng lúa – dã quỳ (quê Gia Lai) -->
+<svg id="canh" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+  <defs>
+    <linearGradient id="gTroi" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6fc3ff"/><stop offset=".55" stop-color="#c8ecff"/><stop offset="1" stop-color="#fff5d1"/></linearGradient>
+    <radialGradient id="gMatTroi"><stop offset="0" stop-color="#fff9c4"/><stop offset=".7" stop-color="#ffd84a"/><stop offset="1" stop-color="#ffbf1f"/></radialGradient>
+    <linearGradient id="gDong" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#cdf07f"/><stop offset="1" stop-color="#78c34a"/></linearGradient>
+  </defs>
+  <rect width="1600" height="900" fill="url(#gTroi)"/>
+  <g class="tia-nang" opacity=".55">
+    <path d="M1380 150 L1395 -40 L1365 -40Z M1380 150 L1570 165 L1570 135Z M1380 150 L1365 340 L1395 340Z M1380 150 L1190 135 L1190 165Z M1380 150 L1530 20 L1510 0Z M1380 150 L1510 300 L1530 280Z M1380 150 L1250 300 L1230 280Z M1380 150 L1230 20 L1250 0Z" fill="#ffe88a"/>
+  </g>
+  <circle cx="1380" cy="150" r="72" fill="url(#gMatTroi)"/>
+  <g class="may"><ellipse cx="200" cy="130" rx="70" ry="30" fill="#fff"/><ellipse cx="250" cy="112" rx="50" ry="36" fill="#fff"/><ellipse cx="300" cy="134" rx="62" ry="26" fill="#fff"/></g>
+  <g class="may may2" opacity=".9"><ellipse cx="700" cy="80" rx="60" ry="24" fill="#fff"/><ellipse cx="745" cy="64" rx="44" ry="30" fill="#fff"/><ellipse cx="790" cy="84" rx="52" ry="22" fill="#fff"/></g>
+  <path d="M0 520 Q150 400 320 470 T640 440 T960 425 T1280 470 T1600 430 V900 H0Z" fill="#a8d9c9"/>
+  <path d="M0 560 Q120 470 260 520 T560 500 T860 520 T1180 490 T1600 520 V900 H0Z" fill="#93cdb4"/>
+  <!-- nhà rông -->
+  <g transform="translate(1110 400)">
+    <path d="M30 108 L48 0 L66 108Z" fill="#9a5d2e"/><path d="M48 0 L66 108 L58 108Z" fill="#7a4520"/>
+    <rect x="30" y="106" width="36" height="16" fill="#c88a4d"/><rect x="34" y="122" width="4" height="18" fill="#7a4520"/><rect x="58" y="122" width="4" height="18" fill="#7a4520"/>
+  </g>
+  <path d="M0 610 Q220 540 460 590 T900 575 T1320 600 T1600 575 V900 H0Z" fill="#8fd16f"/>
+  <path d="M0 665 Q400 625 800 652 T1600 640 V900 H0Z" fill="url(#gDong)"/>
+  <g fill="none" stroke="#b9e86a" stroke-width="6" opacity=".7" stroke-linecap="round">
+    <path d="M0 705 Q400 670 800 698 T1600 688"/><path d="M0 760 Q400 728 800 756 T1600 746"/><path d="M0 825 Q400 795 800 822 T1600 812"/>
+  </g>
+  <!-- tre -->
+  <g fill="#5aa845">
+    <rect x="40" y="420" width="10" height="320" rx="5"/><rect x="72" y="380" width="10" height="360" rx="5"/><rect x="104" y="440" width="9" height="300" rx="4"/>
+    <ellipse cx="30" cy="430" rx="34" ry="8" transform="rotate(-25 30 430)"/><ellipse cx="96" cy="390" rx="36" ry="8" transform="rotate(20 96 390)"/>
+    <ellipse cx="60" cy="470" rx="30" ry="7" transform="rotate(15 60 470)"/><ellipse cx="124" cy="450" rx="30" ry="7" transform="rotate(-20 124 450)"/>
+  </g>
+  <!-- dã quỳ -->
+  <g id="daQuy">
+    <g transform="translate(70 840)"><circle r="20" fill="#ffd21f"/><circle r="8" fill="#b5651d"/></g>
+    <g transform="translate(120 870)"><circle r="16" fill="#ffc400"/><circle r="6" fill="#b5651d"/></g>
+    <g transform="translate(1520 845)"><circle r="20" fill="#ffd21f"/><circle r="8" fill="#b5651d"/></g>
+    <g transform="translate(1470 878)"><circle r="15" fill="#ffc400"/><circle r="6" fill="#b5651d"/></g>
+    <g transform="translate(1565 880)"><circle r="13" fill="#ffd21f"/><circle r="5" fill="#b5651d"/></g>
+  </g>
+</svg>
+
+<div id="dangTai" class="dang-tai" role="status"><div class="dang-tai-hop"><div class="vong-tai" aria-hidden="true"></div><p><b>Nghé đang tải giọng đọc…</b><br>Lần đầu mở bằng mạng yếu có thể mất nửa phút. Cả nhà chờ một chút nhé.</p></div></div>
+<div id="nhanThu" class="nhan-thu" hidden>DỮ LIỆU THỬ</div>
+
+<header id="thanh" class="thanh" hidden>
+  <button class="nut-ve" data-di="dau" aria-label="Về trang đầu">‹ Về</button>
+  <nav class="chang" aria-label="Các bước học hôm nay">
+    <button data-di="nghe">👂 <span class="chu-tab">1. Nghe</span></button>
+    <button data-di="tau">🚂 <span class="chu-tab">2. Chơi</span></button>
+    <button data-di="doc">🗣️ <span class="chu-tab">3. Đọc</span></button>
+  </nav>
+  <div class="ban-be"><span id="tbConVat">🐰</span><b id="tbMa">HS01</b></div>
+</header>
+
+<main>
+<!-- ================= TRANG ĐẦU ================= -->
+<section id="man-dau" class="man">
+  <div class="dau-khung">
+    <div class="dau-trai">
+      <h1 class="ten-app">NGHÉ ƠI,<br>ĐỌC NÀO!</h1>
+      <div class="ten-phu">Ứng dụng AI cá nhân hoá rèn đọc âm vần cho học sinh lớp 1</div><br>
+      <div class="luc-bat">Mỗi ngày đọc một vần hay – Nghé vui, vườn đẹp, bé say học hành!</div>
+      <div class="nghe-dau"><div id="ngheDau" class="noi-len"></div><div class="bong-noi">Chào con! Mình cùng đọc nhé!</div></div>
+    </div>
+    <div class="the the-chon">
+      <div id="dauQuen">
+        <div class="chao-be"><span class="con-vat-to" id="dauConVat">🐰</span><div><small>Chào bạn</small><b id="dauMa">HS01</b></div></div>
+        <button class="nut nut-lon nut-xanh" id="batDau">▶ Học bài hôm nay</button>
+        <p class="bai-hom-nay" id="dauBaiNay">Bài 1</p>
+        <button class="nut nut-xanh-duong" id="dauChonBai">📚 Chọn bài khác</button>
+        <button class="nut nut-cam" id="dauVuon">🌱 Xem vườn của con</button>
+        <button class="nut-nho nhac-gui" id="dauNhacGui" hidden>📨 Đã lâu chưa gửi cô — người lớn bấm để gửi (cũng là lưu tiến trình của con)</button>
+        <button class="lien-ket" id="dauDoiBan">Không phải con? Chọn lại mã</button>
+      </div>
+      <div id="dauMoi" hidden>
+        <h2>🙋 Con là bạn nào?</h2>
+        <p class="goi-y" style="margin:0 0 8px">Chạm vào ô có <b>mã cô cho con</b>. Mỗi mã có một con vật riêng.</p>
+        <input type="hidden" id="chonMa" value="HS01">
+        <div class="luoi-ma" id="luoiMa" role="group" aria-label="Mã học sinh"></div>
+        <button class="nut nut-lon nut-xanh" id="dauXong" disabled>✅ Chọn mã của con</button>
+      </div>
+      <button class="nut-nho nguoi-lon-nut" id="moNguoiLon">👨‍👩‍👧 Dành cho người lớn</button>
+      <button class="nut-nho nguoi-lon-nut" id="nutCai" hidden>📲 Cài app vào điện thoại</button>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CHẶNG NGHE ================= -->
+<section id="man-nghe" class="man">
+  <div class="khung-hoc">
+    <aside class="cot-nghe"><div class="bong-noi" id="ngheLoi">Con chạm vào chữ để nghe nghé đọc nhé!</div><div class="nghe-hinh noi-len" id="ngheNghe"></div></aside>
+    <div class="cot-chinh">
+      <div class="tieu-de-man"><h2 id="ngheTen">Bài</h2></div>
+      <div class="nghe-luoi">
+        <div class="the" id="ngheTrai"></div>
+        <div class="the" id="nghePhai"></div>
+      </div>
+      <div class="hang-nut"><button class="nut nut-xanh nut-lon" data-di="tau">Tiếp ▶</button></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CHẶNG CHƠI ================= -->
+<section id="man-choi" class="man">
+  <div class="khung-hoc">
+    <aside class="cot-nghe"><div class="bong-noi" id="choiLoi">Nghe nghé đọc rồi ghép toa tàu nhé!</div><div class="nghe-hinh noi-len" id="ngheChoi"></div></aside>
+    <div class="cot-chinh">
+      <!-- Đoàn tàu -->
+      <div class="the" id="troTau">
+        <div class="de-bai"><button class="nut-loa to" id="tauNghe" aria-label="Nghe lại">🔊</button><div class="bong-noi" id="tauDe">Nghé đọc một tiếng. Con chạm thẻ để ghép toa tàu nhé!</div></div>
+        <div class="ray">
+          <div class="doan-tau" id="doanTau">
+            <div class="toa" data-loai="am"><span class="nhan" style="color:var(--am)">Âm đầu</span><div class="o-toa" id="toaAm" data-loai="am"></div></div>
+            <div class="toa" data-loai="van"><span class="nhan" style="color:var(--van)">Vần</span><div class="o-toa" id="toaVan" data-loai="van"></div></div>
+            <div class="toa" data-loai="dau"><span class="nhan" style="color:var(--dau)">Dấu</span><div class="o-toa" id="toaDau" data-loai="dau"></div></div>
+            <div class="dau-may"><div class="bien-tau" id="bienTau" hidden></div><div id="dauMay"></div></div>
+          </div>
+        </div>
+        <div class="khay">
+          <div class="nhom-khay" data-loai="am"><h4 style="color:var(--am)">🔵 Âm đầu</h4><div id="khayAm"></div></div>
+          <div class="nhom-khay" data-loai="van"><h4 style="color:var(--van)">🟠 Vần</h4><div id="khayVan"></div></div>
+          <div class="nhom-khay" data-loai="dau"><h4 style="color:var(--dau)">🟣 Dấu thanh</h4><div id="khayDau"></div></div>
+        </div>
+        <p class="loi-giai" id="tauLoiGiai"></p>
+        <div class="hang-nut"><span class="cham-tien" id="tauTien"></span><button class="nut nut-xanh nut-lon tiep-an" id="tauTiep">Tiếp ▶</button></div>
+      </div>
+      <!-- Chạm đúng chữ -->
+      <div class="the" id="troCham" hidden>
+        <div class="de-bai"><button class="nut-loa to" id="chamNghe" aria-label="Nghe lại">🔊</button><div class="bong-noi" id="chamDe">Con nghe nghé đọc rồi chạm vào quả bóng có đúng chữ nhé!</div></div>
+        <div class="bong-bay" id="chamLuaChon"></div>
+        <p class="loi-giai" id="chamLoiGiai"></p>
+        <div class="hang-nut"><span class="cham-tien" id="chamTien"></span><button class="nut nut-xanh nut-lon tiep-an" id="chamTiep">Tiếp ▶</button></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CHẶNG ĐỌC THEO NGHÉ ================= -->
+<section id="man-doc" class="man">
+  <div class="khung-hoc">
+    <aside class="cot-nghe"><div class="bong-noi" id="docLoi">Con nghe nghé đọc nhé!</div><div class="nghe-hinh noi-len" id="ngheDoc"></div></aside>
+    <div class="cot-chinh">
+      <div class="tieu-de-man"><h2 id="docTen">Bài</h2></div>
+      <div class="the the-doc">
+        <span class="loai-muc" id="docLoai">Từ</span>
+        <div class="hinh-doc" id="docHinh"></div>
+        <div class="chu-doc" id="docChu"></div>
+      </div>
+      <div class="hang-doc">
+        <button class="nut nut-xanh-duong" id="docMau">🔊 Nghe lại</button>
+        <button class="nut nut-lon nut-xanh" id="docXong">✅ Con đọc xong</button>
+      </div>
+      <div class="hang-nut"><span class="cham-tien" id="docTien"></span><button class="nut nut-xanh nut-lon tiep-an" id="docTiep">🌱 Xem vườn của con ▶</button></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= VƯỜN CỦA NGHÉ ================= -->
+<section id="man-vuon" class="man">
+  <div class="vuon-khung">
+    <div class="vuon-dau"><h2 id="vuonTieuDe">🌱 Vườn của con</h2><div class="so-lieu" id="vuonSo"></div></div>
+    <div class="dat-vuon">
+      <div class="nghe-vuon noi-len" id="ngheVuon"></div>
+      <div class="luoi-cay" id="luoiCay"></div>
+      <div class="chu-giai"><span>🌰 hạt</span><span>🌱 nảy mầm</span><span>🌿 cây non</span><span>🌳 cây vững — ghép, chạm đúng 5 lần</span></div>
+    </div>
+    <div class="hang-nut"><button class="nut nut-xanh nut-lon" data-di="dau">🏠 Xong! Về trang đầu</button></div>
+    <p class="goi-y" style="text-align:center">Người lớn: cuối tuần vào «👨‍👩‍👧 Dành cho người lớn» ở trang đầu, bấm «Gửi kết quả cho cô».</p>
+  </div>
+</section>
+
+<!-- ================= GÓC CỦA CÔ ================= -->
+<section id="man-co" class="man">
+  <div class="co-khung">
+    <div class="co-dau"><button class="nut-nho" data-di="dau">🏠 Trang đầu</button><h2>👩‍🏫 Góc của cô</h2></div>
+    <div class="the co-khoa" id="coKhoa">
+      <div class="nghe-nho" id="ngheKhoa"></div>
+      <div>
+        <h3>🔐 Mở góc của cô</h3>
+        <p class="goi-y">Nhập mã mở của cô (ghi trong hướng dẫn cô nhận kèm app).<br><b>Mã này chỉ để các con không bấm nhầm vào đây — đây KHÔNG phải bảo mật.</b></p>
+        <input id="coMa" type="text" autocomplete="off" aria-label="Mã mở góc của cô"><button class="nut nut-tim" id="coMo">🔓 Mở</button>
+        <p class="bao-loi" id="coBao"></p>
+      </div>
+    </div>
+    <div class="co-noi-dung" id="coNoiDung" hidden>
+      <div class="co-trai">
+        <div class="the"><h3>📅 Tuần này lớp học tới bài</h3>
+          <div class="co-chon"><select id="coBai" aria-label="Bài lớp học tới"></select></div>
+          <p class="goi-y">Gửi phụ huynh link app có thêm đuôi <code id="coLink">#toi-21</code> — máy của bé tự chọn đúng bài, không dạy trước bài chưa học.</p></div>
+        <div class="the"><h3>🌤️ Hiệu ứng chuyển động</h3><label class="cong-tac"><input type="checkbox" id="coItCD"> Tắt mây trôi, nghé nhún, bóng nảy, pháo giấy trên máy này</label><p class="goi-y">Dùng khi con dễ bị phân tán. Máy đã đặt «giảm chuyển động» trong cài đặt thì app tự tắt.</p></div>
+        <div class="the"><h3>📺 Chế độ ti vi</h3><p class="goi-y">Chiếu bài lên ti vi trong giờ ôn: nghé đọc mẫu, chữ sáng theo tiếng đọc, cả lớp đọc theo, cô bấm khen.</p><button class="nut nut-xanh-duong" id="coTivi">📺 Mở chế độ ti vi</button></div>
+        <div class="the"><h3>💾 Dữ liệu máy này</h3><div class="hang-nut" style="justify-content:flex-start;margin:0"><button class="nut-nho" id="coSaoLuu">💾 Sao lưu</button><button class="nut-nho" id="coNhap">📂 Nhập lại</button></div></div>
+      </div>
+      <div class="the co-phai">
+        <h3>🗺️ Bản đồ lỗi cả lớp</h3>
+        <textarea id="coDan" placeholder="Dán các mã «Gửi cô» phụ huynh gửi qua Zalo vào đây (dán nhiều mã một lúc được, mỗi mã bắt đầu bằng NGHE1-)"></textarea>
+        <div class="hang-nut" style="justify-content:flex-start"><button class="nut nut-tim" id="coXem">🔍 Xem bản đồ lỗi</button><button class="nut-nho" id="coCsv">⬇️ Xuất CSV</button><span class="goi-y" style="margin:0">Không xếp hạng các con — bảng xếp theo mã HS.</span></div>
+        <div id="coKetQua"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CHẾ ĐỘ TI VI ================= -->
+<section id="man-tivi" class="man">
+  <div class="tv-khung">
+    <div class="tv-trai"><div class="bong-noi" id="tvLoi">Cả lớp mình cùng đọc nào!</div><div class="nghe-hinh noi-len" id="ngheTv" style="max-width:min(330px,24vw)"></div></div>
+    <div>
+      <div class="tv-dau"><h2 id="tvTen">📺 Bài</h2>
+        <div class="chon-bai-nho"><button id="tvBaiTru" aria-label="Bài trước">◀</button><span id="tvBai">Bài 1</span><button id="tvBaiCong" aria-label="Bài sau">▶</button></div>
+        <span class="tv-sao" id="tvSao">⭐ 0</span><span class="cham-tien" id="tvTien" style="margin:0"></span>
+        <button class="nut-nho" data-di="co" style="margin-left:auto">✕ Thoát ti vi</button></div>
+      <div class="tv-the" id="tvThe"></div>
+      <div class="hang-nut tv-nut">
+        <button class="nut nut-tim" id="tvTruoc" aria-label="Chữ trước">◀</button>
+        <button class="nut nut-xanh-duong" id="tvMau">🔊 Nghe nghé đọc</button>
+        <button class="nut nut-xanh" id="tvDung">👏 Cả lớp đọc xong</button>
+        <button class="nut nut-tim" id="tvSau" aria-label="Chữ sau">▶</button>
+      </div>
+      <p class="goi-y" style="text-align:center">Phím tắt cho cô: ← → chuyển chữ · N nghe nghé đọc · K khen cả lớp</p>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- Phản hồi đúng/sai -->
+<div class="phu" id="phanHoi" role="dialog" aria-modal="true" aria-labelledby="phChu" hidden><div class="hop"><div class="nghe-hop" id="phNghe"></div><h2 id="phChu"></h2><div id="phPhu"></div><div class="hang-nut" id="phNut"></div></div></div>
+<!-- Chọn bài (bài lớp đã học) -->
+<div class="phu" id="hopChonBai" role="dialog" aria-modal="true" aria-labelledby="cbTieuDe" hidden><div class="hop">
+  <h2 id="cbTieuDe">📚 Con muốn học bài nào?</h2>
+  <p class="goi-y">Chạm vào một bài để học hoặc ôn. Bài khung xanh là bài lớp đang học.</p>
+  <div class="luoi-bai" id="luoiBai"></div>
+  <div class="hang-nut"><button class="nut nut-xanh-duong" id="cbDong" data-chinh>Đóng</button></div>
+</div></div>
+<!-- Dành cho người lớn: mọi việc của người chăm sóc bé (ông bà, cha mẹ, người thân) và cô gom vào một chỗ -->
+<div class="phu" id="hopNguoiLon" role="dialog" aria-modal="true" aria-labelledby="nlTieuDe" hidden><div class="hop hop-nl">
+  <h2 id="nlTieuDe">👨‍👩‍👧 Dành cho người lớn</h2>
+  <div id="cloud-settings"></div>
+  <div class="muc-nl"><h3>📨 Gửi kết quả cho cô</h3><p>Cuối tuần bấm nút dưới, chép mã, dán vào Zalo gửi cô. Mã chỉ có mã HS và tiến trình luyện đọc, đồng thời là <b>bản lưu tiến trình</b> của con.</p><button class="nut nut-tim" id="nlGuiCo" data-chinh>📨 Gửi kết quả cho cô</button></div>
+  <div class="muc-nl"><h3>💡 Cách học cùng con</h3><p>Mỗi tối khoảng 10 phút: 1. Nghe → 2. Chơi → 3. Đọc. Con đọc to theo nghé, đọc giọng quê mình cũng được, người lớn chỉ cần khen. App không thu âm, không chấm giọng.</p></div>
+  <div class="muc-nl"><h3>📖 Con đang học tới bài</h3><div class="co-chon"><select id="nlBai" aria-label="Con đang học tới bài"></select></div><p>Là bài mở ra khi bấm «Học bài hôm nay». Cô đã đặt sẵn theo lớp; các bài khác vẫn chọn được ở «Chọn bài khác».</p></div>
+  <div class="muc-nl" id="nlCaiMuc" hidden><h3>📲 Cài app vào điện thoại</h3><p>Cài một lần, trên màn hình điện thoại có biểu tượng chú nghé, lần sau mở không cần mạng.</p><button class="nut nut-xanh" id="nlCai">📲 Cài app vào điện thoại</button></div>
+  <div class="hang-nut"><button class="nut-nho" id="nlSaoLuu">💾 Sao lưu</button><button class="nut-nho" id="nlNhap">📂 Khôi phục tiến trình</button><button class="nut-nho" data-di="co">👩‍🏫 Góc của cô</button></div>
+  <div class="hang-nut"><button class="nut nut-xanh-duong" id="nlDong">Đóng</button></div>
+</div></div>
+<!-- Nghỉ mắt -->
+<div class="phu" id="hopNghi" role="dialog" aria-modal="true" aria-labelledby="nghiTieuDe" hidden><div class="hop"><div class="nghe-hop" id="nghiNghe"></div>
+  <h2 id="nghiTieuDe">😴 Mình nghỉ mắt một chút nhé!</h2><p>Con học được <b>15 phút</b> rồi. Con nhìn ra xa, ngắm cây xanh, chớp mắt thật chậm 10 lần nhé.</p>
+  <div class="hang-nut"><button class="nut nut-xanh" id="nghiXong" data-chinh>👀 Con nghỉ xong rồi</button></div></div></div>
+<!-- Gửi cô -->
+<div class="phu" id="hopGuiCo" role="dialog" aria-modal="true" aria-labelledby="guiTieuDe" hidden><div class="hop"><div class="nghe-hop" id="guiNghe" style="width:min(150px,36vw)"></div>
+  <h2 id="guiTieuDe">📨 Gửi cô</h2>
+  <p>Người lớn trong nhà <b>chép mã này</b> rồi dán vào Zalo gửi cô. Mã chỉ có <b>mã HS và tiến trình luyện đọc</b> — không có tên, không có tiếng đọc.</p><p class="nho-mo">Mã này cũng là <b>bản lưu tiến trình của con</b>: nếu máy bị xoá dữ liệu, vào «Dành cho người lớn» → «Khôi phục tiến trình», dán lại mã là lấy lại vườn và ngôi sao.</p>
+  <textarea class="ma-gui" id="guiMa" readonly aria-label="Mã gửi cô"></textarea>
+  <div class="hang-nut"><button class="nut nut-tim" id="guiChep" data-chinh>📋 Chép mã</button><button class="nut-nho" id="guiSaoLuu">💾 Sao lưu ra file</button><button class="nut-nho" id="guiDong">Đóng</button></div></div></div>
+
+<!-- Sao lưu / nhập lại bằng chép–dán (dự phòng khi máy không cho tải file) -->
+<div class="phu" id="hopChep" role="dialog" aria-modal="true" aria-labelledby="chepTieuDe" hidden><div class="hop">
+  <h2 id="chepTieuDe">💾 Sao lưu</h2>
+  <p id="chepLoi"></p>
+  <textarea class="ma-gui" id="chepNoiDung" aria-label="Nội dung sao lưu"></textarea>
+  <div class="hang-nut" id="chepNutXuat"><button class="nut nut-tim" id="chepNut">📋 Chép nội dung</button><button class="nut-nho" id="chepDong">Đóng</button></div>
+  <div class="hang-nut" id="chepNutNhap" hidden><button class="nut nut-xanh" id="chepNhap">✅ Nhập nội dung đã dán</button><button class="nut nut-cam" id="chepHoanTac" hidden>↩️ Hoàn tác lần nhập vừa rồi</button><button class="nut-nho" id="chepChonFile">📂 Chọn file sao lưu</button><button class="nut-nho" id="chepDong2">Đóng</button></div>
+</div></div>
+<!-- Cài app ra màn hình chính (chỉ bản web https) -->
+<div class="phu" id="hopCai" role="dialog" aria-modal="true" aria-labelledby="caiTieuDe" hidden><div class="hop hop-nl">
+  <h2 id="caiTieuDe">📲 Cài app vào điện thoại</h2>
+  <div id="caiHuongDan"></div>
+  <p>Cài xong, trên màn hình điện thoại có biểu tượng <b>chú nghé</b> 🐃. Lần sau con bấm vào đó để học, không cần mạng.</p>
+  <div class="hang-nut"><button class="nut nut-xanh-duong" id="caiDong" data-chinh>Đóng</button></div>
+</div></div>
+<canvas id="phaoGiay"></canvas>
+<div id="bao" role="status" hidden></div>
+<input type="file" id="chonFile" accept=".json,application/json" hidden>
+<div class="chan">«Nghé ơi, đọc nào!»<span class="chan-them"> · cô Từ Thị Mỹ Dung, lớp 1A, TH Bình Hòa (Gia Lai) · ngữ liệu SGK Tiếng Việt 1 (KNTT)</span></div>
+

@@ -1,0 +1,2706 @@
+{
+  "nguon": [
+    "Ngữ liệu chép từ SGK Tiếng Việt 1, tập một (Kết nối tri thức với cuộc sống) — sách cô Dung đã nạp, trang 14–73. Mục 'Đọc' của từng bài. Em (trợ lý) đọc ảnh trang sách ngày 19/10/2026 — cô soát lại.",
+    "Ngữ liệu chép từ SGK Tiếng Việt 1, tập một (Kết nối tri thức với cuộc sống) — sách cô Dung đã nạp, trang 74–113 (bài 31–50). Mục 'Đọc' của từng bài; không chép phần Kể chuyện. Đoạn đọc dài hơn 3 câu chỉ chép 3 câu (xem _ghi_chu). Em (trợ lý) đọc ảnh trang sách ngày 19/10/2026 — cô soát lại."
+  ],
+  "bai": [
+    {
+      "bai": 1,
+      "ten": "A a",
+      "tuan": 1,
+      "loai": "moi",
+      "am": [
+        "a"
+      ],
+      "dau": [],
+      "mau": [],
+      "tieng": [
+        "a"
+      ],
+      "tu": [],
+      "cau": []
+    },
+    {
+      "bai": 2,
+      "ten": "B b, dấu huyền",
+      "tuan": 1,
+      "loai": "moi",
+      "am": [
+        "b"
+      ],
+      "dau": [
+        "huyền"
+      ],
+      "mau": [
+        {
+          "am": "b",
+          "van": "a",
+          "dau": "",
+          "tieng": "ba"
+        },
+        {
+          "am": "b",
+          "van": "a",
+          "dau": "huyền",
+          "tieng": "bà"
+        }
+      ],
+      "tieng": [
+        "ba",
+        "bà"
+      ],
+      "tu": [
+        {
+          "chu": "ba",
+          "hinh": "3️⃣"
+        },
+        {
+          "chu": "bà",
+          "hinh": "👵"
+        },
+        {
+          "chu": "ba ba",
+          "hinh": "🐢"
+        }
+      ],
+      "cau": [
+        "A, bà."
+      ]
+    },
+    {
+      "bai": 3,
+      "ten": "C c, dấu sắc",
+      "tuan": 1,
+      "loai": "moi",
+      "am": [
+        "c"
+      ],
+      "dau": [
+        "sắc"
+      ],
+      "mau": [
+        {
+          "am": "c",
+          "van": "a",
+          "dau": "",
+          "tieng": "ca"
+        },
+        {
+          "am": "c",
+          "van": "a",
+          "dau": "sắc",
+          "tieng": "cá"
+        }
+      ],
+      "tieng": [
+        "ca",
+        "cà",
+        "cá"
+      ],
+      "tu": [
+        {
+          "chu": "ca",
+          "hinh": "☕"
+        },
+        {
+          "chu": "cà",
+          "hinh": "🍆"
+        },
+        {
+          "chu": "cá",
+          "hinh": "🐟"
+        }
+      ],
+      "cau": [
+        "A, cá."
+      ]
+    },
+    {
+      "bai": 4,
+      "ten": "E e, Ê ê",
+      "tuan": 1,
+      "loai": "moi",
+      "am": [
+        "e",
+        "ê"
+      ],
+      "dau": [],
+      "mau": [
+        {
+          "am": "b",
+          "van": "e",
+          "dau": "sắc",
+          "tieng": "bé"
+        },
+        {
+          "am": "b",
+          "van": "ê",
+          "dau": "sắc",
+          "tieng": "bế"
+        }
+      ],
+      "tieng": [
+        "bè",
+        "bé",
+        "bế"
+      ],
+      "tu": [
+        {
+          "chu": "bè",
+          "hinh": ""
+        },
+        {
+          "chu": "bé",
+          "hinh": "👶"
+        },
+        {
+          "chu": "bế",
+          "hinh": "🤱"
+        }
+      ],
+      "cau": [
+        "Bà bế bé."
+      ]
+    },
+    {
+      "bai": 5,
+      "ten": "Ôn tập (a, b, c, e, ê)",
+      "tuan": 1,
+      "loai": "on",
+      "am": [],
+      "dau": [],
+      "mau": [],
+      "tieng": [
+        "ba",
+        "bà",
+        "be",
+        "bé",
+        "bè",
+        "cá"
+      ],
+      "tu": [
+        {
+          "chu": "ba bà",
+          "hinh": ""
+        },
+        {
+          "chu": "be bé",
+          "hinh": "👶"
+        },
+        {
+          "chu": "cá bé",
+          "hinh": "🐟"
+        },
+        {
+          "chu": "bè cá",
+          "hinh": ""
+        },
+        {
+          "chu": "bế bé",
+          "hinh": "🤱"
+        }
+      ],
+      "cau": [
+        "Bà bế bé."
+      ]
+    },
+    {
+      "bai": 6,
+      "ten": "O o, dấu hỏi",
+      "tuan": 2,
+      "loai": "moi",
+      "am": [
+        "o"
+      ],
+      "dau": [
+        "hỏi"
+      ],
+      "mau": [
+        {
+          "am": "b",
+          "van": "o",
+          "dau": "huyền",
+          "tieng": "bò"
+        },
+        {
+          "am": "c",
+          "van": "o",
+          "dau": "hỏi",
+          "tieng": "cỏ"
+        }
+      ],
+      "tieng": [
+        "bò",
+        "bó",
+        "bỏ",
+        "cò",
+        "có",
+        "cỏ"
+      ],
+      "tu": [
+        {
+          "chu": "bò",
+          "hinh": "🐄"
+        },
+        {
+          "chu": "cò",
+          "hinh": ""
+        },
+        {
+          "chu": "cỏ",
+          "hinh": "🌿"
+        }
+      ],
+      "cau": [
+        "Bê có cỏ."
+      ]
+    },
+    {
+      "bai": 7,
+      "ten": "Ô ô, dấu nặng",
+      "tuan": 2,
+      "loai": "moi",
+      "am": [
+        "ô"
+      ],
+      "dau": [
+        "nặng"
+      ],
+      "mau": [
+        {
+          "am": "b",
+          "van": "ô",
+          "dau": "sắc",
+          "tieng": "bố"
+        },
+        {
+          "am": "b",
+          "van": "ô",
+          "dau": "nặng",
+          "tieng": "bộ"
+        }
+      ],
+      "tieng": [
+        "bố",
+        "bổ",
+        "bộ",
+        "cô",
+        "cổ",
+        "cộ"
+      ],
+      "tu": [
+        {
+          "chu": "bố",
+          "hinh": "👨"
+        },
+        {
+          "chu": "cô bé",
+          "hinh": "👧"
+        },
+        {
+          "chu": "cổ cò",
+          "hinh": ""
+        }
+      ],
+      "cau": [
+        "Bố bê bể cá."
+      ]
+    },
+    {
+      "bai": 8,
+      "ten": "D d, Đ đ",
+      "tuan": 2,
+      "loai": "moi",
+      "am": [
+        "d",
+        "đ"
+      ],
+      "dau": [],
+      "mau": [
+        {
+          "am": "d",
+          "van": "e",
+          "dau": "hỏi",
+          "tieng": "dẻ"
+        },
+        {
+          "am": "đ",
+          "van": "a",
+          "dau": "",
+          "tieng": "đa"
+        }
+      ],
+      "tieng": [
+        "da",
+        "dẻ",
+        "dế",
+        "đá",
+        "đò",
+        "đổ"
+      ],
+      "tu": [
+        {
+          "chu": "đá dế",
+          "hinh": "🦗"
+        },
+        {
+          "chu": "đa đa",
+          "hinh": "🐦"
+        },
+        {
+          "chu": "ô đỏ",
+          "hinh": "☂️"
+        }
+      ],
+      "cau": [
+        "Bé có ô đỏ."
+      ]
+    },
+    {
+      "bai": 9,
+      "ten": "Ơ ơ, dấu ngã",
+      "tuan": 2,
+      "loai": "moi",
+      "am": [
+        "ơ"
+      ],
+      "dau": [
+        "ngã"
+      ],
+      "mau": [
+        {
+          "am": "b",
+          "van": "ơ",
+          "dau": "huyền",
+          "tieng": "bờ"
+        },
+        {
+          "am": "d",
+          "van": "ơ",
+          "dau": "ngã",
+          "tieng": "dỡ"
+        }
+      ],
+      "tieng": [
+        "bờ",
+        "bở",
+        "cờ",
+        "cỡ",
+        "dỡ",
+        "đỡ"
+      ],
+      "tu": [
+        {
+          "chu": "bờ đê",
+          "hinh": ""
+        },
+        {
+          "chu": "cá cờ",
+          "hinh": "🐠"
+        },
+        {
+          "chu": "đỡ bé",
+          "hinh": ""
+        }
+      ],
+      "cau": [
+        "Bố đỡ bé."
+      ]
+    },
+    {
+      "bai": 10,
+      "ten": "Ôn tập (o, ô, ơ, d, đ)",
+      "tuan": 2,
+      "loai": "on",
+      "am": [],
+      "dau": [],
+      "mau": [],
+      "tieng": [
+        "do",
+        "đo",
+        "dô",
+        "đô",
+        "dơ",
+        "đơ"
+      ],
+      "tu": [
+        {
+          "chu": "bó cỏ",
+          "hinh": "🌿"
+        },
+        {
+          "chu": "cá cờ",
+          "hinh": "🐠"
+        },
+        {
+          "chu": "đỡ bà",
+          "hinh": ""
+        },
+        {
+          "chu": "bờ đê",
+          "hinh": ""
+        },
+        {
+          "chu": "cờ đỏ",
+          "hinh": "🚩"
+        },
+        {
+          "chu": "đỗ đỏ",
+          "hinh": ""
+        },
+        {
+          "chu": "dỗ bé",
+          "hinh": ""
+        }
+      ],
+      "cau": [
+        "Bờ đê có dế.",
+        "Bà có đỗ đỏ."
+      ]
+    },
+    {
+      "bai": 11,
+      "ten": "I i, K k",
+      "tuan": 3,
+      "loai": "moi",
+      "am": [
+        "i",
+        "k"
+      ],
+      "dau": [],
+      "mau": [
+        {
+          "am": "k",
+          "van": "i",
+          "dau": "",
+          "tieng": "ki"
+        },
+        {
+          "am": "k",
+          "van": "i",
+          "dau": "huyền",
+          "tieng": "kì"
+        }
+      ],
+      "tieng": [
+        "kè",
+        "kẻ",
+        "kệ",
+        "kí",
+        "kì",
+        "kĩ"
+      ],
+      "tu": [
+        {
+          "chu": "bí đỏ",
+          "hinh": "🎃"
+        },
+        {
+          "chu": "kẻ ô",
+          "hinh": "📏"
+        },
+        {
+          "chu": "đi đò",
+          "hinh": "🛶"
+        },
+        {
+          "chu": "kì đà",
+          "hinh": "🦎"
+        }
+      ],
+      "cau": [
+        "Kì đà bò ở kẽ đá."
+      ]
+    },
+    {
+      "bai": 12,
+      "ten": "H h, L l",
+      "tuan": 3,
+      "loai": "moi",
+      "am": [
+        "h",
+        "l"
+      ],
+      "dau": [],
+      "mau": [
+        {
+          "am": "h",
+          "van": "ô",
+          "dau": "huyền",
+          "tieng": "hồ"
+        },
+        {
+          "am": "l",
+          "van": "e",
+          "dau": "",
+          "tieng": "le"
+        }
+      ],
+      "tieng": [
+        "hé",
+        "ho",
+        "hổ",
+        "li",
+        "lọ",
+        "lỡ"
+      ],
+      "tu": [
+        {
+          "chu": "lá đỏ",
+          "hinh": "🍁"
+        },
+        {
+          "chu": "bờ hồ",
+          "hinh": ""
+        },
+        {
+          "chu": "cá hố",
+          "hinh": "🐟"
+        },
+        {
+          "chu": "le le",
+          "hinh": "🦆"
+        }
+      ],
+      "cau": [
+        "Bé bị ho. Bà đã có lá hẹ."
+      ]
+    },
+    {
+      "bai": 13,
+      "ten": "U u, Ư ư",
+      "tuan": 3,
+      "loai": "moi",
+      "am": [
+        "u",
+        "ư"
+      ],
+      "dau": [],
+      "mau": [
+        {
+          "am": "đ",
+          "van": "u",
+          "dau": "hỏi",
+          "tieng": "đủ"
+        },
+        {
+          "am": "l",
+          "van": "ư",
+          "dau": "huyền",
+          "tieng": "lừ"
+        }
+      ],
+      "tieng": [
+        "dù",
+        "đủ",
+        "hũ",
+        "củ",
+        "dự",
+        "lữ"
+      ],
+      "tu": [
+        {
+          "chu": "dù",
+          "hinh": "🪂"
+        },
+        {
+          "chu": "đu đủ",
+          "hinh": ""
+        },
+        {
+          "chu": "hổ dữ",
+          "hinh": "🐯"
+        }
+      ],
+      "cau": [
+        "Cá hổ là cá dữ."
+      ]
+    },
+    {
+      "bai": 14,
+      "ten": "Ch ch, Kh kh",
+      "tuan": 3,
+      "loai": "moi",
+      "am": [
+        "ch",
+        "kh"
+      ],
+      "dau": [],
+      "mau": [
+        {
+          "am": "ch",
+          "van": "u",
+          "dau": "sắc",
+          "tieng": "chú"
+        },
+        {
+          "am": "kh",
+          "van": "i",
+          "dau": "hỏi",
+          "tieng": "khỉ"
+        }
+      ],
+      "tieng": [
+        "chè",
+        "chỉ",
+        "chợ",
+        "khế",
+        "kho",
+        "khô"
+      ],
+      "tu": [
+        {
+          "chu": "lá khô",
+          "hinh": "🍂"
+        },
+        {
+          "chu": "chú khỉ",
+          "hinh": "🐒"
+        },
+        {
+          "chu": "chợ cá",
+          "hinh": "🐟"
+        }
+      ],
+      "cau": [
+        "Chị có cá kho khế."
+      ]
+    },
+    {
+      "bai": 15,
+      "ten": "Ôn tập (i, k, h, l, u, ư, ch, kh)",
+      "tuan": 3,
+      "loai": "on",
+      "am": [],
+      "dau": [],
+      "mau": [],
+      "tieng": [
+        "ke",
+        "kê",
+        "ki",
+        "he",
+        "hê",
+        "hi",
+        "hu",
+        "hư",
+        "le",
+        "lê",
+        "li",
+        "lu",
+        "lư",
+        "che",
+        "chê",
+        "chi",
+        "chu",
+        "chư",
+        "khe",
+        "khê",
+        "khi",
+        "khu",
+        "khư"
+      ],
+      "tu": [
+        {
+          "chu": "chú hề",
+          "hinh": "🤡"
+        },
+        {
+          "chu": "chợ cá",
+          "hinh": "🐟"
+        },
+        {
+          "chu": "che ô",
+          "hinh": "☂️"
+        },
+        {
+          "chu": "lá khô",
+          "hinh": "🍂"
+        },
+        {
+          "chu": "bờ hồ",
+          "hinh": ""
+        },
+        {
+          "chu": "cá dữ",
+          "hinh": ""
+        },
+        {
+          "chu": "lá hẹ",
+          "hinh": "🌿"
+        }
+      ],
+      "cau": [
+        "Chị cho bé cá cờ.",
+        "Dì Kha cho Hà đi chợ."
+      ]
+    },
+    {
+      "bai": 16,
+      "ten": "M m, N n",
+      "tuan": 4,
+      "loai": "moi",
+      "am": [
+        "m",
+        "n"
+      ],
+      "dau": [],
+      "mau": [
+        {
+          "am": "m",
+          "van": "e",
+          "dau": "nặng",
+          "tieng": "mẹ"
+        },
+        {
+          "am": "n",
+          "van": "ơ",
+          "dau": "",
+          "tieng": "nơ"
+        }
+      ],
+      "tieng": [
+        "má",
+        "mẹ",
+        "mỡ",
+        "na",
+        "nề",
+        "nở"
+      ],
+      "tu": [
+        {
+          "chu": "cá mè",
+          "hinh": "🐟"
+        },
+        {
+          "chu": "lá me",
+          "hinh": "🌿"
+        },
+        {
+          "chu": "nơ đỏ",
+          "hinh": "🎀"
+        },
+        {
+          "chu": "ca nô",
+          "hinh": "🚤"
+        }
+      ],
+      "cau": [
+        "Bố mẹ cho Hà đi ca nô."
+      ]
+    },
+    {
+      "bai": 17,
+      "ten": "G g, Gi gi",
+      "tuan": 4,
+      "loai": "moi",
+      "am": [
+        "g",
+        "gi"
+      ],
+      "dau": [],
+      "mau": [
+        {
+          "am": "g",
+          "van": "a",
+          "dau": "huyền",
+          "tieng": "gà"
+        },
+        {
+          "am": "gi",
+          "van": "o",
+          "dau": "hỏi",
+          "tieng": "giỏ"
+        }
+      ],
+      "tieng": [
+        "ga",
+        "gỗ",
+        "gụ",
+        "giá",
+        "giò",
+        "giỗ"
+      ],
+      "tu": [
+        {
+          "chu": "gà gô",
+          "hinh": "🐦"
+        },
+        {
+          "chu": "đồ gỗ",
+          "hinh": "🪑"
+        },
+        {
+          "chu": "giá đỗ",
+          "hinh": "🌱"
+        },
+        {
+          "chu": "cụ già",
+          "hinh": "👴"
+        }
+      ],
+      "cau": [
+        "Bà che gió cho ba chú gà."
+      ]
+    },
+    {
+      "bai": 18,
+      "ten": "Gh gh, Nh nh",
+      "tuan": 4,
+      "loai": "moi",
+      "am": [
+        "gh",
+        "nh"
+      ],
+      "dau": [],
+      "mau": [
+        {
+          "am": "gh",
+          "van": "e",
+          "dau": "sắc",
+          "tieng": "ghé"
+        },
+        {
+          "am": "nh",
+          "van": "a",
+          "dau": "huyền",
+          "tieng": "nhà"
+        }
+      ],
+      "tieng": [
+        "ghẹ",
+        "ghế",
+        "ghi",
+        "nhà",
+        "nhẹ",
+        "nhỏ"
+      ],
+      "tu": [
+        {
+          "chu": "ghế đá",
+          "hinh": ""
+        },
+        {
+          "chu": "ghẹ đỏ",
+          "hinh": "🦀"
+        },
+        {
+          "chu": "nhà gỗ",
+          "hinh": "🏠"
+        },
+        {
+          "chu": "lá nho",
+          "hinh": "🍇"
+        }
+      ],
+      "cau": [
+        "Mẹ nhờ Hà bê ghế nhỏ."
+      ]
+    },
+    {
+      "bai": 19,
+      "ten": "Ng ng, Ngh ngh",
+      "tuan": 4,
+      "loai": "moi",
+      "am": [
+        "ng",
+        "ngh"
+      ],
+      "dau": [],
+      "mau": [
+        {
+          "am": "ng",
+          "van": "o",
+          "dau": "ngã",
+          "tieng": "ngõ"
+        },
+        {
+          "am": "ngh",
+          "van": "e",
+          "dau": "sắc",
+          "tieng": "nghé"
+        }
+      ],
+      "tieng": [
+        "ngã",
+        "ngủ",
+        "ngự",
+        "nghe",
+        "nghé",
+        "nghĩ"
+      ],
+      "tu": [
+        {
+          "chu": "ngã ba",
+          "hinh": ""
+        },
+        {
+          "chu": "ngõ nhỏ",
+          "hinh": ""
+        },
+        {
+          "chu": "củ nghệ",
+          "hinh": ""
+        },
+        {
+          "chu": "nghỉ hè",
+          "hinh": "🏖️"
+        }
+      ],
+      "cau": [
+        "Nghé đã no cỏ. Nghé ngủ ở bờ đê."
+      ]
+    },
+    {
+      "bai": 20,
+      "ten": "Ôn tập (m, n, g, gi, gh, nh, ng, ngh)",
+      "tuan": 4,
+      "loai": "on",
+      "am": [],
+      "dau": [],
+      "mau": [],
+      "tieng": [
+        "me",
+        "mê",
+        "mu",
+        "ne",
+        "nê",
+        "nu",
+        "gu",
+        "ghi",
+        "nho",
+        "nhi",
+        "như",
+        "ngo",
+        "ngư",
+        "nghi"
+      ],
+      "tu": [
+        {
+          "chu": "nụ cà",
+          "hinh": ""
+        },
+        {
+          "chu": "nhà ga",
+          "hinh": "🚉"
+        },
+        {
+          "chu": "nghỉ hè",
+          "hinh": "🏖️"
+        },
+        {
+          "chu": "ngủ mơ",
+          "hinh": "😴"
+        },
+        {
+          "chu": "bỡ ngỡ",
+          "hinh": ""
+        },
+        {
+          "chu": "giá đỗ",
+          "hinh": "🌱"
+        },
+        {
+          "chu": "nho nhỏ",
+          "hinh": "🍇"
+        },
+        {
+          "chu": "ghế gỗ",
+          "hinh": "🪑"
+        }
+      ],
+      "cau": [
+        "Mẹ ghé nhà bà.",
+        "Nhà bà ở ngõ nhỏ."
+      ]
+    },
+    {
+      "bai": 21,
+      "ten": "R r, S s",
+      "tuan": 5,
+      "loai": "moi",
+      "am": [
+        "r",
+        "s"
+      ],
+      "dau": [],
+      "mau": [
+        {
+          "am": "r",
+          "van": "a",
+          "dau": "",
+          "tieng": "ra"
+        },
+        {
+          "am": "s",
+          "van": "e",
+          "dau": "hỏi",
+          "tieng": "sẻ"
+        }
+      ],
+      "tieng": [
+        "rạ",
+        "rế",
+        "rổ",
+        "sả",
+        "sẽ",
+        "sò"
+      ],
+      "tu": [
+        {
+          "chu": "rổ rá",
+          "hinh": "🧺"
+        },
+        {
+          "chu": "cá rô",
+          "hinh": "🐟"
+        },
+        {
+          "chu": "su su",
+          "hinh": ""
+        },
+        {
+          "chu": "chữ số",
+          "hinh": "🔢"
+        }
+      ],
+      "cau": [
+        "Chợ có gà ri, cá rô, su su.",
+        "Chợ có cả rổ rá."
+      ]
+    },
+    {
+      "bai": 22,
+      "ten": "T t, Tr tr",
+      "tuan": 5,
+      "loai": "moi",
+      "am": [
+        "t",
+        "tr"
+      ],
+      "dau": [],
+      "mau": [
+        {
+          "am": "t",
+          "van": "ô",
+          "dau": "",
+          "tieng": "tô"
+        },
+        {
+          "am": "tr",
+          "van": "e",
+          "dau": "",
+          "tieng": "tre"
+        }
+      ],
+      "tieng": [
+        "tá",
+        "tạ",
+        "tẻ",
+        "trê",
+        "trò",
+        "trổ"
+      ],
+      "tu": [
+        {
+          "chu": "ô tô",
+          "hinh": "🚗"
+        },
+        {
+          "chu": "sư tử",
+          "hinh": "🦁"
+        },
+        {
+          "chu": "cá trê",
+          "hinh": "🐟"
+        },
+        {
+          "chu": "tre ngà",
+          "hinh": "🎋"
+        }
+      ],
+      "cau": [
+        "Hà tả hồ cá.",
+        "Hồ to, có cá mè, cá trê, cá rô."
+      ]
+    },
+    {
+      "bai": 23,
+      "ten": "Th th, ia",
+      "tuan": 5,
+      "loai": "moi",
+      "am": [
+        "th",
+        "ia"
+      ],
+      "dau": [],
+      "mau": [
+        {
+          "am": "th",
+          "van": "u",
+          "dau": "",
+          "tieng": "thu"
+        },
+        {
+          "am": "ch",
+          "van": "ia",
+          "dau": "",
+          "tieng": "chia"
+        }
+      ],
+      "tieng": [
+        "thẻ",
+        "thọ",
+        "thợ",
+        "đĩa",
+        "mía",
+        "thìa"
+      ],
+      "tu": [
+        {
+          "chu": "thủ đô",
+          "hinh": ""
+        },
+        {
+          "chu": "lá thư",
+          "hinh": "✉️"
+        },
+        {
+          "chu": "thìa đĩa",
+          "hinh": "🥄"
+        },
+        {
+          "chu": "lá tía tô",
+          "hinh": "🌿"
+        }
+      ],
+      "cau": [
+        "Bé chia thìa, chia đĩa cho cả nhà."
+      ]
+    },
+    {
+      "bai": 24,
+      "ten": "ua, ưa",
+      "tuan": 5,
+      "loai": "moi",
+      "am": [
+        "ua",
+        "ưa"
+      ],
+      "dau": [],
+      "mau": [
+        {
+          "am": "m",
+          "van": "ua",
+          "dau": "sắc",
+          "tieng": "múa"
+        },
+        {
+          "am": "đ",
+          "van": "ưa",
+          "dau": "",
+          "tieng": "đưa"
+        }
+      ],
+      "tieng": [
+        "cua",
+        "đũa",
+        "rùa",
+        "cửa",
+        "dứa",
+        "nhựa"
+      ],
+      "tu": [
+        {
+          "chu": "cà chua",
+          "hinh": "🍅"
+        },
+        {
+          "chu": "múa ô",
+          "hinh": ""
+        },
+        {
+          "chu": "dưa lê",
+          "hinh": "🍈"
+        },
+        {
+          "chu": "cửa sổ",
+          "hinh": "🪟"
+        }
+      ],
+      "cau": [
+        "Mẹ đi chợ mua cá, mua cua."
+      ]
+    },
+    {
+      "bai": 25,
+      "ten": "Ôn tập (r, s, t, tr, th, ia, ua, ưa)",
+      "tuan": 5,
+      "loai": "on",
+      "am": [],
+      "dau": [],
+      "mau": [],
+      "tieng": [
+        "ri",
+        "ru",
+        "rư",
+        "si",
+        "su",
+        "sư",
+        "ti",
+        "tu",
+        "tư",
+        "tri",
+        "tru",
+        "trư",
+        "thi",
+        "thu",
+        "thư",
+        "tia",
+        "tua",
+        "tưa",
+        "thia",
+        "thua",
+        "thưa"
+      ],
+      "tu": [
+        {
+          "chu": "củ sả",
+          "hinh": ""
+        },
+        {
+          "chu": "lưa thưa",
+          "hinh": ""
+        },
+        {
+          "chu": "rễ tre",
+          "hinh": "🎋"
+        },
+        {
+          "chu": "lá mía",
+          "hinh": ""
+        },
+        {
+          "chu": "mùa thu",
+          "hinh": "🍂"
+        },
+        {
+          "chu": "cửa sổ",
+          "hinh": "🪟"
+        },
+        {
+          "chu": "khế chua",
+          "hinh": ""
+        },
+        {
+          "chu": "tổ cò",
+          "hinh": ""
+        }
+      ],
+      "cau": [
+        "Mùa hè, nhà bà có dừa, có dưa lê.",
+        "Mùa thu, nhà bà có na, có thị."
+      ]
+    },
+    {
+      "bai": 26,
+      "ten": "Ph ph, Qu qu",
+      "tuan": 6,
+      "loai": "moi",
+      "am": [
+        "ph",
+        "qu"
+      ],
+      "dau": [],
+      "mau": [
+        {
+          "am": "ph",
+          "van": "ô",
+          "dau": "sắc",
+          "tieng": "phố"
+        },
+        {
+          "am": "qu",
+          "van": "ê",
+          "dau": "",
+          "tieng": "quê"
+        }
+      ],
+      "tieng": [
+        "phà",
+        "phí",
+        "phở",
+        "quạ",
+        "quê",
+        "quế"
+      ],
+      "tu": [
+        {
+          "chu": "pha trà",
+          "hinh": "🍵"
+        },
+        {
+          "chu": "phố cổ",
+          "hinh": ""
+        },
+        {
+          "chu": "quê nhà",
+          "hinh": "🏡"
+        },
+        {
+          "chu": "quả khế",
+          "hinh": ""
+        }
+      ],
+      "cau": [
+        "Bà cho bé quà quê."
+      ]
+    },
+    {
+      "bai": 27,
+      "ten": "V v, X x",
+      "tuan": 6,
+      "loai": "moi",
+      "am": [
+        "v",
+        "x"
+      ],
+      "dau": [],
+      "mau": [
+        {
+          "am": "v",
+          "van": "e",
+          "dau": "ngã",
+          "tieng": "vẽ"
+        },
+        {
+          "am": "x",
+          "van": "e",
+          "dau": "",
+          "tieng": "xe"
+        }
+      ],
+      "tieng": [
+        "võ",
+        "vở",
+        "vua",
+        "xỉa",
+        "xứ",
+        "xưa"
+      ],
+      "tu": [
+        {
+          "chu": "vở vẽ",
+          "hinh": "🎨"
+        },
+        {
+          "chu": "vỉa hè",
+          "hinh": ""
+        },
+        {
+          "chu": "xe lu",
+          "hinh": ""
+        },
+        {
+          "chu": "thị xã",
+          "hinh": "🏘️"
+        }
+      ],
+      "cau": [
+        "Nghỉ hè, bố mẹ cho Hà về quê."
+      ]
+    },
+    {
+      "bai": 28,
+      "ten": "Y y",
+      "tuan": 6,
+      "loai": "moi",
+      "am": [
+        "y"
+      ],
+      "dau": [],
+      "mau": [
+        {
+          "am": "qu",
+          "van": "y",
+          "dau": "sắc",
+          "tieng": "quý"
+        }
+      ],
+      "tieng": [
+        "quy",
+        "quỳ",
+        "quý",
+        "quỹ",
+        "quỵ",
+        "ý"
+      ],
+      "tu": [
+        {
+          "chu": "y tá",
+          "hinh": "🧑‍⚕️"
+        },
+        {
+          "chu": "dã quỳ",
+          "hinh": "🌼"
+        },
+        {
+          "chu": "đá quý",
+          "hinh": "💎"
+        }
+      ],
+      "cau": [
+        "Hà chú ý nghe dì kể."
+      ]
+    },
+    {
+      "bai": 29,
+      "ten": "Luyện tập chính tả (c/k, g/gh, ng/ngh)",
+      "tuan": 6,
+      "loai": "chinh-ta",
+      "am": [],
+      "dau": [],
+      "mau": [],
+      "tieng": [
+        "cô",
+        "ki",
+        "cò",
+        "kế",
+        "cá",
+        "kẻ",
+        "ga",
+        "ghe",
+        "gà",
+        "ghi",
+        "gỗ",
+        "ghế",
+        "ngô",
+        "nghe",
+        "ngừ",
+        "nghé",
+        "ngủ",
+        "nghỉ"
+      ],
+      "cap": [
+        [
+          "cô",
+          "ki"
+        ],
+        [
+          "cư",
+          "kề"
+        ],
+        [
+          "cò",
+          "kế"
+        ],
+        [
+          "cá",
+          "kẻ"
+        ],
+        [
+          "cổ",
+          "kỉ"
+        ],
+        [
+          "cỡ",
+          "kẽ"
+        ],
+        [
+          "cọ",
+          "kệ"
+        ],
+        [
+          "ga",
+          "ghe"
+        ],
+        [
+          "gà",
+          "ghi"
+        ],
+        [
+          "gõ",
+          "ghì"
+        ],
+        [
+          "gỗ",
+          "ghé"
+        ],
+        [
+          "gù",
+          "ghế"
+        ],
+        [
+          "gừ",
+          "ghẹ"
+        ],
+        [
+          "ngô",
+          "nghe"
+        ],
+        [
+          "ngà",
+          "nghề"
+        ],
+        [
+          "ngừ",
+          "nghé"
+        ],
+        [
+          "ngủ",
+          "nghỉ"
+        ],
+        [
+          "ngõ",
+          "nghĩ"
+        ],
+        [
+          "ngự",
+          "nghệ"
+        ]
+      ],
+      "luat": [
+        "k đứng trước i, e, ê — c đứng trước a, o, ô, ơ, u, ư",
+        "gh đứng trước i, e, ê — g đứng trước a, o, ô, ơ, u, ư",
+        "ngh đứng trước i, e, ê — ng đứng trước a, o, ô, ơ, u, ư"
+      ],
+      "tu": [
+        {
+          "chu": "cá cờ",
+          "hinh": "🐠"
+        },
+        {
+          "chu": "chữ kí",
+          "hinh": "✍️"
+        },
+        {
+          "chu": "gà gô",
+          "hinh": "🐦"
+        },
+        {
+          "chu": "ghế gỗ",
+          "hinh": "🪑"
+        },
+        {
+          "chu": "cá ngừ",
+          "hinh": "🐟"
+        },
+        {
+          "chu": "củ nghệ",
+          "hinh": ""
+        }
+      ],
+      "cau": []
+    },
+    {
+      "bai": 30,
+      "ten": "Ôn tập (ph, qu, v, x, y)",
+      "tuan": 6,
+      "loai": "on",
+      "am": [],
+      "dau": [],
+      "mau": [],
+      "tieng": [
+        "pha",
+        "phe",
+        "phê",
+        "phơ",
+        "qua",
+        "que",
+        "quê",
+        "quơ",
+        "va",
+        "ve",
+        "vê",
+        "vơ",
+        "xa",
+        "xe",
+        "xê",
+        "xơ"
+      ],
+      "tu": [
+        {
+          "chu": "phố cổ",
+          "hinh": ""
+        },
+        {
+          "chu": "qua phà",
+          "hinh": "⛴️"
+        },
+        {
+          "chu": "vỉa hè",
+          "hinh": ""
+        },
+        {
+          "chu": "đá quý",
+          "hinh": "💎"
+        },
+        {
+          "chu": "cổ vũ",
+          "hinh": "📣"
+        },
+        {
+          "chu": "xa xa",
+          "hinh": ""
+        },
+        {
+          "chu": "xứ sở",
+          "hinh": ""
+        }
+      ],
+      "cau": [
+        "Xa nhà, bé nhớ mẹ.",
+        "Xa quê, bé nhớ bà."
+      ]
+    },
+    {
+      "bai": 31,
+      "ten": "an, ăn, ân",
+      "tuan": 7,
+      "loai": "moi",
+      "am": [
+        "an",
+        "ăn",
+        "ân"
+      ],
+      "dau": [],
+      "mau": [
+        {
+          "am": "b",
+          "van": "an",
+          "dau": "nặng",
+          "tieng": "bạn"
+        }
+      ],
+      "tieng": [
+        "bản",
+        "nhãn",
+        "gắn",
+        "lặn",
+        "bận",
+        "gần"
+      ],
+      "tu": [
+        {
+          "chu": "bạn thân",
+          "hinh": ""
+        },
+        {
+          "chu": "khăn rằn",
+          "hinh": "🧣"
+        },
+        {
+          "chu": "quả mận",
+          "hinh": ""
+        }
+      ],
+      "cau": [
+        "Đàn gà cứ tha thẩn gần chân mẹ.",
+        "Đã có mẹ che chắn, cả đàn chả sợ gì lũ quạ dữ."
+      ]
+    },
+    {
+      "bai": 32,
+      "ten": "on, ôn, ơn",
+      "tuan": 7,
+      "loai": "moi",
+      "am": [
+        "on",
+        "ôn",
+        "ơn"
+      ],
+      "dau": [],
+      "mau": [
+        {
+          "am": "c",
+          "van": "on",
+          "dau": "",
+          "tieng": "con"
+        }
+      ],
+      "tieng": [
+        "giòn",
+        "ngon",
+        "bốn",
+        "nhộn",
+        "gọn",
+        "lớn"
+      ],
+      "tu": [
+        {
+          "chu": "nón lá",
+          "hinh": ""
+        },
+        {
+          "chu": "con chồn",
+          "hinh": ""
+        },
+        {
+          "chu": "sơn ca",
+          "hinh": "🐦"
+        }
+      ],
+      "cau": [
+        "Ve vẻ vè ve",
+        "Vè bốn chú lợn",
+        "Nhởn nhơ nô giỡn",
+        "Ăn ngủ vô tư.",
+        "Hẳn họ nhà “Trư”",
+        "Là to tròn thế.",
+        "Ve vè nghe kể",
+        "Bốn chú lợn con."
+      ]
+    },
+    {
+      "bai": 33,
+      "ten": "en, ên, in, un",
+      "tuan": 7,
+      "loai": "moi",
+      "am": [
+        "en",
+        "ên",
+        "in",
+        "un"
+      ],
+      "dau": [],
+      "mau": [
+        {
+          "am": "m",
+          "van": "en",
+          "dau": "huyền",
+          "tieng": "mèn"
+        }
+      ],
+      "tieng": [
+        "khèn",
+        "sen",
+        "nến",
+        "nghển",
+        "chín",
+        "mịn",
+        "cún",
+        "vun"
+      ],
+      "tu": [
+        {
+          "chu": "ngọn nến",
+          "hinh": "🕯️"
+        },
+        {
+          "chu": "đèn pin",
+          "hinh": "🔦"
+        },
+        {
+          "chu": "cún con",
+          "hinh": "🐶"
+        }
+      ],
+      "cau": [
+        "Con gì tên có chữ \"ba\"",
+        "Ăn cua ăn cá, nhìn qua ngỡ rùa?",
+        "Con gì quen vẻ già nua",
+        "Bốn chân ngắn ngủn, thỏ thua chả ngờ?"
+      ]
+    },
+    {
+      "bai": 34,
+      "ten": "am, ăm, âm",
+      "tuan": 7,
+      "loai": "moi",
+      "am": [
+        "am",
+        "ăm",
+        "âm"
+      ],
+      "dau": [],
+      "mau": [
+        {
+          "am": "l",
+          "van": "am",
+          "dau": "huyền",
+          "tieng": "làm"
+        }
+      ],
+      "tieng": [
+        "cam",
+        "khám",
+        "ẵm",
+        "cằm",
+        "đậm",
+        "nhẩm"
+      ],
+      "tu": [
+        {
+          "chu": "quả cam",
+          "hinh": "🍊"
+        },
+        {
+          "chu": "tăm tre",
+          "hinh": ""
+        },
+        {
+          "chu": "củ sâm",
+          "hinh": ""
+        }
+      ],
+      "cau": [
+        "Mùa hè, ve râm ran, sen nở thắm.",
+        "Lũ trẻ nô đùa trên thảm cỏ ven hồ."
+      ]
+    },
+    {
+      "bai": 35,
+      "ten": "Ôn tập (an, ăn, ân, on, ôn, ơn, en, ên, in, un, am, ăm, âm)",
+      "tuan": 7,
+      "loai": "on",
+      "am": [],
+      "dau": [],
+      "mau": [],
+      "tieng": [
+        "an",
+        "ăn",
+        "ân",
+        "am",
+        "ăm",
+        "âm",
+        "on",
+        "ôn",
+        "ơn",
+        "en",
+        "ên",
+        "in",
+        "un"
+      ],
+      "tu": [
+        {
+          "chu": "củ sắn",
+          "hinh": ""
+        },
+        {
+          "chu": "tấm gỗ",
+          "hinh": ""
+        },
+        {
+          "chu": "khôn lớn",
+          "hinh": ""
+        },
+        {
+          "chu": "bàn chân",
+          "hinh": ""
+        },
+        {
+          "chu": "đèn pin",
+          "hinh": "🔦"
+        },
+        {
+          "chu": "mưa phùn",
+          "hinh": ""
+        },
+        {
+          "chu": "bến đò",
+          "hinh": ""
+        },
+        {
+          "chu": "ngọn cỏ",
+          "hinh": ""
+        },
+        {
+          "chu": "trạm y tế",
+          "hinh": "🏥"
+        },
+        {
+          "chu": "chăm chỉ",
+          "hinh": ""
+        }
+      ],
+      "cau": [
+        "Nhìn rùa, thỏ chê: \"Quả là chậm như rùa.\".",
+        "Rùa ôn tồn: \"Ta thi nhé.\".",
+        "Thỏ hớn hở tham gia."
+      ]
+    },
+    {
+      "bai": 36,
+      "ten": "om, ôm, ơm",
+      "tuan": 8,
+      "loai": "moi",
+      "am": [
+        "om",
+        "ôm",
+        "ơm"
+      ],
+      "dau": [],
+      "mau": [
+        {
+          "am": "x",
+          "van": "om",
+          "dau": "sắc",
+          "tieng": "xóm"
+        }
+      ],
+      "tieng": [
+        "khóm",
+        "vòm",
+        "nộm",
+        "tôm",
+        "bờm",
+        "rơm"
+      ],
+      "tu": [
+        {
+          "chu": "đom đóm",
+          "hinh": ""
+        },
+        {
+          "chu": "chó đốm",
+          "hinh": "🐕"
+        },
+        {
+          "chu": "mâm cơm",
+          "hinh": ""
+        }
+      ],
+      "cau": [
+        "Hôm qua, cô Mơ ở xóm Hạ đến thăm nhà Hà.",
+        "Cô cho Hà giỏ cam.",
+        "Hà chọn quả cam to phần bố."
+      ]
+    },
+    {
+      "bai": 37,
+      "ten": "em, êm, im, um",
+      "tuan": 8,
+      "loai": "moi",
+      "am": [
+        "em",
+        "êm",
+        "im",
+        "um"
+      ],
+      "dau": [],
+      "mau": [
+        {
+          "am": "đ",
+          "van": "êm",
+          "dau": "sắc",
+          "tieng": "đếm"
+        }
+      ],
+      "tieng": [
+        "hẻm",
+        "kem",
+        "mềm",
+        "nếm",
+        "mỉm",
+        "tím",
+        "chụm",
+        "mũm"
+      ],
+      "tu": [
+        {
+          "chu": "tem thư",
+          "hinh": ""
+        },
+        {
+          "chu": "thềm nhà",
+          "hinh": ""
+        },
+        {
+          "chu": "tủm tỉm",
+          "hinh": ""
+        }
+      ],
+      "cau": [
+        "Chim ri cần cù tìm cỏ khô về làm tổ.",
+        "Đêm qua, nó bị ốm.",
+        "Chim sẻ và chim sơn ca đến thăm, đem cho nó túm rơm."
+      ]
+    },
+    {
+      "bai": 38,
+      "ten": "ai, ay, ây",
+      "tuan": 8,
+      "loai": "moi",
+      "am": [
+        "ai",
+        "ay",
+        "ây"
+      ],
+      "dau": [],
+      "mau": [
+        {
+          "am": "h",
+          "van": "ai",
+          "dau": "",
+          "tieng": "hai"
+        }
+      ],
+      "tieng": [
+        "bài",
+        "lái",
+        "nảy",
+        "tay",
+        "đậy",
+        "lẫy"
+      ],
+      "tu": [
+        {
+          "chu": "chùm vải",
+          "hinh": ""
+        },
+        {
+          "chu": "máy cày",
+          "hinh": "🚜"
+        },
+        {
+          "chu": "đám mây",
+          "hinh": "☁️"
+        }
+      ],
+      "cau": [
+        "Nai con nhìn thấy con gì bé nhỏ, thân đầy gai nhọn trên bãi cỏ.",
+        "Nó chạy về nhà, hổn hển kể cho mẹ nghe.",
+        "Nai mẹ tủm tỉm: \"Bạn nhím đấy, con ạ\"."
+      ]
+    },
+    {
+      "bai": 39,
+      "ten": "oi, ôi, ơi",
+      "tuan": 8,
+      "loai": "moi",
+      "am": [
+        "oi",
+        "ôi",
+        "ơi"
+      ],
+      "dau": [],
+      "mau": [
+        {
+          "am": "v",
+          "van": "oi",
+          "dau": "",
+          "tieng": "voi"
+        }
+      ],
+      "tieng": [
+        "chòi",
+        "hỏi",
+        "mỗi",
+        "xôi",
+        "đợi",
+        "mới"
+      ],
+      "tu": [
+        {
+          "chu": "chim bói cá",
+          "hinh": "🐦"
+        },
+        {
+          "chu": "thổi còi",
+          "hinh": ""
+        },
+        {
+          "chu": "đồ chơi",
+          "hinh": "🧸"
+        }
+      ],
+      "cau": [
+        "Mẹ ơi, mạ lớn lên gọi là lúa.",
+        "Bê lớn lên gọi là bò.",
+        "Còn con lớn lên thì gọi là gì ạ?"
+      ]
+    },
+    {
+      "bai": 40,
+      "ten": "Ôn tập (om, ôm, ơm, em, êm, im, um, ai, ay, ây, oi, ôi, ơi)",
+      "tuan": 8,
+      "loai": "on",
+      "am": [],
+      "dau": [],
+      "mau": [],
+      "tieng": [
+        "xóm",
+        "nồm",
+        "rơm",
+        "kẽm",
+        "nêm",
+        "sim",
+        "chùm",
+        "tai",
+        "hãy",
+        "đấy",
+        "hỏi",
+        "hội",
+        "khơi"
+      ],
+      "tu": [
+        {
+          "chu": "chói lọi",
+          "hinh": ""
+        },
+        {
+          "chu": "cày cấy",
+          "hinh": ""
+        },
+        {
+          "chu": "chúm chím",
+          "hinh": ""
+        },
+        {
+          "chu": "sớm tối",
+          "hinh": ""
+        },
+        {
+          "chu": "ngõ hẻm",
+          "hinh": ""
+        },
+        {
+          "chu": "gió nồm",
+          "hinh": ""
+        },
+        {
+          "chu": "lom khom",
+          "hinh": ""
+        },
+        {
+          "chu": "êm đềm",
+          "hinh": ""
+        },
+        {
+          "chu": "bãi bồi",
+          "hinh": ""
+        },
+        {
+          "chu": "bơi lội",
+          "hinh": ""
+        }
+      ],
+      "cau": [
+        "Nhím con ra bãi cỏ tìm cái ăn.",
+        "Nó phấn chấn khi thấy vô số quả chín thơm ngon.",
+        "Nhím vội chạy về gọi bạn chồn."
+      ]
+    },
+    {
+      "bai": 41,
+      "ten": "ui, ưi",
+      "tuan": 9,
+      "loai": "moi",
+      "am": [
+        "ui",
+        "ưi"
+      ],
+      "dau": [],
+      "mau": [
+        {
+          "am": "t",
+          "van": "ui",
+          "dau": "sắc",
+          "tieng": "túi"
+        }
+      ],
+      "tieng": [
+        "bùi",
+        "mũi",
+        "sủi",
+        "cửi",
+        "gửi",
+        "ngửi"
+      ],
+      "tu": [
+        {
+          "chu": "dãy núi",
+          "hinh": "⛰️"
+        },
+        {
+          "chu": "bụi cỏ",
+          "hinh": ""
+        },
+        {
+          "chu": "gửi thư",
+          "hinh": "📮"
+        }
+      ],
+      "cau": [
+        "Lan gửi thư cho Hà kể về quê Lan.",
+        "Ở đó, có nhà sàn nằm ven đồi.",
+        "Mùa này, chim ca rộn rã, sim nở rộ tím cả núi đồi."
+      ]
+    },
+    {
+      "bai": 42,
+      "ten": "ao, eo",
+      "tuan": 9,
+      "loai": "moi",
+      "am": [
+        "ao",
+        "eo"
+      ],
+      "dau": [],
+      "mau": [
+        {
+          "am": "l",
+          "van": "eo",
+          "dau": "ngã",
+          "tieng": "lẽo"
+        }
+      ],
+      "tieng": [
+        "chào",
+        "dao",
+        "sáo",
+        "dẻo",
+        "đẽo",
+        "kẹo"
+      ],
+      "tu": [
+        {
+          "chu": "ngôi sao",
+          "hinh": "⭐"
+        },
+        {
+          "chu": "quả táo",
+          "hinh": "🍎"
+        },
+        {
+          "chu": "cái kẹo",
+          "hinh": "🍬"
+        },
+        {
+          "chu": "ao bèo",
+          "hinh": ""
+        }
+      ],
+      "cau": [
+        "Trên cây cao, đàn chào mào bay đi, bay lại.",
+        "Mấy chú sáo đen vui ca véo von.",
+        "Còn chim ri vẫn chăm chỉ."
+      ]
+    },
+    {
+      "bai": 43,
+      "ten": "au, âu, êu",
+      "tuan": 9,
+      "loai": "moi",
+      "am": [
+        "au",
+        "âu",
+        "êu"
+      ],
+      "dau": [],
+      "mau": [
+        {
+          "am": "s",
+          "van": "au",
+          "dau": "",
+          "tieng": "sau"
+        }
+      ],
+      "tieng": [
+        "cau",
+        "tàu",
+        "bậu",
+        "gấu",
+        "khều",
+        "rêu"
+      ],
+      "tu": [
+        {
+          "chu": "rau củ",
+          "hinh": "🥕"
+        },
+        {
+          "chu": "con trâu",
+          "hinh": "🐃"
+        },
+        {
+          "chu": "chú tễu",
+          "hinh": ""
+        }
+      ],
+      "cau": [
+        "Nhà dì Tư ở quê có cây cau, giàn trầu.",
+        "Sau nhà có rau cải, rau dền và cả dưa hấu.",
+        "Gần nhà dì có cây cầu tre nhỏ."
+      ]
+    },
+    {
+      "bai": 44,
+      "ten": "iu, ưu",
+      "tuan": 9,
+      "loai": "moi",
+      "am": [
+        "iu",
+        "ưu"
+      ],
+      "dau": [],
+      "mau": [
+        {
+          "am": "h",
+          "van": "ưu",
+          "dau": "",
+          "tieng": "hưu"
+        }
+      ],
+      "tieng": [
+        "dịu",
+        "địu",
+        "xíu",
+        "hưu",
+        "mưu",
+        "lựu"
+      ],
+      "tu": [
+        {
+          "chu": "cái rìu",
+          "hinh": "🪓"
+        },
+        {
+          "chu": "cái địu",
+          "hinh": ""
+        },
+        {
+          "chu": "quả lựu",
+          "hinh": ""
+        },
+        {
+          "chu": "con cừu",
+          "hinh": "🐑"
+        }
+      ],
+      "cau": [
+        "Bà đã nghỉ hưu.",
+        "Ngày ngày, bà đi chợ, nấu ăn và chăm lo cho con cháu.",
+        "Mỗi lần đưa bé đi dạo, bà hay kể về ngày xưa."
+      ]
+    },
+    {
+      "bai": 45,
+      "ten": "Ôn tập (ui, ưi, ao, eo, au, âu, êu, iu, ưu)",
+      "tuan": 9,
+      "loai": "on",
+      "am": [],
+      "dau": [],
+      "mau": [],
+      "tieng": [
+        "củi",
+        "cửi",
+        "chào",
+        "đẽo",
+        "rau",
+        "câu",
+        "rêu",
+        "dịu",
+        "sưu"
+      ],
+      "tu": [
+        {
+          "chu": "khâu vá",
+          "hinh": ""
+        },
+        {
+          "chu": "gửi quà",
+          "hinh": "🎁"
+        },
+        {
+          "chu": "ngôi sao",
+          "hinh": "⭐"
+        },
+        {
+          "chu": "kéo co",
+          "hinh": ""
+        },
+        {
+          "chu": "cây cau",
+          "hinh": ""
+        },
+        {
+          "chu": "kêu gọi",
+          "hinh": ""
+        },
+        {
+          "chu": "vui vẻ",
+          "hinh": ""
+        },
+        {
+          "chu": "chịu khó",
+          "hinh": ""
+        },
+        {
+          "chu": "mưu trí",
+          "hinh": ""
+        }
+      ],
+      "cau": [
+        "Nghỉ hè, nhà Hà đi Tam Đảo.",
+        "Khi tán cây, ngọn cỏ còn thiu thiu ngủ, Hà đã dậy ngắm mây mù.",
+        "Đến trưa, trời như vào thu."
+      ]
+    },
+    {
+      "bai": 46,
+      "ten": "ac, ăc, âc",
+      "tuan": 10,
+      "loai": "moi",
+      "am": [
+        "ac",
+        "ăc",
+        "âc"
+      ],
+      "dau": [],
+      "mau": [
+        {
+          "am": "th",
+          "van": "ac",
+          "dau": "sắc",
+          "tieng": "thác"
+        }
+      ],
+      "tieng": [
+        "lạc",
+        "nhạc",
+        "mặc",
+        "nhắc",
+        "gấc",
+        "giấc"
+      ],
+      "tu": [
+        {
+          "chu": "bác sĩ",
+          "hinh": "🧑‍⚕️"
+        },
+        {
+          "chu": "mắc áo",
+          "hinh": ""
+        },
+        {
+          "chu": "quả gấc",
+          "hinh": ""
+        }
+      ],
+      "cau": [
+        "Nếu lên Tây Bắc, bạn hãy đến Sa Pa.",
+        "Vào mùa hè, mỗi ngày ở đây như có bốn mùa.",
+        "Sa Pa có Thác Bạc, có Cầu Mây, có các bản Tả Van, Tả Phìn, Sín Chải."
+      ]
+    },
+    {
+      "bai": 47,
+      "ten": "oc, ôc, uc, ưc",
+      "tuan": 10,
+      "loai": "moi",
+      "am": [
+        "oc",
+        "ôc",
+        "uc",
+        "ưc"
+      ],
+      "dau": [],
+      "mau": [
+        {
+          "am": "g",
+          "van": "oc",
+          "dau": "sắc",
+          "tieng": "góc"
+        }
+      ],
+      "tieng": [
+        "học",
+        "sóc",
+        "cốc",
+        "lộc",
+        "chục",
+        "cúc",
+        "đức",
+        "mực"
+      ],
+      "tu": [
+        {
+          "chu": "con sóc",
+          "hinh": "🐿️"
+        },
+        {
+          "chu": "cái cốc",
+          "hinh": ""
+        },
+        {
+          "chu": "máy xúc",
+          "hinh": ""
+        },
+        {
+          "chu": "con mực",
+          "hinh": "🦑"
+        }
+      ],
+      "cau": [
+        "Đi học về, Hà thấy mấy khóm cúc đã nở rực rỡ.",
+        "Hà hái cúc, cắm vào cốc rồi để ngay ngắn trên bàn học.",
+        "Mẹ tấm tắc khen Hà khéo tay."
+      ]
+    },
+    {
+      "bai": 48,
+      "ten": "at, ăt, ât",
+      "tuan": 10,
+      "loai": "moi",
+      "am": [
+        "at",
+        "ăt",
+        "ât"
+      ],
+      "dau": [],
+      "mau": [
+        {
+          "am": "h",
+          "van": "at",
+          "dau": "sắc",
+          "tieng": "hát"
+        }
+      ],
+      "tieng": [
+        "bát",
+        "lạt",
+        "sắt",
+        "gặt",
+        "đất",
+        "gật"
+      ],
+      "tu": [
+        {
+          "chu": "bãi cát",
+          "hinh": "🏖️"
+        },
+        {
+          "chu": "mặt trời",
+          "hinh": "☀️"
+        },
+        {
+          "chu": "bật lửa",
+          "hinh": ""
+        }
+      ],
+      "cau": [
+        "Hè đến, nhà Nam đi nghỉ mát ở Cát Bà.",
+        "Mẹ và Nam bỏ áo bơi, bàn chải, khăn mặt vào ba lô.",
+        "Nam rất vui khi đi chơi xa với cả nhà."
+      ]
+    },
+    {
+      "bai": 49,
+      "ten": "ot, ôt, ơt",
+      "tuan": 10,
+      "loai": "moi",
+      "am": [
+        "ot",
+        "ôt",
+        "ơt"
+      ],
+      "dau": [],
+      "mau": [
+        {
+          "am": "ng",
+          "van": "ot",
+          "dau": "sắc",
+          "tieng": "ngót"
+        }
+      ],
+      "tieng": [
+        "ngọt",
+        "vót",
+        "cột",
+        "tốt",
+        "thớt",
+        "vợt"
+      ],
+      "tu": [
+        {
+          "chu": "quả nhót",
+          "hinh": ""
+        },
+        {
+          "chu": "lá lốt",
+          "hinh": ""
+        },
+        {
+          "chu": "quả ớt",
+          "hinh": "🌶️"
+        }
+      ],
+      "cau": [
+        "Sớm nay thức dậy, Nam chợt thấy một chú chim sâu.",
+        "Chim hớn hở như chào Nam.",
+        "Nó nhảy nhót một hồi rồi bay qua bay lại, tìm bắt sâu bọ cho cây."
+      ]
+    },
+    {
+      "bai": 50,
+      "ten": "Ôn tập (ac, ăc, âc, oc, ôc, uc, ưc, at, ăt, ât, ot, ôt, ơt)",
+      "tuan": 10,
+      "loai": "on",
+      "am": [],
+      "dau": [],
+      "mau": [],
+      "tieng": [
+        "ac",
+        "ăc",
+        "âc",
+        "oc",
+        "ôc",
+        "uc",
+        "ưc",
+        "at",
+        "ăt",
+        "ât",
+        "ot",
+        "ôt",
+        "ơt"
+      ],
+      "tu": [
+        {
+          "chu": "bật lửa",
+          "hinh": ""
+        },
+        {
+          "chu": "lọ mực",
+          "hinh": ""
+        },
+        {
+          "chu": "cột mốc",
+          "hinh": ""
+        },
+        {
+          "chu": "hạt thóc",
+          "hinh": ""
+        },
+        {
+          "chu": "xúc xắc",
+          "hinh": "🎲"
+        },
+        {
+          "chu": "gót chân",
+          "hinh": ""
+        },
+        {
+          "chu": "đôi mắt",
+          "hinh": "👀"
+        },
+        {
+          "chu": "lác đác",
+          "hinh": ""
+        },
+        {
+          "chu": "giấc mơ",
+          "hinh": ""
+        },
+        {
+          "chu": "quả ớt",
+          "hinh": "🌶️"
+        }
+      ],
+      "cau": [
+        "Gà mẹ dẫn đàn con đi ăn.",
+        "Chốc chốc, tìm thấy mồi, gà mẹ \"tục... tục...\" gọi con.",
+        "Đàn gà con chạy lại, chen chúc nhau ăn rồi rúc vào bên mẹ."
+      ]
+    }
+  ]
+}

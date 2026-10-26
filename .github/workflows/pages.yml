@@ -4,7 +4,7 @@ name: Kiểm tra & đăng app
 
 on:
   push:
-    branches: [main]
+    branches: [main, 'codex/**']
   pull_request:
   workflow_dispatch:
 
@@ -24,13 +24,23 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - name: Kiểm tra tệp, cú pháp, dữ liệu cá nhân
-        run: node .github/scripts/kiem-tra.mjs
+          cache: npm
+      - run: npm ci
+      - name: Build and verify
+        env:
+          VITE_BASE_PATH: /Nghe-oi-doc-nao/
+          VITE_SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          VITE_SUPABASE_PUBLISHABLE_KEY: ${{ secrets.SUPABASE_PUBLISHABLE_KEY }}
+        run: npm run check
+      - uses: actions/upload-artifact@v4
+        with:
+          name: app-build
+          path: dist
 
   dang:
     name: Đăng GitHub Pages
     needs: kiem-tra
-    if: github.event_name != 'pull_request'
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
     runs-on: ubuntu-latest
     permissions:
       pages: write
@@ -39,14 +49,13 @@ jobs:
       name: github-pages
       url: ${{ steps.deploy.outputs.page_url }}
     steps:
-      - uses: actions/checkout@v4
-      - name: Gom đúng các tệp của app
-        run: |
-          mkdir _site
-          cp index.html manifest.webmanifest sw.js icon-192.png icon-512.png .nojekyll _site/
+      - uses: actions/download-artifact@v4
+        with:
+          name: app-build
+          path: dist
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: _site
+          path: dist
       - id: deploy
         uses: actions/deploy-pages@v4
