@@ -4,5 +4,14 @@ export function readScreen(): Screen {
   const explicit = (Object.keys(hashes) as Screen[]).find(screen => hashes[screen] === location.hash);
   if (explicit) return explicit;
   if (location.hash.includes('type=recovery')) return 'teacher';
+  // Supabase consumes the OAuth callback fragment. Keep the destination in a
+  // harmless query marker so its SDK can finish without a custom auth handler.
+  if (new URLSearchParams(location.search).get('auth') === 'teacher') return 'teacher';
   return 'choose';
+}
+
+export function teacherRedirectUrl() {
+  const redirect = new URL(location.origin + location.pathname);
+  redirect.searchParams.set('auth', 'teacher');
+  return redirect.href;
 }

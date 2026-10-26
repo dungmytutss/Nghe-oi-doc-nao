@@ -4,12 +4,16 @@ import { useEffect, useState, type FormEvent } from 'react';
 import type { Session } from '@supabase/supabase-js';
 import { supabase } from '../../cloud/client';
 import { readableError } from '../../cloud/student';
+import { teacherRedirectUrl } from '../entry/navigation';
+
+const googleEnabled = import.meta.env.VITE_GOOGLE_SIGN_IN_ENABLED === 'true';
 
 function authError(error: unknown) {
   const message = readableError(error);
   if (/Invalid login credentials/.test(message)) return 'Email hoặc mật khẩu không chính xác. Kiểm tra lại thông tin hoặc sử dụng chức năng đặt lại mật khẩu.';
   if (/Email not confirmed/.test(message)) return 'Cần xác nhận email trước khi đăng nhập.';
   if (/rate limit/i.test(message)) return 'Đã vượt số lần yêu cầu cho phép. Vui lòng thử lại sau.';
+  if (/provider.*(disabled|not enabled)|unsupported provider|provider_disabled/i.test(message)) return 'Đăng nhập Google chưa được bật. Quản trị viên cần cấu hình Google Provider trong Supabase.';
   return message;
 }
 
@@ -76,10 +80,27 @@ export function TeacherAccount() {
       setMessage('Nếu email đã được đăng ký, hệ thống sẽ gửi hướng dẫn đặt lại mật khẩu.');
     } catch (error) { setMessage(authError(error)); } finally { setBusy(false); }
   }
+  async function googleLogin() {
+    if (!supabase || !googleEnabled) return;
+    setBusy(true); setMessage('');
+    try {
+      // Supabase's official SDK owns the OAuth URL, redirect, token exchange,
+      // session persistence and automatic same-email identity linking.
+      const { error } = await supabase.auth.signInWithOAuth({ provider: 'google', options: {
+        redirectTo: teacherRedirectUrl(), queryParams: { prompt: 'select_account' },
+      } });
+      if (error) throw error;
+    } catch (error) { setMessage(authError(error)); }
+    finally { setBusy(false); }
+  }
   if (!supabase) return <p>Chưa cấu hình kết nối cơ sở dữ liệu. Chế độ khách vẫn có thể sử dụng trên thiết bị.</p>;
   return <section aria-labelledby="teacher-account-title">
     <h3 id="teacher-account-title">Tài khoản giáo viên</h3>
     <p>Đăng nhập để quản lý lớp, cấp mã học sinh và theo dõi tiến độ. Phụ huynh không cần tài khoản.</p>
+    {!session && mode !== 'recovery' && <div className="google-sign-in">
+      <button type="button" className="nut-nho" disabled={busy || !googleEnabled} onClick={() => void googleLogin()}>Đăng nhập bằng Google</button>
+      <p><small>{googleEnabled ? 'Chọn tài khoản Google có email đã được cấp quyền giáo viên. Ứng dụng chỉ dùng thông tin đăng nhập, không yêu cầu quyền đọc hoặc gửi Gmail.' : 'Đăng nhập Google đang chờ cấu hình. Có thể tiếp tục dùng email và mật khẩu bên dưới.'}</small></p>
+    </div>}
     {session && mode !== 'recovery' ? <>
       <p>Đã đăng nhập: <strong>{session.user.email}</strong></p>
       {role === 'teacher' ? <TeacherMfa key={session.user.id} session={session}><ClassroomManager /></TeacherMfa> : <p role="status">{role ? 'Tài khoản chưa được cấp quyền giáo viên. Liên hệ quản trị viên để được cấp quyền.' : 'Đang kiểm tra quyền giáo viên…'}</p>}

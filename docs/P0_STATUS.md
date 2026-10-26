@@ -59,3 +59,23 @@ This is the first P0 batch: student API access, device limits, code recovery, se
 4. If the authenticator is lost, the Supabase project administrator must verify the teacher's identity and remove/reset the factor through trusted Auth administration. A password reset alone does not bypass MFA. No public MFA reset endpoint or fallback master code is provided.
 
 References: [Supabase TOTP flow](https://supabase.com/docs/guides/auth/auth-mfa/totp), [Supabase MFA assurance levels](https://supabase.com/docs/guides/auth/auth-mfa), [MDN frame-ancestors and meta limitation](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Security-Policy/frame-ancestors).
+
+## Google sign-in integration — awaiting provider setup
+
+- Uses the existing official `@supabase/supabase-js` SDK: `auth.signInWithOAuth({provider: 'google', ...})`. Supabase owns OAuth URL construction, callback processing, token/session handling and same-email identity linking. No custom OAuth server, password database, Google token validator, callback endpoint, or Gmail API integration was added.
+- The app requests the standard Google sign-in identity only, with account selection. It adds no Gmail/Drive scopes or offline Google access. Same-email linking is handled by Supabase; using a different Google email does not transfer classes or automatically grant teacher privileges.
+- The callback destination is the existing app entry point with `?auth=teacher`. A routing marker keeps the teacher page open while Supabase consumes/clears its callback fragment. It preserves the GitHub Pages project base path.
+- Live read-only Supabase Auth settings confirmed `external.google=false`. The button is therefore disabled by default with a setup message. Enable `VITE_GOOGLE_SIGN_IN_ENABLED=true` locally only after setup. Production builds use the repository variable `GOOGLE_SIGN_IN_ENABLED=true`; no Google secret belongs in Vite variables or Git.
+- Existing password login and MFA remain unchanged. Google sign-in is not equivalent to Supabase AAL2; the teacher MFA gate and database policies are not bypassed. Real-account MFA/Google validation remains pending.
+- Validation passed: build, 26 unit/database tests and 12 browser tests. Isolated OAuth tests exercise the real Supabase SDK redirect/callback handling, preserve teacher routing after fragment cleanup, and verify that Google does not bypass teacher role or MFA checks. These mocks do not validate the external Google project configuration.
+
+### Provider setup owned by the project administrator
+
+1. In Google Auth Platform, create/select the Google Cloud project. Configure Branding, Audience and Data Access. If Audience is External/Testing, add `dungmytutss@gmail.com` as a test user. Use only `openid`, email and profile identity scopes.
+2. Create an OAuth Client of type **Web application**. Authorized JavaScript origins for this project are `http://127.0.0.1:5173` and `https://dungmytutss.github.io` (no project subpath in origins).
+3. Set Google's Authorized redirect URI to **`https://mixlblrijfmmvpzawxco.supabase.co/auth/v1/callback`**. The app still uses the hosted Supabase project during local development; this is not a local database callback URL.
+4. In Supabase → Authentication → Sign In / Providers → Google, enable Google and save the Client ID and Client Secret directly there. Do not send the secret in chat, put it into the frontend, or disable nonce validation.
+5. In Supabase Auth URL Configuration, add exact app redirect URLs `http://127.0.0.1:5173/?auth=teacher` and `https://dungmytutss.github.io/Nghe-oi-doc-nao/?auth=teacher`. Keep existing email confirmation/recovery URLs. Site URL should be the actual production app URL when that app is deployed.
+6. Once the provider is enabled, enable the frontend flag, restart/rebuild, and test with the authorized teacher Gmail in a regular browser tab. Google may reject OAuth in an embedded browser. Verify same teacher user ID/classes, denied access for an unapproved email, cancelled sign-in, sign-out, and the existing MFA challenge before marking this live-tested.
+
+Provider configuration requires Google/Supabase administrative access; publishable keys cannot perform it. References: [Supabase Google provider setup](https://supabase.com/docs/guides/auth/social-sign-in/auth-google), [automatic identity linking](https://supabase.com/docs/guides/auth/auth-identity-linking), [redirect configuration](https://supabase.com/docs/guides/auth/redirect-urls).

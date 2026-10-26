@@ -32,6 +32,7 @@ jobs:
           VITE_SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           VITE_SUPABASE_PUBLISHABLE_KEY: ${{ secrets.SUPABASE_PUBLISHABLE_KEY }}
           VITE_STUDENT_GATEWAY_URL: ${{ vars.STUDENT_GATEWAY_URL || 'https://nghe-student-api.en11001100.workers.dev' }}
+          VITE_GOOGLE_SIGN_IN_ENABLED: ${{ vars.GOOGLE_SIGN_IN_ENABLED || 'false' }}
         run: npm run check
       - name: Install test browser
         run: npx playwright install --with-deps chromium
