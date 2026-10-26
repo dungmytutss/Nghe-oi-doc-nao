@@ -1,16 +1,22 @@
 import { z } from 'zod';
 
-const count = z.number().finite().nonnegative();
-export const progressSchema = z.looseObject({
-  conVat: z.string().max(20),
-  muc: z.record(z.string(), z.looseObject({ b: count.max(5), d: count, s: count, h: count })),
-  am: z.record(z.string(), count),
-  loi: z.record(z.string(), count),
-  loiCT: z.array(z.unknown()),
-  phut: z.record(z.string(), count),
-  daDoc: z.record(z.string(), count),
+// Avoid eval probes/code generation under the app's strict script policy.
+z.config({ jitless: true });
+
+const count = z.number().int().min(0).max(1_000_000_000);
+const progressKey = z.string().min(1).max(2000).refine(key => !['__proto__', 'constructor', 'prototype'].includes(key));
+const record = <T extends z.ZodType>(value: T) => z.record(progressKey, value).refine(rows => Object.keys(rows).length <= 2048);
+export const progressSchema = z.object({
+  conVat: z.string().min(1).max(20),
+  muc: record(z.object({ b: count.min(1).max(5), d: count, s: count, h: count, pb: count.min(1).max(5).optional() })),
+  am: record(count.max(9)),
+  loi: record(count),
+  loiCT: z.array(z.object({d:z.string().max(2000),c:z.string().max(2000),l:z.string().max(2000),n:z.string().max(2000)})).max(40),
+  phut: record(z.number().finite().min(0).max(1440)),
+  daDoc: record(count),
   docTheo: count,
-});
+  lanGui: z.string().max(32).optional(),
+}).refine(progress => new TextEncoder().encode(JSON.stringify(progress)).byteLength <= 262144);
 export type StudentProgress = z.infer<typeof progressSchema>;
 export interface LegacyStore {
   caiDat: { baiToi?: number; hsCuoi?: string; [key: string]: unknown };

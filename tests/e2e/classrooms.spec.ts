@@ -52,8 +52,8 @@ test('teacher generates a class code with lesson and student count and approves 
   await page.route('https://classroom-test.supabase.co/**', async route => {
     const path = new URL(route.request().url()).pathname;
     if (path.endsWith('/token')) {
-      const payload = Buffer.from(JSON.stringify({ sub: teacherId, exp: Math.floor(Date.now() / 1000) + 3600 })).toString('base64url');
-      return route.fulfill({ json: { access_token: `eyJhbGciOiJIUzI1NiJ9.${payload}.signature`, refresh_token: 'test-refresh', expires_in: 3600, token_type: 'bearer',
+      const payload = Buffer.from(JSON.stringify({ sub: teacherId, aal: 'aal2', exp: Math.floor(Date.now() / 1000) + 3600 })).toString('base64url');
+      return route.fulfill({ json: { access_token: `eyJhbGciOiJIUzI1NiJ9.${payload}.${Buffer.alloc(32).toString('base64url')}`, refresh_token: 'test-refresh', expires_in: 3600, token_type: 'bearer',
         user: { id: teacherId, email: 'teacher@example.test', aud: 'authenticated', role: 'authenticated', app_metadata: {}, user_metadata: {}, created_at: new Date().toISOString() } } });
     }
     if (path.endsWith('/profiles')) return route.fulfill({ json: { role: 'teacher' } });

@@ -1,4 +1,5 @@
 import { ClassroomManager } from './ClassroomManager';
+import { TeacherMfa } from './TeacherMfa';
 import { useEffect, useState, type FormEvent } from 'react';
 import type { Session } from '@supabase/supabase-js';
 import { supabase } from '../../cloud/client';
@@ -81,7 +82,7 @@ export function TeacherAccount() {
     <p>Đăng nhập để quản lý lớp, cấp mã học sinh và theo dõi tiến độ. Phụ huynh không cần tài khoản.</p>
     {session && mode !== 'recovery' ? <>
       <p>Đã đăng nhập: <strong>{session.user.email}</strong></p>
-      {role === 'teacher' ? <ClassroomManager /> : <p role="status">{role ? 'Tài khoản chưa được cấp quyền giáo viên. Liên hệ quản trị viên để được cấp quyền.' : 'Đang kiểm tra quyền giáo viên…'}</p>}
+      {role === 'teacher' ? <TeacherMfa key={session.user.id} session={session}><ClassroomManager /></TeacherMfa> : <p role="status">{role ? 'Tài khoản chưa được cấp quyền giáo viên. Liên hệ quản trị viên để được cấp quyền.' : 'Đang kiểm tra quyền giáo viên…'}</p>}
       <button className="nut-nho" disabled={busy} onClick={() => {
         setBusy(true);
         void supabase!.auth.signOut().then(({ error }) => { if (error) setMessage(authError(error)); }).finally(() => setBusy(false));

@@ -3,6 +3,7 @@ import { GIONG_VIET, __amDang, coGiongViet, dungGiong, docGiongViet } from './au
 import DU_LIEU from '../data/lessons.json';
 import LOI from '../data/phrases.json';
 import { progressSchema } from '../cloud/types';
+import { parseBackup, decodeReport, csvCell, MAX_IMPORT_BYTES } from '../cloud/imports';
 
 export function initializeGame(callbacks = {}) {
 
@@ -488,6 +489,7 @@ function veGiong(){
   ["#luoiGiong", "#coLuoiGiong"].forEach(sel => { const o = $(sel); if (o) o.innerHTML = GIONG_DS.map(nut).join(""); });
 }
 function chonGiong(id, ngheThu){
+  if (!GIONG_DS.some(voice => voice.id === id)) return;
   const xong = () => { if (!CHUP){ KHO.caiDat.giong = id; luu(); } veGiong(); if (ngheThu) noi(LOI.cau.chao); };
   if (apGiong(id)){ xong(); return; }
   if (CHUP) return;
@@ -520,7 +522,7 @@ function veTrangDau(){
 function moNguoiLon(){ veBaiDau(); veGiong(); moHop("#hopNguoiLon"); }
 function veConVat(chon){
   let o = "";
-  for (let i = 1; i <= 40; i++){ const ma = "HS" + String(i).padStart(2, "0"); o += `<button class="o-ma" data-ma="${ma}" aria-pressed="${ma === chon}" aria-label="Mã ${ma}"><span>${conVatCua(ma)}</span>${ma}</button>`; }
+  for (let i = 1; i <= 40; i++){ const ma = "HS" + String(i).padStart(2, "0"); o += `<button class="o-ma" data-ma="${ma}" aria-pressed="${ma === chon}" aria-label="Mã ${ma}"><span>${esc(conVatCua(ma))}</span>${ma}</button>`; }
   $("#luoiMa").innerHTML = o;
   const nut = $("#dauXong"); nut.disabled = !chon; nut.textContent = chon ? "✅ Con là " + chon + " " + conVatCua(chon) : "✅ Chọn mã của con";
 }
@@ -882,16 +884,10 @@ function veVuon(){
    GỬI CÔ — mã ngắn (nén JSON thống kê) · SAO LƯU / NHẬP
    ===================================================================== */
 function b64u(u8){ let s = ""; for (let i = 0; i < u8.length; i += 0x8000) s += String.fromCharCode.apply(null, u8.subarray(i, i + 0x8000)); return btoa(s).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, ""); }
-function tuB64u(s){ s = s.replace(/-/g, "+").replace(/_/g, "/"); while (s.length % 4) s += "="; const b = atob(s), u = new Uint8Array(b.length); for (let i = 0; i < b.length; i++) u[i] = b.charCodeAt(i); return u; }
 async function nen(chu){
   const u = new TextEncoder().encode(chu);
   try { if (window.CompressionStream){ const s = new Blob([u]).stream().pipeThrough(new CompressionStream("deflate-raw")); return "Z" + b64u(new Uint8Array(await new Response(s).arrayBuffer())); } } catch (e){}
   return "J" + b64u(u);
-}
-async function giaiNen(ma){
-  const u = tuB64u(ma.slice(1));
-  if (ma[0] === "Z"){ const s = new Blob([u]).stream().pipeThrough(new DecompressionStream("deflate-raw")); return new TextDecoder().decode(await new Response(s).arrayBuffer()); }
-  return new TextDecoder().decode(u);
 }
 function thongKe(ma, hs){
   const ngay = Object.keys(hs.phut || {}).sort().slice(-14).map(k => [k.slice(5), Math.round(hs.phut[k] * 10) / 10]);
@@ -947,6 +943,7 @@ const NHAP = {cho: null, truoc: null, bai: null};
 let nhapKhach = false;
 function nhapFile(){ NHAP.cho = null; NHAP.bai = null; moChep("📂 Khôi phục tiến trình", "Dán mã tiến trình đã xuất hoặc chọn tệp sao lưu. Hệ thống sẽ yêu cầu xác nhận trước khi thay thế tiến trình hiện có.", "", true); $("#chepNhap").textContent = "✅ Nhập nội dung đã dán"; }
 function nhapNoiDung(chu){
+  if (typeof chu !== 'string' || new TextEncoder().encode(chu).byteLength > MAX_IMPORT_BYTES){ $("#chepLoi").textContent = "Tệp hoặc mã tiến trình vượt giới hạn 2 MB. Chọn bản sao lưu nhỏ hơn."; return; }
   if (/NGHE1-(?:LOCAL-KHACH-B\d{2}|HS\d{2}|KHACH)-/.test(chu || "")){
     docMaLop(chu).then(r => {
       const hs = {}; r.ds.forEach(o => { const h = moTienTrinh(o); if (h) hs[o.m] = h; });
@@ -956,7 +953,7 @@ function nhapNoiDung(chu){
     }).catch(() => { $("#chepLoi").textContent = "⚠️ Máy chưa đọc được mã này. Kiểm tra đã chép đủ mã chưa rồi dán lại."; });
     return;
   }
-  let k; try { k = JSON.parse(chu); if (!k || !k.hs) throw new Error("x"); } catch (x){ $("#chepLoi").textContent = "⚠️ Nội dung này không phải bản sao lưu của «Nghé ơi, đọc nào!». Cô hoặc người lớn trong nhà kiểm tra đã chép đủ chưa (bắt đầu bằng {\"caiDat\"…) rồi dán lại."; return; }
+  let k; try { k = parseBackup(chu); } catch (x){ $("#chepLoi").textContent = "Bản sao lưu không hợp lệ hoặc thiếu dữ liệu. Kiểm tra đã chọn đúng tệp hoặc sao chép đầy đủ mã tiến trình. Dữ liệu hiện có chưa bị thay đổi."; return; }
   if (nhapKhach){
     const ds = Object.values(k.hs);
     if (ds.length !== 1){ $("#chepLoi").textContent = "Mỗi khách chỉ có một tiến trình. Hãy dùng mã tiến trình của một bạn."; return; }
@@ -986,6 +983,7 @@ function hoanTacNhap(){
 }
 $("#chonFile").addEventListener("change", e => {
   const f = e.target.files && e.target.files[0]; if (!f) return;
+  if (f.size > MAX_IMPORT_BYTES){ $("#chepLoi").textContent = "Tệp vượt giới hạn 2 MB. Chọn bản sao lưu nhỏ hơn."; e.target.value = ''; return; }
   const r = new FileReader();
   r.onload = () => nhapNoiDung(r.result);
   r.readAsText(f);
@@ -1009,9 +1007,12 @@ function veCo(){
 }
 function moCo(){ if (($("#coMa").value || "").trim().toLowerCase() === MA_MO_CO){ S.coMo = true; $("#coBao").textContent = ""; veCo(); } else $("#coBao").textContent = "Mã chưa đúng ạ."; }
 async function docMaLop(chu){
+  if (typeof chu !== 'string' || new TextEncoder().encode(chu).byteLength > MAX_IMPORT_BYTES) throw new Error('import_too_large');
   const ra = {}, loi = [];
+  const budget = {remaining: MAX_IMPORT_BYTES};
   const ds = (chu.match(/NGHE1-(?:LOCAL-KHACH-B\d{2}|HS\d{2}|KHACH)-[ZJ][A-Za-z0-9_-]+/g) || []);
-  for (const m of ds){ try { const local = m.match(/^NGHE1-LOCAL-KHACH-B\d{2}-(.*)$/); const i = m.indexOf("-", 6); const o = JSON.parse(await giaiNen(local ? local[1] : m.slice(i + 1))); if (o && o.m){ o.__goc = m; ra[o.m] = o; } } catch (e){ loi.push(m.slice(0, 16)); } }
+  if (ds.length > 41) throw new Error('invalid_import');
+  for (const m of ds){ try { const local = m.match(/^NGHE1-LOCAL-KHACH-B\d{2}-(.*)$/); const i = m.indexOf("-", 6); const o = await decodeReport(local ? local[1] : m.slice(i + 1), budget); o.__goc = m; ra[o.m] = o; } catch (e){ loi.push(m.slice(0, 16)); } }
   return {ds: Object.values(ra).sort((a, b) => a.m.localeCompare(b.m)), loi};
 }
 function veBanDo(){
@@ -1056,7 +1057,7 @@ function xuatCsv(){
   const dong = [["ma_hs", "hoc_toi_bai", "phut_14_ngay", "so_ngay_luyen", "luot_doc_theo", "choi_dung", "choi_sai", "cay_vung", "cap_hay_nham", "muc_can_on"]];
   LOP.forEach(o => dong.push([o.m, o.t, Math.round((o.n || []).reduce((s, x) => s + x[1], 0)), (o.n || []).filter(x => x[1] > 0).length, o.r || 0, o.d || 0, o.s || 0, o.g || 0,
     Object.entries(o.l || {}).sort((a, b) => b[1] - a[1]).map(([k, v]) => hienLoi(k) + " x" + v).join("; "), (o.y || []).map(y => String(y[0]).slice(2)).join("; ")]));
-  const csv = dong.map(r => r.map(x => '"' + String(x).replace(/"/g, '""') + '"').join(",")).join("\r\n");
+  const csv = dong.map(r => r.map(csvCell).join(",")).join("\r\n");
   taiFile("ban-do-loi-lop-1A-" + homNay() + ".csv", "\uFEFF" + csv, "text/csv;charset=utf-8");
   moChep("⬇️ Bảng CSV", "Máy đã thử tải file CSV. Nếu không thấy file (khi mở app qua đường link), cô bấm «Chép nội dung» rồi dán vào Excel hoặc Google Trang tính.", csv, false);
 }

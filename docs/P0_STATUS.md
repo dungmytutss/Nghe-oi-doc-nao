@@ -37,6 +37,25 @@ This is the first P0 batch: student API access, device limits, code recovery, se
 
 - Worker rate limits are approximate and apply per Cloudflare location; they are not a globally exact counter. Database budgets/device caps provide an additional layer after credential validation. The TOTAL binding is a pilot circuit breaker, not a tested capacity promise. Tune all limits after a staging load test.
 - This protects student RPCs; teacher Auth/REST remains on Supabase and needs its own production Auth settings and monitoring.
-- MFA for teachers, production CSP/security headers, remaining legacy HTML/import review, and authenticated cross-teacher permission verification are not marked complete by this batch. Live enrollment/save/lock/rotation with a dedicated teacher test account remains to be verified; local database tests cover those operations.
+- Live enrollment/save/lock/rotation with a dedicated teacher test account remains to be verified; local database tests cover those operations.
 - No DDoS simulation or production load test has been performed. Managed DDoS protection and deployment availability must be verified against the actual Cloudflare account/plan.
 - Hosted SQL and Auth settings are not changed by local unit tests or Worker dry-run builds.
+
+## Second P0 batch — teacher MFA and browser/import protection
+
+- Teacher UI requires TOTP enrollment or a fresh authenticator challenge before mounting the classroom manager. Setup starts only on an explicit click; QR/secret stays in component memory and is cleared after verification. An incorrect code keeps classes inaccessible. Student and guest flows do not require accounts or MFA.
+- Apply `supabase/migrations/202610260006_teacher_mfa.sql` after the new frontend is available. The migration requires signed JWT AAL2 for teacher RPCs and adds restrictive policies to all seven class/student/progress/history tables, including direct REST paths inherited from the old parent-account schema. Profile self-read remains available for login. Existing data is preserved; the script is rerunnable.
+- MFA SQL awaits owner application. Local PostgreSQL tests verify AAL1 cannot read/write class data or use teacher RPCs, AAL2 can read owned codes, another teacher cannot read them, and anonymous student access through the gateway still works.
+- `vite.config.ts` puts CSP into built HTML: same-origin scripts only, inline handlers/eval blocked, fixed API origins, no objects/frames/base URL changes. Inline styles remain necessary for the teaching engine. Zod runs without eval/JIT probes.
+- Vite dev/preview also send CSP frame-ancestors, nosniff, referrer, frame and permissions headers. **GitHub Pages does not gain these HTTP headers from this configuration**; its built HTML receives the meta CSP/referrer policy only. Production anti-framing and other response headers need a host/proxy capable of setting them. Do not mark that hosting task complete.
+- Legacy reports and raw backups are validated before import, reject prototype keys and malformed numbers, and enforce a 2 MiB input/decompressed limit. Streaming decompression stops at the limit. Progress schema bounds match server constraints. Imported avatar text is escaped before HTML rendering; CSV cells neutralize formula prefixes.
+- Validation: build and 26 unit/database tests passed; nine browser tests cover existing student/guest/teacher flows, TOTP setup/challenge, malformed restore and injected handlers. A production-preview guest lesson completed without CSP violations. Hosted teacher MFA enrollment/recovery still requires testing with the owner; no real factor was enrolled automatically.
+
+### Teacher rollout and recovery
+
+1. Use the new frontend, apply migration 006, then open Góc của cô and sign in.
+2. Choose Thiết lập xác thực hai bước. Add its QR/manual secret to a TOTP authenticator and enter the current six-digit code. Do not share the QR or secret in chat.
+3. On later password logins, enter the authenticator code before class management opens.
+4. If the authenticator is lost, the Supabase project administrator must verify the teacher's identity and remove/reset the factor through trusted Auth administration. A password reset alone does not bypass MFA. No public MFA reset endpoint or fallback master code is provided.
+
+References: [Supabase TOTP flow](https://supabase.com/docs/guides/auth/auth-mfa/totp), [Supabase MFA assurance levels](https://supabase.com/docs/guides/auth/auth-mfa), [MDN frame-ancestors and meta limitation](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Security-Policy/frame-ancestors).

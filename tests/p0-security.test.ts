@@ -7,10 +7,11 @@ const teacher = '00000000-0000-4000-8000-000000000001';
 const stranger = '00000000-0000-4000-8000-000000000002';
 const gatewaySecret = 'a'.repeat(64);
 const progress = { conVat: '🐰', muc: {}, am: {}, loi: {}, loiCT: [], phut: {}, daDoc: {}, docTheo: 1 };
-async function asUser(id?: string, gateway = true) {
+async function asUser(id?: string, gateway = true, assurance = 'aal2') {
   await db.exec('reset role');
   await db.query("select set_config('request.jwt.claim.sub',$1,false),set_config('request.headers',$2,false)",
     [id || '', JSON.stringify(gateway ? { 'x-nghe-gateway': gatewaySecret } : {})]);
+  await db.query("select set_config('request.jwt.claims',$1,false)", [JSON.stringify({sub:id,aal:assurance})]);
   await db.exec(id ? 'set role authenticated' : 'set role anon');
 }
 async function rpc<T>(expression: string, params: unknown[] = []) {
@@ -30,6 +31,7 @@ beforeAll(async () => {
   await db.exec(`create role anon; create role authenticated; create role supabase_auth_admin; create schema auth;
     create table auth.users(id uuid primary key,email text,email_confirmed_at timestamptz);
     create function auth.uid() returns uuid language sql as $$select nullif(current_setting('request.jwt.claim.sub',true),'')::uuid$$;
+    create function auth.jwt() returns jsonb language sql as $$select coalesce(nullif(current_setting('request.jwt.claims',true),''),'{}')::jsonb$$;
     grant usage on schema auth to anon,authenticated;
     alter default privileges in schema public grant execute on functions to anon,authenticated;`);
   for (const file of ['202610260001_learning.sql', '202610260003_class_codes.sql', '202610260004_fixed_student_codes.sql']) {
@@ -114,4 +116,36 @@ test('per-device read budget rejects excess requests with HTTP 429 semantics', a
   let code='';
   try { await rpc('public.read_student_device($1)',[paired.device_token]); } catch(error) { code=(error as {code:string}).code; }
   expect(code).toBe('PT429');
+});
+
+test('teacher MFA is enforced by RPCs and REST policies while student gateway access remains usable', async () => {
+  const row=await student(); await asUser();
+  const paired=await rpc<{device_token:string}>('public.redeem_student_code($1)',[row.issued_code]);
+  await db.exec('reset role');
+  const migration=readFileSync('supabase/migrations/202610260006_teacher_mfa.sql','utf8');
+  await db.exec(migration); await db.exec(migration);
+  await asUser(teacher,true,'aal1');
+  const classDenied=await rejected("public.create_classroom_with_codes('Không được tạo',1,21)");
+  const rotateDenied=await rejected('public.rotate_student_code($1)',[row.student_id]);
+  const writeDenied=await rejected('public.save_student_progress($1,$2,21,0)',[row.student_id,progress]);
+  const tables=['classrooms','students','student_progress','learning_history','student_codes','student_devices','student_teachers'];
+  const visible=[];
+  for(const table of tables) visible.push((await db.query(`select ${table==='student_devices'?'id':'*'} from public.${table}`)).rows.length);
+  let restInsertCode='';
+  try{await db.query("insert into public.students(owner_id,local_code) values($1,'HS40')",[teacher]);}
+  catch(error){restInsertCode=(error as {code:string}).code;}
+  expect({classDenied,rotateDenied,writeDenied,visible,restInsertCode})
+    .toEqual({classDenied:true,rotateDenied:true,writeDenied:true,visible:tables.map(()=>0),restInsertCode:'42501'});
+  await asUser(teacher);
+  expect((await db.query('select student_id from public.student_codes where student_id=$1',[row.student_id])).rows).toHaveLength(1);
+  await asUser(stranger);
+  expect((await db.query('select student_id from public.student_codes where student_id=$1',[row.student_id])).rows).toHaveLength(0);
+  const formerTeacherClass=await rpc<string>("public.create_classroom_with_codes('Lớp kiểm quyền',1,21)");
+  await db.exec('reset role');
+  await db.query("update public.profiles set role='parent' where id=$1",[stranger]);
+  await asUser(stranger);
+  expect((await db.query('select id from public.classrooms where id=$1',[formerTeacherClass])).rows).toHaveLength(0);
+  expect(await rejected("public.create_classroom_with_codes('Sai quyền',1,21)")).toBe(true);
+  await asUser();
+  expect((await rpc<{student_id:string}>('public.read_student_device($1)',[paired.device_token])).student_id).toBe(row.student_id);
 });
