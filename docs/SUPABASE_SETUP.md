@@ -11,11 +11,11 @@ References: https://supabase.com/pricing and https://supabase.com/docs/guides/pl
 1. Create a project at https://supabase.com/dashboard. The GitHub repository selector is optional; leave it empty if the repository is unavailable.
 2. Keep the database password private. Obtain the Project URL and publishable key from the project's connection/API settings. A legacy anon key also works as the frontend key.
 3. Copy `.env.example` to `.env.local` and fill `VITE_SUPABASE_URL` and `VITE_SUPABASE_PUBLISHABLE_KEY`. Restart the dev server after changes.
-4. Apply the SQL files in `supabase/migrations/` in timestamp order through the SQL Editor on a new project, or through the Supabase CLI migration workflow. These files create the initial schema; do not rerun them over an already migrated database.
+4. On a new project, run `supabase/setup.sql` once in the SQL Editor. It combines the two foundational migrations. Alternatively, apply `supabase/migrations/` in timestamp order through the Supabase CLI migration workflow. Choose one method; do not run both or rerun the initial setup over an already migrated database.
 5. Configure Auth redirect URLs for the local development URL and the published app URL when the reviewed login flow is implemented.
 6. For GitHub builds, add repository Actions secrets `SUPABASE_URL` and `SUPABASE_PUBLISHABLE_KEY`. The publishable key is designed for browsers; RLS and grants enforce database access. Never use a service-role/secret key in frontend build variables.
 
-Only foundational schema and sync functions are prepared. The current UI continues to work locally; login, class invitations, and automatic account sync await user-flow review. No cloud migrations or Auth changes have been executed by this setup.
+Only foundational schema and sync functions are prepared. The current UI continues to work locally. The revised flow uses teacher-managed personal student links without parent registration; teacher login, classroom management, secure device pairing, and automatic sync are not implemented yet. No cloud migrations or Auth changes have been executed by the local setup.
 
 ## Keepalive
 
