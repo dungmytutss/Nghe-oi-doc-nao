@@ -6,7 +6,8 @@ if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
   process.exit(1);
 }
 const quotedEmail = email.replaceAll("'", "''");
-const migration = readFileSync('supabase/migrations/202610260003_class_codes.sql', 'utf8');
+const migration = ['202610260003_class_codes.sql', '202610260004_fixed_student_codes.sql']
+  .map(file => readFileSync(`supabase/migrations/${file}`, 'utf8')).join('\n\n');
 const bootstrap = `
 begin;
 insert into public.teacher_emails(email) values ('${quotedEmail}') on conflict do nothing;

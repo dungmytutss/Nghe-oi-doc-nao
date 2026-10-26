@@ -1,46 +1,12 @@
 // Preserved teaching engine. New account/storage code lives in strict TypeScript.
-import audioFiles from '../data/audio.json';
+import { GIONG_VIET, __amDang, coGiongViet, dungGiong, docGiongViet } from './audio';
 import DU_LIEU from '../data/lessons.json';
 import LOI from '../data/phrases.json';
+import { progressSchema } from '../cloud/types';
 
 export function initializeGame(callbacks = {}) {
-/*GIONG-VIET-BAT*/
-const GIONG_VIET = Object.fromEntries(Object.entries(audioFiles).map(([text, file]) => [text, import.meta.env.BASE_URL + "audio/" + file]));
-let __amDang = null, __giongMay = null;
-function __chuanGiong(t){ return String(t).normalize("NFC").replace(/\s+/g, " ").trim(); }
-function __choDeNghe(t){
-  const doi = [["π"," pi "],["cm³"," xăng-ti-mét khối"],["cm²"," xăng-ti-mét vuông"],["dm³"," đề-xi-mét khối"],["m³"," mét khối"],
-    ["m²"," mét vuông"],["×"," nhân "],["÷"," chia "],["−"," trừ "],["≈"," xấp xỉ "],["="," bằng "],["+"," cộng "]];
-  t = String(t).replace(/<[^>]+>/g, "");
-  for (const [a, b] of doi) t = t.split(a).join(b);
-  return __chuanGiong(t.replace(/(\d)\s*cm\b/g, "$1 xăng-ti-mét").replace(/(\d)\s*m\b/g, "$1 mét"));
-}
-function __timGiongMay(){ try { const ds = speechSynthesis.getVoices().filter(v => /^vi/i.test(v.lang));
-  __giongMay = ds.find(v => /Natural|Online|HoaiMy|Hoài/i.test(v.name)) || ds[0] || null; } catch(e){} return __giongMay; }
-try { if (window.speechSynthesis){ __timGiongMay(); speechSynthesis.addEventListener("voiceschanged", __timGiongMay); } } catch(e){}
-function coGiongViet(chu){ return !!(GIONG_VIET[__chuanGiong(chu)] || __giongMay || __timGiongMay()); }
-function dungGiong(){ try { if (__amDang){ __amDang.pause(); __amDang = null; } if (window.speechSynthesis) speechSynthesis.cancel(); } catch(e){} }
-function __baoChuaCoGiong(){ try { if (document.getElementById("__baoGiong")) return; const d = document.createElement("div"); d.id = "__baoGiong";
-  d.setAttribute("role", "status");
-  d.textContent = "Máy chưa có giọng đọc tiếng Việt cho câu này. Mở bằng Microsoft Edge (có mạng) để nghe giọng Việt, hoặc cài thêm giọng Tiếng Việt: Cài đặt Windows → Thời gian và ngôn ngữ → Giọng nói.";
-  d.style.cssText = "position:fixed;left:50%;bottom:18px;transform:translateX(-50%);max-width:92vw;background:#1f2937;color:#fff;padding:12px 16px;border-radius:12px;font:15px/1.4 system-ui,sans-serif;z-index:99999;box-shadow:0 6px 20px rgba(0,0,0,.3)";
-  document.body.appendChild(d); setTimeout(() => d.remove(), 7000); } catch(e){} }
-function __docMay(chu, toc){
-  if (!__giongMay){ __baoChuaCoGiong(); return; }   // KHÔNG có giọng Việt → báo, không đọc bằng giọng Anh
-  const u = new SpeechSynthesisUtterance(chu); u.voice = __giongMay; u.lang = __giongMay.lang; u.rate = toc || 0.9; speechSynthesis.speak(u);
-}
-function docGiongViet(goc, chuMay, toc){
-  dungGiong(); const k = __chuanGiong(goc);
-  if (GIONG_VIET[k]){ try { __amDang = new Audio(GIONG_VIET[k]); const h = __amDang.play(); if (h && h.catch) h.catch(() => {}); return; } catch(e){} }
-  try { if (!window.speechSynthesis){ __baoChuaCoGiong(); return; }
-    const chu = chuMay || __choDeNghe(goc);
-    if (!__giongMay && !__timGiongMay() && !speechSynthesis.getVoices().length){   // Chrome nạp danh sách giọng chậm
-      setTimeout(() => { __timGiongMay(); __docMay(chu, toc); }, 700); return; }
-    __docMay(chu, toc); } catch(e){}
-}
-/*GIONG-VIET-HET*/
 
-"use strict";
+
 /* =====================================================================
    DỮ LIỆU — ghep_du_lieu.py ghi đè phần giữa hai dấu dưới đây. Đừng sửa tay.
    ===================================================================== */
@@ -495,7 +461,7 @@ function diToi(ten){
 function nhanMaHS(code){ return KHO.caiDat.nhanHS?.[code] || code; }
 function veThanh(){ $("#tbConVat").textContent = S.hs ? S.hs.conVat : "🐰"; $("#tbMa").textContent = nhanMaHS(S.ma) || ""; }
 function capNhatDongHo(){}
-function doiBai(buoc){ const m = baiKe(S.bai, buoc, S.baiToi); if (m === S.bai){ bao(buoc > 0 ? "Bài sau con chưa học tới — cô sẽ mở dần nhé!" : "Đây là bài đầu rồi."); return; } S.bai = m; S.tau = S.cham = S.doc = null; diToi(S.man); }
+function doiBai(buoc){ const m = baiKe(S.bai, buoc, S.baiToi); if (m === S.bai){ bao(buoc > 0 ? "Bài sau con chưa học tới — cô sẽ mở dần nhé!" : "Đây là bài đầu rồi."); return; } S.bai = m; if (!CHUP){ KHO.caiDat.viTriHS = {...KHO.caiDat.viTriHS, [S.ma]: m}; luu(); } S.tau = S.cham = S.doc = null; diToi(S.man); }
 
 /* =====================================================================
    GIỌNG CỦA NGHÉ — giọng Hoài My (thu sẵn, sửa theo «LOI CAN SUA» của cô). Giọng mặc định nhúng sẵn trong file (khối giọng Việt chuẩn);
@@ -540,7 +506,7 @@ function veTrangDau(){
   $("#ngheDau").innerHTML = veNghe("vui");
   const sel = $("#chonMa");
   sel.value = S.ma || KHO.caiDat.hsCuoi || "HS01";
-  if (!CHUP && KHO.caiDat.baiTheoHS?.[sel.value]) S.baiToi = KHO.caiDat.baiTheoHS[sel.value];
+  if (!CHUP && (KHO.caiDat.viTriHS?.[sel.value] || KHO.caiDat.baiTheoHS?.[sel.value])) S.baiToi = KHO.caiDat.viTriHS?.[sel.value] || KHO.caiDat.baiTheoHS[sel.value];
   S.conVatChon = conVatCua(sel.value);
   const quen = CHUP || !!KHO.caiDat.hsCuoi;
   $("#dauQuen").hidden = !quen; $("#dauMoi").hidden = quen;
@@ -575,6 +541,7 @@ function vaoHoc(dich, baiChon){
   S.ma = ma; S.hs = CHUP ? (S.hs || hsMoi()) : layHS(ma); S.hs.conVat = S.conVatChon || S.hs.conVat;
   if (!CHUP){ KHO.caiDat.hsCuoi = ma; luu(); }
   S.bai = baiChon || S.baiToi; S.tau = S.cham = S.doc = null; S.phienGiay = 0; S.daNhac10 = S.daNhac15 = false;
+  if (!CHUP){ KHO.caiDat.viTriHS = {...KHO.caiDat.viTriHS, [ma]: S.bai}; luu(); }
   diToi(dich || "nghe");
   if (!dich || dich === "nghe") docLienTiep([LOI.cau.chao, LOI.cau.nghe_bai]);
 }
@@ -943,8 +910,15 @@ function moTienTrinh(o){
   const muc = {}; (b.m || []).forEach(x => { muc[x[0]] = {b: x[1], d: x[2], s: x[3], h: x[4]}; });
   return {conVat: b.cv || conVatCua(o.m), muc, am: b.a || {}, loi: b.l || {}, loiCT: [], phut: b.p || {}, daDoc: b.dd || {}, docTheo: b.r || 0, lanGui: homNay()};
 }
-async function taoMaGuiCo(){ const ma = nhanMaHS(S.ma); return "NGHE1-" + ma + "-" + await nen(JSON.stringify(thongKe(ma, S.hs))); }
+async function taoMaGuiCo(){
+  const khach = S.ma === 'KHACH', ma = khach ? 'KHACH' : nhanMaHS(S.ma);
+  const bai = KHO.caiDat.viTriHS?.[S.ma] || S.baiToi;
+  const dau = khach ? 'NGHE1-LOCAL-KHACH-B' + String(bai).padStart(2, '0') + '-' : 'NGHE1-' + ma + '-';
+  const duLieu = thongKe(ma, S.hs); if (khach) duLieu.t = bai;
+  return dau + await nen(JSON.stringify(duLieu));
+}
 function moGuiCo(){
+  $("#guiTieuDe").textContent = S.ma === 'KHACH' ? '📋 Mã tiến trình khách' : '📨 Gửi kết quả cho giáo viên';
   chonHSMacDinh(); $("#guiNghe").innerHTML = veNghe("khen"); $("#guiMa").value = "Đang tạo mã…"; moHop("#hopGuiCo");
   taoMaGuiCo().then(m => { $("#guiMa").value = m; if (S.hs && !CHUP){ S.hs.lanGui = homNay(); luu(); } }).catch(() => { $("#guiMa").value = "Máy chưa tạo được mã — bấm Sao lưu ra file rồi gửi file cho cô nhé."; });
 }
@@ -964,22 +938,31 @@ function moChep(tieuDe, loi, noiDung, nhap){
   $("#chepNut").toggleAttribute("data-chinh", !nhap); o.toggleAttribute("data-chinh", !!nhap); moHop("#hopChep");
 }
 function saoLuu(){
-  const noiDung = JSON.stringify(KHO);
+  const duLieu = S.ma === 'KHACH' ? {caiDat: {hsCuoi: 'KHACH', baiToi: KHO.caiDat.viTriHS?.KHACH || S.baiToi}, hs: {KHACH: layHS('KHACH')}} : KHO;
+  const noiDung = JSON.stringify(duLieu);
   taiFile("nghe-oi-doc-nao-sao-luu-" + homNay() + ".json", noiDung, "application/json");
   moChep("💾 Sao lưu", "Máy đã thử tải file sao lưu. Nếu không thấy file (khi mở app qua đường link), người lớn bấm «Chép nội dung» rồi dán vào Zalo «Cloud của tôi» để giữ. Đổi máy thì bấm «Nhập lại» và dán vào.", noiDung, false);
 }
-const NHAP = {cho: null, truoc: null};
-function nhapFile(){ NHAP.cho = null; moChep("📂 Khôi phục tiến trình", "Dán vào ô dưới mã «Gửi cô» gần nhất (tìm trong tin Zalo đã gửi cô, hoặc nhờ cô gửi lại), hoặc bản sao lưu, hoặc chọn file sao lưu. App sẽ báo trước nếu có dữ liệu bị thay.", "", true); $("#chepNhap").textContent = "✅ Nhập nội dung đã dán"; }
+const NHAP = {cho: null, truoc: null, bai: null};
+let nhapKhach = false;
+function nhapFile(){ NHAP.cho = null; NHAP.bai = null; moChep("📂 Khôi phục tiến trình", "Dán mã tiến trình đã xuất hoặc chọn tệp sao lưu. Hệ thống sẽ yêu cầu xác nhận trước khi thay thế tiến trình hiện có.", "", true); $("#chepNhap").textContent = "✅ Nhập nội dung đã dán"; }
 function nhapNoiDung(chu){
-  if (/NGHE1-HS\d{2}-/.test(chu || "")){
+  if (/NGHE1-(?:LOCAL-KHACH-B\d{2}|HS\d{2}|KHACH)-/.test(chu || "")){
     docMaLop(chu).then(r => {
       const hs = {}; r.ds.forEach(o => { const h = moTienTrinh(o); if (h) hs[o.m] = h; });
+      if (nhapKhach && r.ds.length === 1 && Number.isInteger(r.ds[0].t) && r.ds[0].t >= 1 && r.ds[0].t <= 50) NHAP.bai = r.ds[0].t;
       if (!Object.keys(hs).length){ $("#chepLoi").textContent = "⚠️ Mã này là mã cũ, chưa mang tiến trình của con. Cô hoặc người lớn trong nhà dán mã gửi cô gần nhất (từ ngày 23/10/2026) nhé."; return; }
       nhapNoiDung(JSON.stringify({hs}));
     }).catch(() => { $("#chepLoi").textContent = "⚠️ Máy chưa đọc được mã này. Kiểm tra đã chép đủ mã chưa rồi dán lại."; });
     return;
   }
   let k; try { k = JSON.parse(chu); if (!k || !k.hs) throw new Error("x"); } catch (x){ $("#chepLoi").textContent = "⚠️ Nội dung này không phải bản sao lưu của «Nghé ơi, đọc nào!». Cô hoặc người lớn trong nhà kiểm tra đã chép đủ chưa (bắt đầu bằng {\"caiDat\"…) rồi dán lại."; return; }
+  if (nhapKhach){
+    const ds = Object.values(k.hs);
+    if (ds.length !== 1){ $("#chepLoi").textContent = "Mỗi khách chỉ có một tiến trình. Hãy dùng mã tiến trình của một bạn."; return; }
+    if (!progressSchema.safeParse(ds[0]).success){ $("#chepLoi").textContent = "Mã tiến trình không hợp lệ hoặc bị thiếu dữ liệu. Kiểm tra lại bản sao lưu."; return; }
+    k.hs = {KHACH: ds[0]}; delete k.caiDat;
+  }
   const ma = Object.keys(k.hs), coDuLieu = h => h && (Object.keys(h.muc || {}).length || h.docTheo || Object.keys(h.phut || {}).length), trung = ma.filter(m => coDuLieu(KHO.hs[m]));
   if (trung.length && NHAP.cho !== chu){
     NHAP.cho = chu;
@@ -988,6 +971,7 @@ function nhapNoiDung(chu){
   }
   NHAP.truoc = JSON.stringify(KHO); NHAP.cho = null;
   Object.assign(KHO.hs, k.hs); KHO.caiDat = Object.assign({}, k.caiDat || {}, KHO.caiDat);
+  if (nhapKhach && NHAP.bai){ KHO.caiDat.viTriHS = {...KHO.caiDat.viTriHS, KHACH: NHAP.bai}; KHO.caiDat.baiTheoHS = {...KHO.caiDat.baiTheoHS, KHACH: NHAP.bai}; if (S.ma === 'KHACH') S.baiToi = NHAP.bai; }
   if (!KHO.caiDat.hsCuoi && ma.length === 1) KHO.caiDat.hsCuoi = ma[0];
   luu(); S.hs = S.ma ? layHS(S.ma) : null; if (S.man === "dau") veTrangDau();
   $("#chepLoi").textContent = "✅ Đã nhập dữ liệu của " + ma.length + " mã HS. Nếu nhập nhầm, bấm «Hoàn tác lần nhập vừa rồi».";
@@ -1026,8 +1010,8 @@ function veCo(){
 function moCo(){ if (($("#coMa").value || "").trim().toLowerCase() === MA_MO_CO){ S.coMo = true; $("#coBao").textContent = ""; veCo(); } else $("#coBao").textContent = "Mã chưa đúng ạ."; }
 async function docMaLop(chu){
   const ra = {}, loi = [];
-  const ds = (chu.match(/NGHE1-HS\d{2}-[ZJ][A-Za-z0-9_-]+/g) || []);
-  for (const m of ds){ try { const i = m.indexOf("-", 6); const o = JSON.parse(await giaiNen(m.slice(i + 1))); if (o && o.m){ o.__goc = m; ra[o.m] = o; } } catch (e){ loi.push(m.slice(0, 16)); } }
+  const ds = (chu.match(/NGHE1-(?:LOCAL-KHACH-B\d{2}|HS\d{2}|KHACH)-[ZJ][A-Za-z0-9_-]+/g) || []);
+  for (const m of ds){ try { const local = m.match(/^NGHE1-LOCAL-KHACH-B\d{2}-(.*)$/); const i = m.indexOf("-", 6); const o = JSON.parse(await giaiNen(local ? local[1] : m.slice(i + 1))); if (o && o.m){ o.__goc = m; ra[o.m] = o; } } catch (e){ loi.push(m.slice(0, 16)); } }
   return {ds: Object.values(ra).sort((a, b) => a.m.localeCompare(b.m)), loi};
 }
 function veBanDo(){
@@ -1143,7 +1127,7 @@ setInterval(() => {
    ===================================================================== */
 document.addEventListener("click", e => {
   const n = e.target.closest("[data-noi]"); if (n){ noi(n.dataset.noi); nhay(n); }
-  const d = e.target.closest("[data-di]"); if (d){ diToi(d.dataset.di); return; }
+  const d = e.target.closest("[data-di]"); if (d){ if (d.dataset.di === 'co' && !CHUP && callbacks.onTeacherOpen){ HOP.forEach(x => dongHop(x)); callbacks.onTeacherOpen(); return; } diToi(d.dataset.di); return; }
   const om = e.target.closest("[data-ma]"); if (om){ $("#chonMa").value = om.dataset.ma; S.conVatChon = conVatCua(om.dataset.ma); veConVat(om.dataset.ma); noi(LOI.cau.chao); return; }
   const g = e.target.closest(".the-ghep"); if (g){ if (g.dataset.keoXong){ delete g.dataset.keoXong; return; } datToa(g.dataset.loai, g.dataset.gt); return; }
   const ot = e.target.closest(".o-toa"); if (ot && S.tau && !S.tau.xong && S.tau.dat[ot.dataset.loai] !== undefined){ delete S.tau.dat[ot.dataset.loai]; veToa(); return; }
@@ -1162,7 +1146,7 @@ $("#moNguoiLon").onclick = moNguoiLon;
 $("#nlDong").onclick = () => dongHop("#hopNguoiLon");
 $("#nlGuiCo").onclick = () => { dongHop("#hopNguoiLon"); S.ma = $("#chonMa").value || S.ma; S.hs = layHS(S.ma); moGuiCo(); };
 $("#nlSaoLuu").onclick = () => { dongHop("#hopNguoiLon"); saoLuu(); };
-$("#nlNhap").onclick = () => { dongHop("#hopNguoiLon"); nhapFile(); };
+$("#nlNhap").onclick = () => { dongHop("#hopNguoiLon"); nhapKhach = S.ma === 'KHACH'; nhapFile(); };
 $("#guiChep").onclick = chepMa;
 $("#guiSaoLuu").onclick = saoLuu;
 $("#guiDong").onclick = () => dongHop("#hopGuiCo");
@@ -1271,6 +1255,7 @@ return {
   restoreStudent: (code, progress, lesson) => {
     if (CHUP) throw new Error('Không khôi phục trong chế độ xem thử.');
     KHO.hs[code] = progress;
+    KHO.caiDat.viTriHS = {...KHO.caiDat.viTriHS, [code]: lesson};
     KHO.caiDat.baiTheoHS = {...KHO.caiDat.baiTheoHS, [code]: lesson};
     if ((S.ma || KHO.caiDat.hsCuoi) === code){ KHO.caiDat.baiToi = lesson; S.baiToi = lesson; }
     S.hs = S.ma ? layHS(S.ma) : null;
@@ -1292,6 +1277,12 @@ return {
     if ((S.ma || KHO.caiDat.hsCuoi) === code){ S.baiToi = lesson; KHO.caiDat.baiToi = lesson; if (S.man === 'dau') veBaiDau(); }
     luu();
   },
+  setEntryMode: mode => { if (!CHUP){ KHO.caiDat.entryMode = mode; luu(); } },
+  exportProgress: () => { if (!CHUP){ S.hs = layHS(S.ma || KHO.caiDat.hsCuoi || 'KHACH'); moGuiCo(); } },
+  importGuestProgress: () => { nhapKhach = true; nhapFile(); },
+  openTeacherTool: tool => { S.coMo = true; diToi(tool); },
+  closeDialogs: () => HOP.forEach(x => dongHop(x)),
+  currentLesson: code => KHO.caiDat.viTriHS?.[code] || KHO.caiDat.baiTheoHS?.[code] || KHO.caiDat.baiToi || 1,
 };
 
 }

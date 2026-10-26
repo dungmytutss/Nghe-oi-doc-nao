@@ -4,9 +4,8 @@ test('preserves student entry, lesson stages and adult settings without cloud cr
   const errors: string[] = [];
   page.on('pageerror', error => errors.push(error.message));
   await page.goto('/');
-  await expect(page.locator('#man-dau')).toBeVisible();
-  await page.locator('[data-ma="HS01"]').click();
-  await page.locator('#dauXong').click();
+  await page.getByRole('button', { name: 'Tiếp tục với tư cách khách' }).click();
+  await expect(page.locator('#dauMa')).toHaveText('Khách');
   await page.locator('#batDau').click();
   await expect(page.locator('#man-nghe')).toBeVisible();
   await page.locator('#thanh [data-di="tau"]').click();
@@ -25,7 +24,8 @@ test('loads existing browser progress instead of resetting it', async ({ page })
     hs: { HS05: { conVat: '🐸', muc: {}, am: { a: 5 }, loi: {}, loiCT: [], phut: {}, daDoc: {}, docTheo: 7 } },
   })));
   await page.goto('/');
-  await expect(page.locator('#dauMa')).toHaveText('HS05');
+  await page.getByRole('button', { name: 'Tiếp tục với tư cách khách' }).click();
+  await expect(page.locator('#dauMa')).toHaveText('Khách');
   await expect(page.locator('#dauBaiNay')).toContainText('21');
   await page.locator('#dauVuon').click();
   await expect(page.locator('#man-vuon')).toBeVisible();

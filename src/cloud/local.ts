@@ -20,6 +20,7 @@ export class LearningDatabase extends Dexie {
 export const localDb = new LearningDatabase();
 
 export async function recordEvent(event: LearningEvent, db = localDb) {
+  if (event.localCode === 'KHACH') return; // Guests export one local progress snapshot; they never join a cloud queue.
   // Capture the binding when the event is written, not when another user signs in.
   await db.transaction('rw', db.events, db.bindings, db.devices, async () => {
     const binding = await db.bindings.get(event.localCode);

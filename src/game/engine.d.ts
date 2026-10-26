@@ -3,4 +3,5 @@ export function initializeGame(callbacks?: {
   onSave?: (store: LegacyStore) => void;
   onLearningEvent?: (event: LearningEvent) => void;
   onStudentChange?: (code: string) => void;
+  onTeacherOpen?: () => void;
 }): GameBridge;

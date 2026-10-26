@@ -23,6 +23,7 @@ async function start() {
     },
     onLearningEvent: event => { void recordEvent(event).catch(reportStorageFailure); },
     onStudentChange: () => window.dispatchEvent(new Event('nghe-student-change')),
+    onTeacherOpen: () => window.dispatchEvent(new Event('nghe-open-teacher')),
   });
   createRoot(document.getElementById('root')!).render(<CloudSettings game={game} />);
   if (!document.body.classList.contains('chup')) {

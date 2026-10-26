@@ -15,7 +15,7 @@ References: https://supabase.com/pricing and https://supabase.com/docs/guides/pl
 5. Configure Auth redirect URLs for the local development URL and the published app URL when the reviewed login flow is implemented.
 6. For GitHub builds, add repository Actions secrets `SUPABASE_URL` and `SUPABASE_PUBLISHABLE_KEY`. The publishable key is designed for browsers; RLS and grants enforce database access. Never use a service-role/secret key in frontend build variables.
 
-Teacher login, the class-code generator, parent code entry, teacher-approved device pairing, and automatic student sync are implemented. The app still works locally before the database upgrade. Local development does not execute cloud migrations automatically.
+Teacher login, fixed student codes, code entry, a separate single-profile guest mode, and automatic student sync are implemented. The app still works locally before the database upgrade. Local development does not execute cloud migrations automatically.
 
 ## Upgrade the existing project for classroom codes
 
@@ -24,11 +24,11 @@ The initial tables already exist on the configured project. **Do not rerun `supa
 1. Run `node scripts/prepare-classroom-setup.mjs teacher@example.com` with the intended first teacher's email. This generates `supabase/classroom-setup.local.sql`, which is ignored by Git so personal email configuration stays local.
 2. Run that generated SQL in the project's SQL Editor. It adds the classroom/device tables, secures the RPCs, and allows that verified email to receive the teacher role. It preserves the existing learning tables and can be rerun safely.
 3. In Supabase Auth URL Configuration, add the local and deployed app URLs to the allowed redirect URLs. Keep email confirmation enabled. If hosted email delivery is restricted, configure SMTP or provision the teacher through the Auth dashboard rather than weakening student access policies.
-4. Open **Dành cho người lớn → Tài khoản của cô → Tạo mới**, set a password, and confirm the teacher email. An existing confirmed account is promoted by the generated upgrade; a newly confirmed allowlisted account is promoted by the database trigger. Other signups cannot grant themselves teacher access.
-5. Log in, create a class with its starting lesson and student count, and copy the six-digit code and app website to send through Zalo.
-6. Families enter that code once and choose the assigned student animal/code. They can practise while waiting. Verify the displayed machine-check code with the family before approving the first connection in the teacher panel.
+4. Open **Góc của cô → Tài khoản giáo viên → Tạo mới**, set a password, and confirm the teacher email. An existing confirmed account is promoted by the generated upgrade; a newly confirmed allowlisted account is promoted by the database trigger. Other signups cannot grant themselves teacher access.
+5. Open #goc-co, log in, and create a class with its starting lesson and student count. Each student receives a permanent structured code. Copy the individual code from the class roster and send it to the corresponding family.
+6. Families open #nhap-ma and paste the full student code. It authenticates exactly one student without selecting from a roster or waiting for approval. The device retains its own credential, separate from teacher Auth.
 
-Class codes identify class settings rather than encoding a fixed lesson. Changing the class's current lesson updates the child's default lesson the next time their device connects.
+The generated upgrade includes migrations 003 and 004. Issued student codes retain the original class, student and starting-lesson fields permanently. Learning writes update the existing student_progress row and append idempotent history events; they do not issue or rotate a code. A class's default lesson applies when a code is first issued, while a returning student resumes their own saved lesson.
 
 ## Keepalive
 
@@ -48,16 +48,27 @@ This reduces inactivity risk, not a guarantee of availability or exemption from 
 - `classrooms`: teacher-owned class name, six-digit code, and current lesson.
 - `student_devices`: hashed, revocable device credentials. Pending devices cannot access cloud progress. Teachers can read approval metadata but not credential hashes.
 - `teacher_emails`: trusted provisioning allowlist, unavailable to browser roles.
+- `student_codes`: permanent structured credentials and their lookup hashes. Only the owning teacher can read full issued codes; anonymous clients can redeem only an exact valid code.
 - `app_health`: one public read-only row, no student data.
 
 RLS denies anonymous table access to learning data. Students access their own progress through constrained RPCs requiring a valid, approved device credential; they never use a teacher session. Class owners read their own roster/history and approve or revoke devices. Users cannot assign their own role. The old `1a` teacher code controls the original local teaching tools only; it is not cloud authorization.
 
 ## Local data
 
-The original `nghe-oi-doc-nao.v1` localStorage key stays intact. IndexedDB keeps a second progress snapshot, per-student device credentials, and a queue of attempt events. No cloud upload happens without teacher-approved pairing. Joining a class preserves occupied legacy profiles by allocating another local slot; the home screen displays the teacher's assigned student code. Different classes' HS01 profiles stay separate on a shared phone.
+The original `nghe-oi-doc-nao.v1` localStorage key stays intact. IndexedDB keeps a second progress snapshot, per-student device credentials, and a queue of attempt events. No cloud upload happens without redeeming a valid teacher-issued student code (or a previously approved legacy device). Entering a student code preserves occupied legacy profiles by allocating another local slot; the home screen displays the teacher's assigned student code. Different classes' HS01 profiles stay separate on a shared phone.
 
-Restore saves the previous full local snapshot into IndexedDB under `before-restore-*`. The adult area offers explicit local/cloud choices for conflicting progress. Pending history remains queued; unique event IDs prevent duplicates on retry. The original JSON export/import remains available. The classroom feature does not implement automatic merging of two modified progress copies.
+Restore saves the previous full local snapshot into IndexedDB under `before-restore-*`. The adult area offers explicit local/cloud choices for conflicting progress. Pending history remains queued; unique event IDs prevent duplicates on retry. The original JSON export/import remains available. The classroom feature does not implement automatic merging of two modified progress copies. The guest profile is stored once as KHACH, and guest events are not put into the cloud queue.
 
 ## Verification
 
 `npm run check` compiles the app, checks the original audio assets, and runs local storage/sync tests plus isolated PostgreSQL tests through PGlite. `npm run test:e2e` uses a local Vite server and mocked Supabase endpoints to test student entry, classroom generation, approval, reading saves, and returning devices. Browser tests cannot sign up or modify the live project. Cloud deployment and actual teacher signup still need the SQL upgrade and Supabase Auth configuration above.
+
+## Source organization
+
+- src/components/EntryScreens.tsx: entry, code, guest, teacher and local-tool screens.
+- src/components/entry/navigation.ts: explicit routes; the root always opens the default chooser.
+- src/components/teacher/: teacher account and classroom management.
+- src/cloud/codes.ts and guest.ts: code parsing and the single guest profile.
+- src/cloud/student.ts: student authentication, stable-identity sync and conflict handling.
+- src/game/audio.js: original voice playback, extracted without changing recordings.
+- src/game/engine.js: preserved learning engine and the typed integration bridge.

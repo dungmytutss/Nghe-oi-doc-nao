@@ -42,13 +42,14 @@ export interface GameBridge {
   restoreStudent(code: string, progress: StudentProgress, lesson: number): void;
   selectStudent(code: string, lesson: number, displayCode?: string): void;
   setLesson(code: string, lesson: number): void;
+  setEntryMode(mode: 'guest' | 'student'): void;
+  exportProgress(): void;
+  importGuestProgress(): void;
+  openTeacherTool(tool: 'co' | 'tivi'): void;
+  closeDialogs(): void;
+  currentLesson(code: string): number;
 }
 
-export const classLookupSchema = z.object({
-  name: z.string(), lesson: z.number().int().min(1).max(50),
-  students: z.array(z.object({ id: z.uuid(), local_code: z.string(), avatar: z.string() })),
-});
-export type ClassLookup = z.infer<typeof classLookupSchema>;
 export const deviceResponseSchema = z.object({
   student_id: z.uuid(), local_code: z.string(), avatar: z.string(), class_name: z.string(),
   lesson: z.number().int().min(1).max(50), status: z.enum(['pending', 'approved']),
@@ -68,4 +69,5 @@ export interface StudentDevice {
   revision: number;
   lastSnapshot: string;
   lastSync?: string;
+  lastLesson?: number;
 }

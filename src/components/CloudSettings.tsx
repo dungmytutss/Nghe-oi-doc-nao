@@ -4,8 +4,7 @@ import { supabase } from '../cloud/client';
 import { localDb } from '../cloud/local';
 import { readableError, syncDevice } from '../cloud/student';
 import type { GameBridge, StudentDevice } from '../cloud/types';
-import { TeacherPanel } from './TeacherPanel';
-import { StudentClassroom } from './StudentClassroom';
+import { EntryScreens } from './EntryScreens';
 
 export function CloudSettings({ game }: { game: GameBridge }) {
   const [storageError, setStorageError] = useState(false);
@@ -65,17 +64,16 @@ export function CloudSettings({ game }: { game: GameBridge }) {
   }, [refresh, sync]);
   const target = document.getElementById('cloud-settings');
   if (!target) return null;
-  const studentTarget = document.getElementById('student-classroom');
-  return <>{studentTarget && createPortal(<StudentClassroom game={game} devices={devices} onRefresh={refresh} />, studentTarget)}
+  return <><EntryScreens game={game} devices={devices} onRefresh={refresh} />
   {createPortal(<section className="cloud-settings" aria-labelledby="cloud-title">
-    <h3 id="cloud-title">☁️ Lưu tiến trình trên mạng</h3>
-    <p>Con vẫn học bình thường khi không có mạng. Người lớn có thể dùng nút Sao lưu bên dưới.</p>
+    <h3 id="cloud-title">☁️ Lưu và đồng bộ tiến độ</h3>
+    <p>Tiến trình được lưu trên thiết bị khi ngoại tuyến. Sử dụng chức năng Sao lưu để tạo bản dự phòng.</p>
     {storageError && <p role="alert">Chưa lưu được bản dự phòng trên máy. Người lớn hãy bấm Sao lưu ra file để giữ tiến trình.</p>}
     {devices.map(device => <section key={device.studentId} className="device-sync">
       <h4>{device.avatar} {device.remoteCode} · {device.className}</h4>
       <p role="status">{syncMessages[device.localCode]?.text || (device.status === 'pending' ? `Máy ${device.checkCode} đang chờ cô xác nhận.` : 'Đang kiểm tra bản lưu…')}</p>
       <small>Lần gửi gần nhất: {device.lastSync ? new Date(device.lastSync).toLocaleString('vi-VN') : 'Chưa gửi'}</small>
-      <div className="cloud-actions"><button className="nut-nho" disabled={resolving} onClick={() => void sync(device.localCode)}>Thử gửi lại</button></div>
+      <div className="cloud-actions"><button className="nut-nho" disabled={resolving} onClick={() => void sync(device.localCode)}>Đồng bộ lại</button></div>
       {syncMessages[device.localCode]?.conflict && <div>
         <p>Chọn bản tiến trình cần tiếp tục học. App sẽ giữ bản dự phòng trước khi thay đổi; lịch sử đã ghi không bị xóa.</p>
         <div className="cloud-actions">{(['local', 'remote'] as const).map(choice => <button key={choice} className="nut-nho" disabled={resolving} onClick={() => {
@@ -83,6 +81,6 @@ export function CloudSettings({ game }: { game: GameBridge }) {
         }}>{choice === 'local' ? 'Tiếp tục bản trên máy này' : 'Dùng bản trên mạng'}</button>)}</div>
       </div>}
     </section>)}
-    <TeacherPanel />
+    <button className="nut-nho" onClick={() => window.dispatchEvent(new Event('nghe-open-teacher'))}>👩‍🏫 Mở Góc của cô</button>
   </section>, target)}</>;
 }

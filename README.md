@@ -57,7 +57,7 @@ Use `npm run build` and `npm run preview` to test the production PWA. Developmen
 
 Supabase credentials are optional for local practice. Copy `.env.example` to `.env.local` and follow [Supabase setup](docs/SUPABASE_SETUP.md). Never commit `.env.local`, database passwords, or secret/service-role keys.
 
-Teachers can generate a class by choosing its starting lesson and student count. Parents enter the six-digit class code once, choose the assigned student animal/code, and wait for the teacher's first-device approval while continuing local practice. Approved devices remember the child and sync automatically; no parent login is required. See [student and teacher flows](docs/USER_FLOWS.md).
+The default screen offers student-code entry and guest mode. Teachers create a class with its starting lesson and student count; each student receives a permanent structured code. Parents paste that code once to open the correct student record. Progress updates preserve the code and resume the saved lesson. Guests have one local progress record with optional export/import. Teacher login, classroom management, and local teaching tools are integrated in Góc của cô. See [student and teacher flows](docs/USER_FLOWS.md).
 
 For the existing Supabase project, apply the classroom upgrade described in [Supabase setup](docs/SUPABASE_SETUP.md), rather than rerunning the initial table-creation script. Live classroom access requires that upgrade and teacher Auth setup; guest/offline practice works independently.
 

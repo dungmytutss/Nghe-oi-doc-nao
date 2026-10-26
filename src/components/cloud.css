@@ -21,3 +21,28 @@
 .cloud-student-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}.cloud-student-grid .o-ma{font-size:16px;min-height:80px;width:100%;padding:10px 4px}.cloud-student-grid .o-ma span{font-size:30px}
 .device-sync{margin:16px 0;padding-bottom:14px;border-bottom:2px solid #dcd4f4}.cloud-settings h4{margin:14px 0 8px}.cloud-settings button:focus-visible,.student-classroom button:focus-visible{outline:3px solid #1f6fd1;outline-offset:3px}
 @media(max-width:420px){.cloud-fields{grid-template-columns:1fr}.cloud-student-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.entry-page{width:min(1180px,100%);margin:0 auto;padding:20px 24px 48px;color:#2b2350}
+.entry-header{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:18px;padding:16px 0 28px}
+.entry-brand{font-size:22px;font-weight:900;text-decoration:none;color:#403088}.entry-header nav{display:flex;flex-wrap:wrap;gap:10px}
+.entry-header nav a{display:inline-flex;align-items:center;min-height:46px;padding:10px 16px;color:#403088;background:#ffffffdb;border:2px solid #fff;border-radius:999px;text-decoration:none;font-weight:800}
+.entry-header nav [aria-current=page]{background:#5a3ec4;color:#fff;border-color:#5a3ec4}
+.entry-welcome{text-align:center;padding:26px 0}.entry-mascot{font-size:96px;line-height:1.2}.entry-eyebrow{font-weight:800;color:#285b47}
+.entry-welcome h1{font-size:clamp(30px,5vw,52px);line-height:1.12;margin:16px 0}.entry-welcome>p{font-size:19px}
+.entry-choices{display:grid;grid-template-columns:1fr 1fr;gap:24px;max-width:850px;margin:32px auto}
+.entry-choice{display:grid;justify-items:center;align-content:center;gap:14px;padding:28px 22px;min-height:240px;border:3px solid #fff;border-radius:28px;background:#f5f0ff;box-shadow:0 8px 0 #c4b3ed,0 14px 28px #40308814;color:#403088;cursor:pointer;font:inherit}
+.entry-choice>span{font-size:50px}.entry-choice strong{font-size:27px}.entry-choice small{font-size:17px;line-height:1.5;color:#51446b}
+.guest-choice{background:#effff3;color:#165834;box-shadow:0 8px 0 #90c9a4,0 14px 28px #16583414}.guest-choice small{color:#355c42}
+.entry-choice:hover{transform:translateY(-3px)}.entry-choice:active{transform:translateY(3px)}
+.teacher-entry{display:inline-flex;align-items:center;min-height:48px;padding:12px 18px;color:#403088;font-size:18px;font-weight:800}
+.entry-card{background:#fff;border:3px solid #fff;border-radius:26px;padding:28px;width:min(680px,100%);margin:12px auto;box-shadow:0 12px 30px #4030881a}
+.entry-card h1{font-size:clamp(27px,4vw,36px);margin:0 0 14px}.entry-card p{line-height:1.6}.entry-card .class-enrollment{border:0;padding:0;background:transparent}
+.entry-card .student-connection,.entry-card .remembered-children{display:none}.teacher-workspace{width:100%}.teacher-workspace>.teacher-local-tools{border-top:2px solid #e5dff3;margin-top:28px;padding-top:16px}
+.entry-remembered{max-width:850px;margin:24px auto;padding:18px;background:#ffffffa8;border-radius:18px}.entry-remembered h2{font-size:20px}.entry-remembered .remembered-children{justify-content:center}
+.learner-mode{border-bottom:2px solid #e7e1f4;padding-bottom:16px;margin-bottom:16px}.learner-mode h2{font-size:24px;margin:12px 0}.learner-mode p{line-height:1.5;color:#51446b}
+.teacher-return{position:fixed;left:16px;bottom:16px;z-index:50;border:2px solid #5a3ec4;background:#fff}.entry-error{max-width:680px;margin:20px auto;padding:16px;background:#fff4e8;border:2px solid #a94a06;border-radius:16px}
+body[data-entry-screen=guest] #dauMoi,body[data-entry-screen=student] #dauMoi,body[data-entry-screen] #dauDoiBan{display:none!important}
+.entry-page a:focus-visible,.entry-page button:focus-visible{outline:3px solid #1f6fd1;outline-offset:4px}
+@media(max-width:640px){.entry-page{padding:12px 16px 32px}.entry-header{justify-content:center}.entry-brand{font-size:21px}.entry-header nav{justify-content:center}.entry-header nav a{padding:8px 12px}.entry-welcome{padding:14px 0}.entry-choices{grid-template-columns:1fr;gap:22px;margin:24px 0}.entry-choice{min-height:180px;padding:22px}.entry-choice strong{font-size:25px}.entry-mascot{font-size:74px}.entry-card{padding:20px 16px}.teacher-entry{font-size:16px}.entry-welcome h1{font-size:32px}}
+.student-code-input{display:block;width:100%;min-height:110px;margin-top:8px;padding:14px;border:2px solid #9585be;border-radius:12px;font:16px/1.6 ui-monospace,monospace;resize:vertical;overflow-wrap:anywhere}
+.code-breakdown{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin:0;padding:16px;background:#f3f0ff;border-radius:14px}.code-breakdown dt{font-size:14px;color:#615a80}.code-breakdown dd{margin:5px 0 0;font-weight:800}
+.student-issued-code{min-width:180px;max-width:280px}.student-issued-code code{display:block;overflow-wrap:anywhere;user-select:all;padding:10px;background:#f3f0ff;font-size:13px}

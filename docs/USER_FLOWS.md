@@ -1,39 +1,42 @@
-# Proposed student and teacher flows
+# Luồng sử dụng
 
-Status: implemented on the migration branch. The classroom upgrade SQL must be applied before cloud classroom functions work. Parents use a six-digit class code, rather than personal links.
+## Trang mặc định
 
-## Student flow
+Trang chủ luôn hiển thị hai lựa chọn: Nhập mã học sinh và Tiếp tục với tư cách khách. Thanh điều hướng chỉ giữ Góc của cô. Nội dung hướng dẫn dành cho phụ huynh/giáo viên dùng ngôn ngữ trung tính; lời động viên và hướng dẫn trong bài học giữ phong cách phù hợp trẻ lớp 1.
 
-1. Open the app. A returning student sees their animal, code, and today's lesson.
-2. First use: choose a local student code and animal, just like the existing app. Start immediately without email or a password.
-3. Follow **Nghe → Chơi → Đọc theo**. Keep the original games, recordings, adaptive review, praise, garden, and rest reminder.
-4. Save every learning result locally. Show cloud status to the adult, without interrupting the child.
-5. The teacher sends the regular app website and a six-digit class code (for example, `642891`) through Zalo. The parent opens the website, taps **Nhập mã lớp**, enters the code once, and chooses the child's assigned student code and animal. No student email, password, or parent account is required.
-6. The child can practise immediately while the teacher confirms the first device. The app shows a short machine-check code that the teacher can compare with the family through Zalo. Until approval, it cannot read or write the child's cloud history.
-7. After approval, queued results sync automatically when online. The app remembers the child; subsequent visits go directly to **Học bài hôm nay**. Offline practice continues, with manual retry available to adults.
-8. Siblings sharing a phone choose between remembered animal icons. Another phone repeats the class-code entry and receives its own teacher-approved device credential. Conflicting progress is backed up and requires an explicit choice in the adult area.
+## Học sinh có mã
 
-## Teacher flow
+1. Giáo viên đăng nhập Góc của cô, tạo lớp, chọn số học sinh và bài bắt đầu.
+2. Hệ thống cấp một mã cố định cho mỗi học sinh, ví dụ NGHE1-SB-C642891-HS01-B21-<khóa riêng>.
+3. Phụ huynh mở trang web, chọn Nhập mã học sinh và dán toàn bộ mã. Không cần đăng ký tài khoản hoặc chọn lại học sinh.
+4. App xác định đúng lớp/hồ sơ, mở tiến trình đã lưu hoặc bắt đầu từ bài ghi trong mã.
+5. Các lượt học tiếp theo cập nhật cùng bản ghi tiến độ. Mã không đổi khi đổi bài, đồng bộ hoặc mở trên thiết bị khác.
+6. Trang chủ có các hồ sơ đã lưu để tiếp tục học mà không nhập lại mã.
+7. Nghe → Chơi → Đọc theo, vườn, giọng đọc, nghỉ mắt và học ngoại tuyến được giữ nguyên.
 
-1. Sign in through the adult area. A trusted administrator grants the teacher role; entering the old code `1a` does not grant database access.
-2. Enter a class name, starting lesson (1–50), and student count (1–40). **Tạo lớp và mã lớp** creates the roster and one six-digit class code.
-3. Copy the app website and class code to send through Zalo. Tell each family their assigned student code/animal. Confirm incoming devices after checking with the family; parents do not register accounts.
-4. Review class and student progress: recent practice, reading completions, common mistakes, and items to review. Show the last sync time so stale offline results are clear.
-5. Select the class lesson, open the original TV mode, or export a report as CSV. Preserve manual **Gửi cô** code import for families who use offline practice.
-6. Revoke a wrong or lost device. This immediately prevents its cloud access while retaining the child's learning history. Moving/archiving classes is outside the current generator feature.
+## Cấu trúc mã học sinh
 
-## Access model
+- NGHE1: ứng dụng và phiên bản định dạng.
+- SB: lưu và đồng bộ trên Supabase.
+- C642891: định danh lớp.
+- HS01: định danh học sinh trong lớp.
+- B21: bài bắt đầu tại thời điểm cấp mã, không phải bài hiện tại.
+- Khóa riêng: phần xác thực ngẫu nhiên cho đúng hồ sơ. Không thể đổi HS01 thành HS02 hoặc B21 thành B25 rồi dùng lại mã.
 
-- Students use a child profile, not an adult account or shared classroom password.
-- Parents enter the class code once, choose their child's assigned code/animal, and help add the app to the home screen. They do not need an account.
-- Teachers manage their classes and device approvals and read their students' progress. They do not edit children's answers or other teachers' classes.
-- Administrators provision teacher roles. Broad administrator access to learning data is not enabled by default.
-- A database UUID identifies each student. `HS01` is a display code scoped to its teacher/class, never a login credential.
-- Class codes only reveal the code/animal roster and permit an enrollment request. They never authorize history access. Approved devices receive a separate random credential; only its SHA-256 digest is stored in the database. Credentials expire after a year and can be revoked earlier.
+Tiến độ được liên kết với UUID học sinh đã xác thực từ mã. Vị trí bài hiện tại, bộ đếm và lịch sử được lưu riêng. Mã nhận diện không chứa khóa API hay mật khẩu Supabase.
 
-## Review decisions
+## Chế độ khách
 
-- Revised for countryside families: teacher-generated six-digit class codes and remembered animal profiles; no parent login. Keep guest/offline practice available.
-- Teacher role is assigned by a trusted administrator; children never share a teacher login.
-- Recommended: a class lesson updates the default lesson while allowing the child to revisit earlier lessons.
-- Classroom schema, teacher-approved pairing, automatic retry, and recovery snapshots are implemented. Conflicts between modified copies require an adult choice; the app does not guess which copy to overwrite. Direct anonymous table access to learning data stays disabled.
+1. Chọn Tiếp tục với tư cách khách để mở một hồ sơ KHACH duy nhất trên thiết bị.
+2. Tiến trình tự lưu cục bộ, không cần đăng nhập và không được gửi vào lớp.
+3. Xuất mã tiến trình khi cần sao lưu hoặc chuyển thiết bị. Mã có dạng NGHE1-LOCAL-KHACH-B21-<dữ liệu nén>.
+4. Nhập mã tiến trình trong màn hình Khách để khôi phục. Nếu đã có dữ liệu, phải xác nhận trước khi thay thế và có thể hoàn tác.
+5. Các hồ sơ cũ không bị xóa; tiến trình cục bộ chưa liên kết đang chọn có thể được sao chép sang hồ sơ khách khi dùng lần đầu.
+
+Mã tiến trình khách là bản sao lưu thay đổi theo dữ liệu được xuất. Nó khác với mã nhận diện học sinh do giáo viên cấp, vốn được giữ cố định.
+
+## Góc của cô
+
+Một màn hình duy nhất tại #goc-co chứa tài khoản giáo viên, quản lý lớp, danh sách mã cố định, báo cáo tiến độ, thiết bị kết nối và công cụ dạy học cũ. Giáo viên có thể xem/chép lại mã đã cấp mà không tạo mã mới. Mã 1a không cấp quyền truy cập dữ liệu lớp trên máy chủ.
+
+Mã riêng đủ để kết nối trực tiếp đúng học sinh; luồng mới không yêu cầu phụ huynh chờ duyệt hay chọn từ danh sách cả lớp. Cơ chế duyệt thiết bị của bản mã lớp chung được giữ trong cơ sở dữ liệu để tương thích các bản trước.

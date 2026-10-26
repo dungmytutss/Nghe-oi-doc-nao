@@ -20,6 +20,8 @@ beforeEach(async () => {
   store = { caiDat: { hsCuoi: 'HS01', baiToi: 21 }, hs: { HS01: { ...progress, docTheo: 1 } } };
   game = {
     snapshot: () => structuredClone(store), selectedCode: () => 'HS01', selectStudent: vi.fn(), setLesson: vi.fn(),
+    setEntryMode: vi.fn(), exportProgress: vi.fn(), importGuestProgress: vi.fn(), openTeacherTool: vi.fn(), closeDialogs: vi.fn(),
+    currentLesson: () => 21,
     restoreStudent: (code: string, saved: StudentProgress) => { store.hs[code] = saved; },
   };
   await localDb.devices.put({ localCode: 'HS01', studentId, remoteCode: 'HS01', token: 'a'.repeat(64), avatar: '🐰', className: 'Lớp 1A',
@@ -51,7 +53,7 @@ test('a dirty local snapshot never silently replaces newer cloud progress', asyn
   rpc.mockResolvedValue({ data: { ...metadata, revision: 2, progress: { ...emptyProgress('🐰'), docTheo: 5 } } });
   let error = '';
   try { await syncDevice(game, 'HS01'); } catch (failure) { error = (failure as Error).message; }
-  expect({ error, localReadings: store.hs.HS01.docTheo, saveCalls: rpc.mock.calls.filter(([name]) => name === 'save_student_device').length })
+  expect({ error, localReadings: store.hs.HS01.docTheo, saveCalls: rpc.mock.calls.filter(([name]) => name === 'save_student_code_progress').length })
     .toEqual({ error: 'progress_conflict', localReadings: 1, saveCalls: 0 });
 });
 

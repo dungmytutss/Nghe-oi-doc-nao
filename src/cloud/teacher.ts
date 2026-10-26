@@ -2,7 +2,7 @@ import { requireSupabase } from './client';
 import { progressSchema, type StudentProgress } from './types';
 
 export interface Classroom { id: string; name: string; current_lesson: number; class_code: string }
-export interface RosterStudent { id: string; local_code: string; avatar: string; progress?: StudentProgress; updatedAt?: string }
+export interface RosterStudent { id: string; local_code: string; avatar: string; progress?: StudentProgress; updatedAt?: string; accessCode?: string; startLesson?: number; lesson?: number }
 export interface DeviceRequest { id: string; student_id: string; status: string; check_code: string; created_at: string }
 
 export function formatClassCode(code: string) { return code.length === 6 ? `${code.slice(0, 3)} ${code.slice(3)}` : code; }
@@ -13,7 +13,7 @@ export async function getClassrooms() {
   return data as Classroom[];
 }
 export async function createClassroom(name: string, count: number, lesson: number) {
-  const { data, error } = await requireSupabase().rpc('create_classroom', { p_name: name, p_student_count: count, p_lesson: lesson });
+  const { data, error } = await requireSupabase().rpc('create_classroom_with_codes', { p_name: name, p_student_count: count, p_lesson: lesson });
   if (error) throw error;
   return data as string;
 }
@@ -28,19 +28,27 @@ export async function getClassRoster(classId: string) {
   const roster = students as RosterStudent[];
   if (!roster.length) return { roster, devices: [] as DeviceRequest[] };
   const ids = roster.map(student => student.id);
-  const [progressResult, deviceResult] = await Promise.all([
-    client.from('student_progress').select('student_id,progress,updated_at').in('student_id', ids),
+  const [progressResult, deviceResult, codeResult] = await Promise.all([
+    client.from('student_progress').select('student_id,progress,lesson,updated_at').in('student_id', ids),
     client.from('student_devices').select('id,student_id,status,check_code,created_at').in('student_id', ids).order('created_at'),
+    client.from('student_codes').select('student_id,issued_code,start_lesson').in('student_id', ids),
   ]);
   if (progressResult.error) throw progressResult.error;
   if (deviceResult.error) throw deviceResult.error;
+  if (codeResult.error) throw codeResult.error;
   return {
     roster: roster.map(student => {
       const saved = progressResult.data.find(row => row.student_id === student.id);
-      return { ...student, progress: saved ? progressSchema.safeParse(saved.progress).data : undefined, updatedAt: saved?.updated_at as string | undefined };
+      const code = codeResult.data.find(row => row.student_id === student.id);
+      return { ...student, progress: saved ? progressSchema.safeParse(saved.progress).data : undefined, updatedAt: saved?.updated_at as string | undefined,
+        lesson: saved?.lesson as number | undefined, accessCode: code?.issued_code as string | undefined, startLesson: code?.start_lesson as number | undefined };
     }),
     devices: deviceResult.data as DeviceRequest[],
   };
+}
+export async function issueMissingCodes(classId: string) {
+  const { error } = await requireSupabase().rpc('issue_class_student_codes', { p_class_id: classId });
+  if (error) throw error;
 }
 export async function approveDevice(deviceId: string, status: 'approved' | 'revoked') {
   const { error } = await requireSupabase().rpc('set_student_device_status', { p_device_id: deviceId, p_status: status });
