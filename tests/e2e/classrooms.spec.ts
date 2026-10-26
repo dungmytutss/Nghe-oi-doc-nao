@@ -11,11 +11,13 @@ test('parent enters a fixed student code once and returns to the same learning r
   let savedProgress: unknown;
   const savedEvents: unknown[] = [];
   let revision = 0;
-  await page.route('https://classroom-test.supabase.co/**', async route => {
+  await page.route('https://classroom-test.supabase.co/**', route => route.abort('blockedbyclient'));
+  await page.route('https://student-api.example.test/student/**', async route => {
     const path = new URL(route.request().url()).pathname;
     const metadata = { student_id: studentId, local_code: 'HS01', avatar: '🐰', class_name: 'Lớp 1A', lesson: 21, check_code: 'ABC123' };
     if (path.endsWith('/redeem_student_code')) {
       expect(route.request().postDataJSON().p_code).toBe(issuedCode);
+      expect(route.request().headers().authorization).toBeUndefined();
       return route.fulfill({ json: { ...metadata, device_token: 'a'.repeat(64), status: 'approved', revision } });
     }
     if (path.endsWith('/read_student_device')) return route.fulfill({ json: { ...metadata, status: 'approved', revision, ...(savedProgress ? { progress: savedProgress } : {}) } });

@@ -70,4 +70,5 @@ export interface StudentDevice {
   lastSnapshot: string;
   lastSync?: string;
   lastLesson?: number;
+  codeHash?: string;
 }

@@ -2,6 +2,7 @@
   "name": "nghe-oi-doc-nao",
   "version": "2.0.0",
   "private": true,
+  "overrides": { "undici": "^7.30.1" },
   "type": "module",
   "scripts": {
     "dev": "vite --host 127.0.0.1",
@@ -30,6 +31,7 @@
     "typescript": "^5.0.0",
     "vite": "^7.0.0",
     "vite-plugin-pwa": "^1.0.0",
-    "vitest": "^5.0.5"
+    "vitest": "^5.0.5",
+    "wrangler": "^4.152.0"
   }
 }

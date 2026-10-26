@@ -1,5 +1,5 @@
 import { createPortal } from 'react-dom';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { supabase } from '../cloud/client';
 import { localDb } from '../cloud/local';
 import { readableError, syncDevice } from '../cloud/student';
@@ -11,15 +11,22 @@ export function CloudSettings({ game }: { game: GameBridge }) {
   const [devices, setDevices] = useState<StudentDevice[]>([]);
   const [syncMessages, setSyncMessages] = useState<Record<string, { text: string; conflict: boolean }>>({});
   const [resolving, setResolving] = useState(false);
+  const retryAt = useRef(new Map<string, number>());
   const refresh = useCallback(async () => { setDevices(await localDb.devices.toArray()); }, []);
   const sync = useCallback(async (code: string, resolution?: 'local' | 'remote') => {
+    if (!resolution && Date.now() < (retryAt.current.get(code) || 0)) return;
     try {
       const status = await syncDevice(game, code, resolution);
       if (!status) return;
+      retryAt.current.delete(code);
       setSyncMessages(current => ({ ...current, [code]: { conflict: false, text: status === 'pending'
         ? 'Đang chờ cô xác nhận máy. Gửi mã máy cho cô qua Zalo nếu cần.'
         : status === 'newer' ? 'Có bản lưu mới. Về trang đầu để tải tiến trình trước khi học tiếp.' : 'Đã gửi tiến trình cho cô.' } }));
     } catch (error) {
+      const failure = error as { code?: string; retryAfter?: number };
+      if (failure.code === 'PT429' || failure.code === 'rate_limited' || failure.code === 'device_limit_reached') {
+        retryAt.current.set(code,Date.now() + Math.max(60000,(failure.retryAfter || 60)*1000) + Math.random()*5000);
+      }
       setSyncMessages(current => ({ ...current, [code]: { text: readableError(error), conflict: readableError(error).includes('máy khác') } }));
     }
     await refresh();

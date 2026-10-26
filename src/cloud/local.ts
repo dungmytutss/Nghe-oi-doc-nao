@@ -15,6 +15,7 @@ export class LearningDatabase extends Dexie {
       snapshots: 'id',
     });
     this.version(2).stores({ devices: 'localCode, &studentId' });
+    this.version(3).stores({ devices: 'localCode, &studentId, codeHash' });
   }
 }
 export const localDb = new LearningDatabase();

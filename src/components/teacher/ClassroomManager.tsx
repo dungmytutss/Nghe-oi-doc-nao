@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState, type FormEvent } from 'react';
 import { readableError } from '../../cloud/student';
-import { approveDevice, createClassroom, formatClassCode, getClassrooms, getClassRoster, issueMissingCodes, setClassLesson, type Classroom, type DeviceRequest, type RosterStudent } from '../../cloud/teacher';
+import { approveDevice, createClassroom, formatClassCode, getClassrooms, getClassRoster, issueMissingCodes, lockStudentCode, replaceStudentKey, setClassLesson, type Classroom, type DeviceRequest, type RosterStudent } from '../../cloud/teacher';
 
 export function ClassroomManager() {
   const [classes, setClasses] = useState<Classroom[]>([]);
@@ -14,6 +14,7 @@ export function ClassroomManager() {
   const [busy, setBusy] = useState(false);
   const [message, setMessage] = useState('');
   const [revokeId, setRevokeId] = useState('');
+  const [codeAction, setCodeAction] = useState<{ id: string; action: 'lock' | 'replace' } | null>(null);
   const selected = classes.find(item => item.id === selectedId);
   const refreshClasses = useCallback(async () => {
     const list = await getClassrooms();
@@ -112,6 +113,19 @@ export function ClassroomManager() {
           <button className="nut-nho" onClick={() => void task(async () => {
             await navigator.clipboard.writeText(student.accessCode!); setMessage(`Đã chép mã ${student.local_code}.`);
           })}>Chép mã {student.local_code}</button>
+          <p>{student.codeLocked ? '🔒 Mã đang khóa' : 'Mã đang hoạt động'}</p>
+          {student.codeLocked ? <button className="nut-nho" disabled={busy} onClick={() => void task(async () => {
+            await lockStudentCode(student.id, false); await refreshRoster(); setMessage('Đã mở lại mã. Các thiết bị đã thu hồi cần nhập mã để kết nối lại.');
+          })}>Mở lại mã</button> : <button className="nut-nho" disabled={busy} onClick={() => setCodeAction({ id:student.id,action:'lock' })}>Khóa mã</button>}
+          <button className="nut-nho" disabled={busy} onClick={() => setCodeAction({ id:student.id,action:'replace' })}>Cấp lại khóa truy cập</button>
+          {codeAction?.id === student.id && <div className="cloud-message">
+            <p>{codeAction.action === 'lock' ? 'Khóa mã và thu hồi các thiết bị hiện tại. Tiến độ học tập được giữ nguyên.'
+              : 'Chỉ dùng khi mã bị lộ. Phần khóa truy cập sẽ thay đổi; mã cũ và các thiết bị hiện tại ngừng hoạt động. Lớp, học sinh, bài bắt đầu và tiến độ được giữ nguyên. Gửi mã thay thế cho đúng gia đình.'}</p>
+            <div className="cloud-actions"><button className="nut-nho" disabled={busy} onClick={() => void task(async () => {
+              if (codeAction.action === 'lock') await lockStudentCode(student.id,true); else await replaceStudentKey(student.id);
+              setCodeAction(null); await refreshRoster(); setMessage('Đã cập nhật quyền truy cập. Tiến độ được giữ nguyên.');
+            })}>Xác nhận {codeAction.action === 'lock' ? 'khóa mã' : 'cấp lại khóa'}</button><button className="nut-nho" onClick={() => setCodeAction(null)}>Hủy</button></div>
+          </div>}
         </> : 'Chưa cấp'}</td><td>Bài {student.lesson || student.startLesson || selected.current_lesson}</td><td>{student.progress?.docTheo || 0}</td>
           <td>{Math.round(Object.values(student.progress?.phut || {}).reduce((a, b) => a + b, 0))}</td>
           <td>{Object.entries(student.progress?.muc || {}).filter(([, value]) => value.s > value.d).slice(0, 3).map(([key]) => key.replace(/^t:/, '')).join(', ') || '—'}</td>

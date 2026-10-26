@@ -1,0 +1,17 @@
+{
+  "$schema": "../node_modules/wrangler/config-schema.json",
+  "name": "nghe-student-api",
+  "main": "worker.ts",
+  "compatibility_date": "2026-10-26",
+  "workers_dev": true,
+  "vars": {
+    "SUPABASE_URL": "https://mixlblrijfmmvpzawxco.supabase.co",
+    "ALLOWED_ORIGINS": "http://127.0.0.1:5173,https://dungmytutss.github.io"
+  },
+  "ratelimits": [
+    { "name": "ENTRY_IP", "namespace_id": "642891001", "simple": { "limit": 60, "period": 60 } },
+    { "name": "ENTRY_CODE", "namespace_id": "642891002", "simple": { "limit": 6, "period": 60 } },
+    { "name": "DEVICE", "namespace_id": "642891003", "simple": { "limit": 60, "period": 60 } },
+    { "name": "TOTAL", "namespace_id": "642891004", "simple": { "limit": 1200, "period": 60 } }
+  ]
+}

@@ -2,7 +2,7 @@ import { requireSupabase } from './client';
 import { progressSchema, type StudentProgress } from './types';
 
 export interface Classroom { id: string; name: string; current_lesson: number; class_code: string }
-export interface RosterStudent { id: string; local_code: string; avatar: string; progress?: StudentProgress; updatedAt?: string; accessCode?: string; startLesson?: number; lesson?: number }
+export interface RosterStudent { id: string; local_code: string; avatar: string; progress?: StudentProgress; updatedAt?: string; accessCode?: string; codeLocked?: boolean; startLesson?: number; lesson?: number }
 export interface DeviceRequest { id: string; student_id: string; status: string; check_code: string; created_at: string }
 
 export function formatClassCode(code: string) { return code.length === 6 ? `${code.slice(0, 3)} ${code.slice(3)}` : code; }
@@ -31,7 +31,7 @@ export async function getClassRoster(classId: string) {
   const [progressResult, deviceResult, codeResult] = await Promise.all([
     client.from('student_progress').select('student_id,progress,lesson,updated_at').in('student_id', ids),
     client.from('student_devices').select('id,student_id,status,check_code,created_at').in('student_id', ids).order('created_at'),
-    client.from('student_codes').select('student_id,issued_code,start_lesson').in('student_id', ids),
+    client.from('student_codes').select('*').in('student_id', ids),
   ]);
   if (progressResult.error) throw progressResult.error;
   if (deviceResult.error) throw deviceResult.error;
@@ -41,7 +41,8 @@ export async function getClassRoster(classId: string) {
       const saved = progressResult.data.find(row => row.student_id === student.id);
       const code = codeResult.data.find(row => row.student_id === student.id);
       return { ...student, progress: saved ? progressSchema.safeParse(saved.progress).data : undefined, updatedAt: saved?.updated_at as string | undefined,
-        lesson: saved?.lesson as number | undefined, accessCode: code?.issued_code as string | undefined, startLesson: code?.start_lesson as number | undefined };
+        lesson: saved?.lesson as number | undefined, accessCode: code?.issued_code as string | undefined, codeLocked: code?.is_locked === true,
+        startLesson: code?.start_lesson as number | undefined };
     }),
     devices: deviceResult.data as DeviceRequest[],
   };
@@ -52,5 +53,13 @@ export async function issueMissingCodes(classId: string) {
 }
 export async function approveDevice(deviceId: string, status: 'approved' | 'revoked') {
   const { error } = await requireSupabase().rpc('set_student_device_status', { p_device_id: deviceId, p_status: status });
+  if (error) throw error;
+}
+export async function lockStudentCode(studentId: string, locked: boolean) {
+  const { error } = await requireSupabase().rpc('set_student_code_lock', { p_student_id: studentId, p_locked: locked });
+  if (error) throw error;
+}
+export async function replaceStudentKey(studentId: string) {
+  const { error } = await requireSupabase().rpc('rotate_student_code', { p_student_id: studentId });
   if (error) throw error;
 }

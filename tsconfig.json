@@ -14,5 +14,5 @@
     "skipLibCheck": true,
     "types": ["vite/client", "vite-plugin-pwa/client", "node"]
   },
-  "include": ["src", "vite.config.ts", "vitest.config.ts", "tests", "playwright.config.ts"]
+  "include": ["src", "gateway/worker.ts", "vite.config.ts", "vitest.config.ts", "tests", "playwright.config.ts"]
 }

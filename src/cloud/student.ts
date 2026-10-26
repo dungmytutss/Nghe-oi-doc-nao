@@ -9,6 +9,9 @@ export function readableError(error: unknown) {
   if (/PGRST202|schema cache|relation .*does not exist/.test(message)) return 'Cô cần chạy bản cập nhật cơ sở dữ liệu trước khi dùng mã học sinh.';
   if (message.includes('invalid_class_code')) return 'Chưa tìm thấy mã lớp. Kiểm tra lại mã cô gửi nhé.';
   if (message.includes('invalid_student_code')) return 'Mã học sinh không hợp lệ hoặc chưa được cấp. Kiểm tra và dán đầy đủ mã do giáo viên cung cấp.';
+  if (message.includes('device_limit_reached')) return 'Hồ sơ đã đạt giới hạn ba thiết bị. Liên hệ giáo viên để ngắt thiết bị cũ trước khi thêm thiết bị mới.';
+  if (message.includes('rate_limited')) return 'Đã vượt số lần yêu cầu cho phép. Hệ thống sẽ thử lại sau.';
+  if (/gateway_not_configured|gateway_required|upstream_unavailable/.test(message)) return 'Kết nối bảo mật chưa sẵn sàng. Tiến trình trên thiết bị vẫn được giữ.';
   if (message.includes('too_many_requests')) return 'Mã học sinh đã có nhiều máy chờ. Nhờ cô kiểm tra trước khi thêm máy.';
   if (message.includes('invalid_student_device')) return 'Máy này chưa được phép kết nối. Nhờ cô kiểm tra hoặc nhập lại mã lớp.';
   if (message.includes('progress_conflict')) return 'Có tiến trình mới trên máy khác. Bản trên máy này vẫn được giữ; mở Dành cho người lớn để chọn bản cần dùng.';
@@ -19,7 +22,12 @@ export function readableError(error: unknown) {
 export async function enterStudentCode(game: GameBridge, value: string) {
   const parsed = parseStudentCode(value);
   if (!parsed) throw new Error('invalid_student_code');
-  const { data, error } = await requireStudentClient().rpc('redeem_student_code', { p_code: parsed.code });
+  const codeHash = Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(parsed.code))))
+    .map(byte => byte.toString(16).padStart(2,'0')).join('');
+  const remembered = await localDb.devices.where('codeHash').equals(codeHash).first();
+  const payload: Record<string, unknown> = { p_code: parsed.code };
+  if (import.meta.env.VITE_STUDENT_GATEWAY_URL) payload.p_device_token = remembered?.token ?? null;
+  const { data, error } = await requireStudentClient().rpc('redeem_student_code', payload);
   if (error) throw error;
   const response = deviceResponseSchema.parse(data);
   if (!response.device_token) throw new Error('Chưa nhận được kết nối cho học sinh.');
@@ -34,6 +42,7 @@ export async function enterStudentCode(game: GameBridge, value: string) {
     avatar: response.avatar, className: response.class_name, lesson, status: 'approved', checkCode: response.check_code,
     revision: existing?.revision ?? response.revision ?? 0,
     lastSnapshot: existing?.lastSnapshot ?? stableJson(progress), lastLesson: existing?.lastLesson ?? lesson,
+    codeHash,
   };
   await localDb.devices.put(device);
   if (!existing) game.restoreStudent(localCode, progress, lesson);

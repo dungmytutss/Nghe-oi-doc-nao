@@ -31,6 +31,7 @@ jobs:
           VITE_BASE_PATH: /Nghe-oi-doc-nao/
           VITE_SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           VITE_SUPABASE_PUBLISHABLE_KEY: ${{ secrets.SUPABASE_PUBLISHABLE_KEY }}
+          VITE_STUDENT_GATEWAY_URL: ${{ vars.STUDENT_GATEWAY_URL || 'https://nghe-student-api.en11001100.workers.dev' }}
         run: npm run check
       - name: Install test browser
         run: npx playwright install --with-deps chromium

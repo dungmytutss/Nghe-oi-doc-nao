@@ -9,6 +9,7 @@ export default defineConfig({
   webServer: {
     command: 'node node_modules/vite/bin/vite.js --host 127.0.0.1 --port 4173 --strictPort',
     url: 'http://127.0.0.1:4173', reuseExistingServer: false,
-    env: { VITE_SUPABASE_URL: 'https://classroom-test.supabase.co', VITE_SUPABASE_PUBLISHABLE_KEY: 'sb_publishable_browser_test_only' },
+    env: { VITE_SUPABASE_URL: 'https://classroom-test.supabase.co', VITE_SUPABASE_PUBLISHABLE_KEY: 'sb_publishable_browser_test_only',
+      VITE_STUDENT_GATEWAY_URL: 'https://student-api.example.test' },
   },
 });
